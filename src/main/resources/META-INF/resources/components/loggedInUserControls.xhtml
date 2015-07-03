@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+       	<cc:attribute name="goToSiteBtn" default="true" /><!-- Nease, etc. -->
+       	<cc:attribute name="style" targets="aplosLoggedInUserControlsPanel" />
+       	<cc:facet name="loggedInText"/>
+    </cc:interface>
+    <cc:implementation>	
+    	<!-- Aplos Logged-In-User Control Panel : Begin (must be nested within a h:form) -->
+    	<aplos:panel layout="none" id="aplosLoggedInUserControlsPanel">
+			<aplos:panel layout="none" rendered="#{currentUser != null}">
+				<div id="topLoginBarRightDiv">
+					<div id="topLoginBarLeftDiv">
+						<div id="topLoginBarMiddleDiv">
+							<div style="position:relative;top:-1px"> 
+								<div id="topLoginBarUserBtns">
+									<aplos:panel layout="none" rendered="#{currentUser.superuser}">
+										<aploscc:ajaxButton action="#{cc.errorCheck}" value="Error Check" styleClass="loggedInUserControlBtn" />
+										<aploscc:ajaxButton action="#{cc.clearCache}" value="Clear Cache" styleClass="loggedInUserControlBtn" />
+										<aploscc:ajaxButton action="#{loginPage.switchUser}" value="Switch User" styleClass="loggedInUserControlBtn" />
+									</aplos:panel>
+									<aplos:panel layout="none" rendered="#{!currentUser.superuser}">
+										<aploscc:ajaxButton action="#{loginPage.logoutAndHome}" value="Logout" styleClass="loggedInUserControlBtn" />
+									</aplos:panel>
+									<aplos:panel layout="none" rendered="#{cc.attrs.goToSiteBtn}">
+										<aploscc:ajaxButton action="#{ contextListener.goToSite }" value="Go To Site" styleClass="loggedInUserControlBtn" />
+									</aplos:panel>
+								</div>
+								<div id="topLoginBarUserName">
+							    	<aplos:panel layout="none" rendered="#{not empty cc.facets.loggedInText}" >
+							    		<h:panelGroup layout="block">
+							    			<cc:renderFacet name="loggedInText" />
+							    		</h:panelGroup>
+							    	</aplos:panel>
+							    	<aplos:panel layout="none" rendered="#{empty cc.facets.loggedInText}" >
+										#{currentUser.displayName}&#160;#{currentUser.unreadMessagesNotification}
+							    	</aplos:panel>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aplos:panel>
+			<aplos:panel rendered="#{currentUser == null}">
+				<div id="topLoginBarRightDiv">
+					<div id="topLoginBarLeftDiv">
+						<div id="topLoginBarMiddleDiv">
+							<div style="position:relative;top:-1px">
+								<span id="topLoginBarUserName">&#160;</span>
+								<span>
+									<aplos:panel layout="none" rendered="#{cc.attrs.goToSiteBtn}">
+										<aploscc:ajaxButton action="#{ contextListener.goToSite }" value="Go To Site" />
+									</aplos:panel>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aplos:panel>
+		</aplos:panel>
+    	<!-- Aplos Logged-In-User Control Panel : End -->
+    </cc:implementation>    
+   </h:body>
+</html>
+

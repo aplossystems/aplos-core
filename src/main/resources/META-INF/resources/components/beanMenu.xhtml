@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="value"></cc:attribute>
+    	<cc:attribute name="beanMenuHelper"></cc:attribute>
+    	<cc:attribute name="update" default="@none" ></cc:attribute>
+    	<cc:attribute name="listener" ></cc:attribute>
+    	<cc:attribute name="onstart" ></cc:attribute>
+    	<cc:attribute name="oncomplete" ></cc:attribute>
+    	<cc:attribute name="label"></cc:attribute>
+    	<cc:attribute name="disabled" default="false" ></cc:attribute>
+    	<cc:attribute name="required" default="false" ></cc:attribute>
+    	<cc:attribute name="showAddButton" default="true" ></cc:attribute>
+    </cc:interface>
+    <cc:implementation>
+		<h:selectOneMenu label="#{ cc.determineLabel() }" value="#{ cc.attrs.value }" converter="aplosAbstractBeanConverter" disabled="#{ cc.attrs.disabled }" required="#{ cc.attrs.required }">
+			<f:selectItems value="#{ cc.attrs.beanMenuHelper.selectItems }" />
+			<p:ajax event="change" listener="#{cc.beanChanged}" update="beanMenuBtnPnl #{ cc.attrs.update }" onstart="#{ cc.attrs.onstart }" oncomplete="#{ cc.attrs.oncomplete }"/>
+		</h:selectOneMenu>
+		<aplos:panel id="beanMenuBtnPnl">
+			<h:commandLink id="beanMenuEditBtn" action="#{ cc.attrs.beanMenuHelper.goToEditPage( cc.attrs.value ) }" rendered="#{ cc.determineIsShowingEditBtn() }" title="Edit #{ cc.beanDisplayName }" >
+				<h:graphicImage url="/images/arrow_right_16.png" style="padding-left:5px"></h:graphicImage>
+			</h:commandLink>
+			<h:commandLink actionListener="#{ cc.attrs.beanMenuHelper.goToNew }" rendered="#{ cc.attrs.beanMenuHelper.determineIsShowingNewBtn() }" title="New #{ cc.attrs.beanMenuHelper.beanClassDisplayName }" >
+				<h:graphicImage url="/images/action_add.gif" style="padding-left:5px"></h:graphicImage>
+			</h:commandLink>
+		</aplos:panel>
+    </cc:implementation>    
+  </h:body>
+</html>

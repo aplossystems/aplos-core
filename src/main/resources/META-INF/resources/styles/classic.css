@@ -1,0 +1,613 @@
+body {
+	background-image: url('../images/classic/backgroundGradient.jpg');
+	background-repeat: repeat-x;
+	font: normal 13px Tahoma, Helvetica;
+}
+
+#backendBreadCrumbs {
+	background-color: #D1D9FE;
+	color: navy;
+	font: bold 14px Trebuchet MS;
+	padding-left:15px;
+	padding-bottom: 5px;
+	text-decoration:none;
+}
+
+#backendBreadCrumbs a {
+	text-decoration:none;
+	color: navy;
+	font: bold 14px Trebuchet MS;
+}
+
+#themeChanger {
+	background-color: #D1D9FE;
+	color: navy;
+	font: bold 12px Garamond;
+	text-decoration:none;
+	float:left;
+	margin-top:8px;
+	margin-left:15px;
+}
+
+#themeChanger a {
+	text-decoration:none;
+	color: navy;
+	font: bold 11px Garamond;
+}
+
+
+#imgTopRightDiv {
+	min-height:27px;
+	background-image:url('../images/classic/frameTopRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+}
+
+#imgTopLeftDiv {
+	min-height:27px;
+	background-image:url('../images/classic/frameTopLeft.png');
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+	padding-left:27px;
+	padding-right:27px;
+}
+
+#bgTopDiv {
+	background-image:url('../images/classic/frameTopExtender.png');
+	background-position:bottom center;
+	background-repeat: repeat-x;
+	min-height:27px;
+	padding-bottom:13px;
+}
+
+#bgRightDiv {
+	background-image:url('../images/classic/frameRightExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+}
+
+#bgBottomDiv {
+	background-image:url('../images/classic/frameBottomExtender.png');
+	background-repeat: repeat-x;
+	background-position:bottom center;
+	height:27px;
+}
+
+#imgBottomRightDiv {
+	height: 27px;
+	background-image:url('../images/classic/frameBottomRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+}
+
+#imgBottomLeftDiv {
+	height: 27px;
+	background-image:url('../images/classic/frameBottomLeft.png');
+	background-repeat:no-repeat;
+	padding-left:27px;
+	padding-right:27px;
+}
+
+#tableImgTopRight {
+	background-image:url('../images/classic/subListTopRight.png');
+	background-position: top right;
+	background-repeat: no-repeat;
+}
+
+#tableImgTopLeft {
+	background-image:url('../images/classic/subListTopLeft.png');
+	background-repeat:no-repeat;
+	padding-left:28px;
+	padding-right:28px;
+	padding-top:10px;
+}
+
+#tableBgTop {
+	background-image:url('../images/classic/subListTopExtender.png');
+	background-repeat: repeat-x;
+	margin-left:-14px;
+	margin-right:-14px;
+	margin-top: -10px;
+	padding-top: 24px;
+}
+
+#tableBgRight {
+	background-image:url('../images/classic/subListRightExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+}
+
+#tableBgLeft {
+	background-image:url('../images/classic/subListLeftExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:0%;
+}
+
+#tableBackgroundAndContent {
+	margin:0px 12px;
+	background-repeat:repeat
+}
+
+#tableBottomImgBottomRight {
+	background-image:url('../images/classic/subListBottomRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+	padding-top:10px;
+}
+
+#tableBottomImgBottomLeft {
+	background-image:url('../images/classic/subListBottomLeft.png');
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+}
+
+#tableBottomBgBottom {
+	background-image:url('../images/classic/subListBottomExtender.png');
+	background-repeat: repeat-x;
+	padding-right: 8px;
+	margin-top: -10px;
+}
+
+/* Data Table */
+
+.dataTD {
+	border: 1px solid lightgrey;	
+}
+
+/* Data Scroller */
+
+.rich-dtascroller-table  { background-color: #eaeaea; }
+.rich-table-subheadercell   { color: navy; }
+
+/************************************************************************
+ * Faces Messages
+ */
+.rich-messages {
+	margin: 0px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+
+.rich-messages dt {
+	line-height: 35px;
+}
+
+.rich-messages-label {
+	background-color: lightYellow;
+	padding: 7px 10px 7px 30px;
+	font: bold 13px Arial;
+	border: 1px solid lightgray;
+	color: #444;
+	
+	background-image: url('../images/warning.png');
+	background-position: 5px;
+	background-repeat: no-repeat;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.message-info .rich-messages-label {
+/*	background-color: lightBlue;	*/
+	background-image: url("../images/action_check.gif");
+}
+
+.message-fatal .rich-messages-label {
+	background-color: lightRed;
+}
+
+/***************************************************** Message Box */
+
+.messageTitle {
+	font: bold 19px Verdana;
+	color: black;
+}
+
+.messageText {
+	font: bold 13px Tahoma;
+	color: black;
+}
+
+.messageBox {
+	clear: both;
+	margin: 0 auto;
+	position: relative;
+	color: black;
+	padding: 10px;
+	width: 500px;
+	z-index: 1050;
+}
+
+.messageBack {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background-color: #000800;
+	opacity: 0.5;
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity = 50);
+}
+
+.btn {
+	position: relative;
+	top: 14px;
+}
+
+.btnLeftPnl {
+	padding-left:30px;
+	padding-right:30px;	
+	height:45px;
+	background-repeat:no-repeat;
+	background-position:0% 0%;
+	 background-image:url('../images/classic/btnLeft.png');
+}
+
+.btnRightPnl {
+	padding:10px 0 0 0;	
+	position:relative;
+	height:45px;
+	padding-top:15px;
+	background-position:0px 0px;
+	background-repeat: repeat-x;
+	background-image:url('../images/classic/btnMiddle.png');
+}
+
+/* main part of button, don't know how it got this name */
+.aplosSmallBorder {
+	height:45px;
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+	background-image:url('../images/classic/btnRight.png');
+}
+
+#agentButton {
+	position: absolute;
+	top: 150px;
+	z-index: 10;
+}
+
+#agentButton2 {
+	position: absolute;
+	top: 150px;
+	z-index: 10;
+}
+
+#agentSearch {
+	position: absolute;
+	top: 160px;
+	z-index: 10;
+}
+
+.subTabExtenderUp, .subTabExtenderDown {
+	text-align: center;
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+a.tabExtenderUp, a.tabExtenderDown {
+	padding: 8px;
+	line-height: 28px;
+}
+
+#mainFrame {
+	position: absolute;
+	top: 108px;
+	left: 0px;
+}
+
+.tabPanelDiv {
+	left: 23px;
+	top: 50px;
+}
+
+.subTabPanelDiv {
+	position: absolute;
+	top: 102px;
+	left: 50px;
+	z-index: 2;
+}
+
+
+.aplosTextInput {
+	position: relative;
+	border: 0px solid white;
+	color: black;
+	background-color: white;
+	font: normal 13px Tahoma, Helvetica;
+}
+
+.searchTextBox {
+	margin-top: 15px ;
+	border:0 ;
+	background-color: transparent;
+}
+
+.searchField {
+	position: relative;
+	width: 100px;
+	top: 12px;
+	border: 0px solid white;
+	color: black;
+	background-color: white;
+	font: normal 13px Tahoma, Helvetica;
+}
+
+.formContentSubDiv {
+	top: 150px;
+	z-index: 10;
+}
+
+.stdLink,.mainMenuLink,.subMenuLink {
+	color: #33147F;
+	text-decoration: none;
+}
+
+
+/* Ajax Loading Panel */
+
+.loadingPanel {
+	background-color: rgb(242, 242, 242);
+}
+
+/********************************************************************* Table */
+
+.listHeaderDiv table {
+	width: 100%;	
+}
+
+.algorithmSetUpTable {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.algorithmSetUpTable td {
+	padding: 5px;
+	background-color: white;
+	border: 2px solid lightgrey;
+}
+
+th {
+	padding: 5px;
+	font-weight: normal;
+	text-align: left;	
+}
+
+th a {
+	color: #33147F;
+	text-decoration: none;
+}
+
+.dataTD {
+	background-color: white;
+	border: 2px solid lightgrey;
+}
+
+.tabExtenderUp {
+	background-image: url('../images/classic/tabsExtenderUp.png');
+	background-repeat: repeat-x;
+	float:left;
+}
+
+.tabExtenderDown {
+	background-image: url('../images/classic/tabsExtenderDown.png');
+	background-repeat: repeat-x;
+	float:left;
+}
+
+.subTabExtenderUp {
+	background-image: url('../images/classic/subTabExtenderUp.png');
+	background-repeat: repeat-x;
+	float:left;
+}
+
+.subTabExtenderDown {
+	background-image: url('../images/classic/subTabExtenderDown.png');
+	background-repeat: repeat-x;
+	float:left;
+}
+
+
+
+.outerListDiv {
+	top: 7px;
+	width: 865px;
+}
+
+.listHeaderDiv {
+	top: 150px;
+	left: 30px;
+	width: 100%;
+}
+
+.listContentDiv {
+	top: 182px;
+	width: 100%;
+}
+
+.listNavigationDiv {
+	top: 482px;
+	width: 830px;
+}
+
+
+.detailsHeader {
+	top: 95px;
+	left: 60px;
+}
+
+.detailsHeaderNoTabs {
+	position: absolute;
+	top: 105px;
+	left: 60px;
+}
+
+.detailHeader {
+	font: bold 16px Tahoma;	
+}
+
+.largeDividerDiv {
+	top: 135px;
+}
+
+/********************************************************************* Forms */
+
+.formText {
+	padding-top: 4px;
+	vertical-align: top;
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2F4F4F;
+	padding-right: 20px;	
+}
+
+.formField {
+	padding: 2px;	
+}
+
+.formField input, .formField select {
+	/* max-width2: 160px; */
+}
+
+.formHeader {
+	padding: 0px;
+	margin: 0px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+#studentForm .formField input, #studentForm .formField select {
+	/* max-width2: 300px; */
+}
+
+
+#subFrame {
+	top: 155px;
+	left: 35px
+}
+
+#subList {
+	top: 175px;
+	left: 60px;
+}
+
+#subTabPanel {
+	position: absolute;
+	top: 102px;
+	left: 50px;
+	z-index: 2;
+}
+
+#toolBar {
+	position: absolute;
+	top: 150px;
+	left: 580px;
+}
+
+#buttonNew {
+	position: absolute;
+	top: 137px;
+	left: 55px;
+	z-index: 10;
+}
+
+#mainFrame {
+	position: absolute;
+	top: 108px;
+	left: 0px;
+}
+
+.editTabPanel {
+	position: absolute;
+	top: 116px;
+	left: 49px;
+	z-index: 2;
+}
+
+#editSubFrame {
+	position: absolute;
+	top: 168px;
+	left: 35px;
+}
+
+.classGridDiv {
+	background-color:#EBEBEB;
+}
+
+.outerClassDiv {
+	background-color:#def0e2;
+}
+
+.innerClassDiv {
+	background-color:#def0e2;
+}
+
+.rolloverButtonRight {
+	display:inline-block;
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+	height: 45px;
+}
+
+.rolloverButtonLeft {
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+	height: 45px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.rolloverButtonMiddle {
+	background-position:0px 1px;
+	background-repeat: repeat-x;
+	height: 45px;
+}
+
+
+
+.rolloverButtonHeight {
+}
+
+.searchFieldRightDiv {
+	height:45px;
+}
+
+.searchFieldLeftDiv {
+	height:45px;
+}
+
+.searchFieldMiddleDiv {
+	height:45px;
+}
+
+#editImage {
+	background-image: url('../images/classic/edit.gif');
+	background-position: center center; 
+	margin-left:5px;
+	width:20px;
+	height:20px;
+}
+
+.pageFrameHeader {
+	background-color: #D1D9FE;
+	color: navy;
+	text-align: right;
+	font: bold 15px Garamond;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+
+.pageFrameHeader a {
+	color: navy;
+	font: bold 33px Garamond;
+	text-decoration: none;
+}
+
+
+
+

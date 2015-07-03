@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+    <name>core</name>
+    
+    <!-- This makes sure that we can overide the renderers for the pretty faces components -->
+    <ordering>
+    	<after>
+    		<name>ocpsoft_pretty_faces</name>
+    	</after>
+    </ordering>
+    
+    <lifecycle>
+		<!-- Phase Listeners -->
+		<phase-listener>com.aplos.common.listeners.ResourceServerPhaseListener</phase-listener>
+		<!-- Automagically bind backing pages -->
+		<phase-listener>com.aplos.common.listeners.PageBindingPhaseListener</phase-listener>
+		
+	</lifecycle>
+	
+	<factory>
+	  	<exception-handler-factory>
+	    	com.aplos.core.context.AplosExceptionHandlerFactory
+	  	</exception-handler-factory>
+	  	<facelet-cache-factory>
+	  		com.aplos.common.facelets.AplosFaceletCacheFactory
+	  	</facelet-cache-factory>
+	</factory>
+	
+	<!-- ================================================================= -->
+	<!-- Error & Validation Messages -->
+	<application>
+        <resource-handler>com.aplos.core.application.CombinedResourceHandler</resource-handler>
+		<view-handler>com.aplos.common.application.AplosViewHandler</view-handler>
+		<locale-config>
+			<default-locale>en</default-locale>
+		</locale-config>
+		<message-bundle>com.aplos.core.resources.messages.messages</message-bundle>
+        <el-resolver>com.aplos.common.AplosElResolver</el-resolver>
+        <system-event-listener>
+            <system-event-listener-class>org.primefaces.event.AutoUpdateComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>com.aplos.core.component.AplosPanel</source-class>
+        </system-event-listener>
+        <system-event-listener>
+            <system-event-listener-class>com.aplos.core.event.InternalComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>com.aplos.core.component.CommandButton</source-class>
+        </system-event-listener>
+        <system-event-listener>
+            <system-event-listener-class>com.aplos.core.event.InternalComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>com.aplos.core.component.OverlayInputText</source-class>
+        </system-event-listener>
+        <system-event-listener>
+            <system-event-listener-class>com.aplos.core.event.InternalComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>components.lockBean</source-class>
+        </system-event-listener>
+        <system-event-listener>
+            <system-event-listener-class>com.aplos.core.event.InternalComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>components.dateTime</source-class>
+        </system-event-listener>
+        <system-event-listener>
+            <system-event-listener-class>com.aplos.core.event.InternalComponentListener</system-event-listener-class>
+        	<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+            <source-class>components.aplosBeanMenu</source-class>
+        </system-event-listener>
+	</application>
+	
+	<render-kit>
+	    <description>The Faces renderers.</description>
+	    <render-kit-id>HTML_BASIC</render-kit-id>
+	    <render-kit-class>com.sun.faces.renderkit.RenderKitImpl</render-kit-class>
+	    <renderer>
+	            <component-family>javax.faces.Form</component-family>
+	            <renderer-type>javax.faces.Form</renderer-type>
+	            <renderer-class>com.aplos.core.component.AplosFormRenderer</renderer-class>
+	    </renderer>
+	    <renderer>
+	            <component-family>javax.faces.Input</component-family>
+	            <renderer-type>javax.faces.Textarea</renderer-type>
+	            <renderer-class>com.aplos.core.component.AplosTextareaRenderer</renderer-class>
+	    </renderer>
+	 </render-kit>
+	
+	<render-kit>
+		<renderer>
+			<component-family>org.primefaces.component</component-family>
+			<renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
+			<renderer-class>com.aplos.core.component.fileupload.FileUploadRenderer</renderer-class>
+		</renderer>
+	 </render-kit>
+    
+    <behavior>
+        <behavior-id>com.aplos.core.component.behavior.ajax.AjaxBehavior</behavior-id>
+        <behavior-class>com.aplos.core.component.behavior.ajax.AjaxBehavior</behavior-class>
+    </behavior>
+
+	<!-- ================================================================= -->
+	<!-- Converter -->
+	<converter>
+		<converter-id>aplosAbstractBeanConverter</converter-id>
+		<converter-class>com.aplos.common.AplosAbstractBeanConverter</converter-class>
+	</converter>
+	<converter>  
+	    <converter-id>booleanConverter</converter-id>  
+	    <converter-class>javax.faces.convert.BooleanConverter</converter-class>  
+	</converter>
+	 
+	 <render-kit>
+        <client-behavior-renderer>
+            <client-behavior-renderer-type>com.aplos.core.component.behavior.ajax.AjaxBehaviorRenderer</client-behavior-renderer-type>
+            <client-behavior-renderer-class>com.aplos.core.component.behavior.ajax.AjaxBehaviorRenderer</client-behavior-renderer-class>
+        </client-behavior-renderer>
+     </render-kit>
+     
+
+</faces-config>

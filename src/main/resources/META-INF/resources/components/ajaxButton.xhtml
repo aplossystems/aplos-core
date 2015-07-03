@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="action" method-signature="void  f()" required="false"></cc:attribute>
+    	<cc:attribute name="style" />
+    	<cc:attribute name="styleClass" />
+    	<cc:attribute name="value" />	
+    	<cc:attribute name="onclick" default="null" />
+    	<cc:attribute name="target" default="_self" />	
+    	<cc:attribute name="oncomplete"  />
+    	<cc:attribute name="rendered" type="boolean" />
+    	<cc:attribute name="reRender" default="null" />	
+    	<cc:attribute name="ajaxEnabled" default="false" type="boolean" />	
+    	<cc:attribute name="immediate" default="false" />	
+    	<cc:attribute name="disabled" default="false" />
+    </cc:interface>
+    <cc:implementation>
+    	<aplos:panel layout="none" rendered="#{ cc.showingPicturedBtn and cc.attrs.rendered }">
+			<h:commandLink id="ajaxCommandLink" action="#{ cc.invokeAction }" immediate="{ cc.attrs.immediate }" class="#{ cc.styleClasses }" onclick="#{ cc.attrs.onclick }" styleClass="#{ cc.attrs.styleClass }" target="#{ cc.attrs.target }" disabled="#{ cc.attrs.disabled }" >
+				<p:ajax process="@form" event="action" oncomplete="#{ cc.attrs.oncomplete }"  update="#{ cc.attrs.reRender }" disabled="#{ !cc.determineAjaxEnabled() }"/>
+				<span id="cmdBtnPnl" class="aplos-command-button-right aplosSmallBorder" style="cursor:pointer;display:inline-block;#{ cc.attrs.style };">
+					<span id="cmdBtnLeftPnl" class="aplos-command-button-left btnLeftPnl" style="display:block">
+						<span id="cmdBtnRightPnl" class="aplos-command-button-middle btnRightPnl" style="display:block;">
+							<span><h:outputText value="#{ cc.attrs.value }" /></span>
+						</span>
+					</span>
+				</span>
+			</h:commandLink>
+		</aplos:panel>
+		<aplos:panel layout="none" rendered="#{ !cc.showingPicturedBtn and cc.containingActions and cc.attrs.rendered }">  
+			<h:commandLink id="ajaxCommandLink2" action="#{ cc.invokeAction }" immediate="{ cc.attrs.immediate }" class="#{ cc.styleClasses }" onclick="#{ cc.attrs.onclick }" style="#{ cc.attrs.style }" target="#{ cc.attrs.target }">
+				<p:ajax process="@form" event="action" oncomplete="#{ cc.attrs.oncomplete }"  update="#{ cc.attrs.reRender }" disabled="#{ !cc.determineAjaxEnabled() }"/>
+				<h:outputText value="#{ cc.attrs.value }" />
+			</h:commandLink>
+		</aplos:panel>
+		<aplos:panel layout="none" rendered="#{ !cc.showingPicturedBtn and !cc.containingActions and cc.attrs.rendered }" target="#{ cc.attrs.target }" >
+			<h:outputLink id="ajaxCommandLink3" value="#" class="#{ cc.styleClasses }" onclick="#{ cc.attrs.onclick }" >
+				<h:outputText value="#{ cc.attrs.value }" />
+			</h:outputLink>
+		</aplos:panel>
+    </cc:implementation>    
+  </h:body>
+</html>

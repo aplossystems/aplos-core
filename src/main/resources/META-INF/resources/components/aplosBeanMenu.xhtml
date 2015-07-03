@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="value"></cc:attribute>
+    	<cc:attribute name="selectItems" ></cc:attribute>
+    	<cc:attribute name="update" default="@none" ></cc:attribute>
+    	<cc:attribute name="listener" ></cc:attribute>
+    	<cc:attribute name="onstart" ></cc:attribute>
+    	<cc:attribute name="oncomplete" ></cc:attribute>
+    	<cc:attribute name="label" default="" ></cc:attribute>
+    	<cc:attribute name="disabled" default="false" ></cc:attribute>
+    	<cc:attribute name="required" default="false" ></cc:attribute>
+    </cc:interface>
+    <cc:implementation>
+		<h:selectOneMenu label="#{ cc.attrs.label }" value="#{ cc.attrs.beanValue }" converter="aplosAbstractBeanConverter" disabled="#{ cc.attrs.disabled }" required="#{ cc.attrs.required }">
+			<f:selectItems value="#{ cc.attrs.selectItems }" />
+			<p:ajax event="change" listener="#{cc.beanChanged}" update="#{ cc.attrs.update }" onstart="#{ cc.attrs.onstart }" oncomplete="#{ cc.attrs.oncomplete }"/>
+		</h:selectOneMenu>
+    </cc:implementation>    
+  </h:body>
+</html>

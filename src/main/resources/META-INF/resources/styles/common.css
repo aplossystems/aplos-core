@@ -1,0 +1,1880 @@
+/**
+* This forces the vertical scroll to always show and thus avoid page jump with centred content.
+*/ 
+ html
+{
+  overflow-y:scroll;
+}
+
+a {
+    color: #0078D0;
+}
+
+a:hover {
+    color: #0090FF;
+}
+
+
+/************************************************************************
+ * Tab Panels
+ */
+ 
+ div.ui-dialog {
+    position: fixed;
+ }
+ 
+ img {
+ 	border-style: none;
+ }
+ 
+ .archived-column {
+ 	background-color: #eccb83;
+ }
+ 
+.tabPanel a, .tabPanel img {
+	float: left;
+	line-height: 35px;
+}
+.tabPanel a {
+	color: #33147F;
+	text-decoration: none;
+	padding-left: 5px;
+}
+
+img { border-width: 0px }
+
+a {
+	outline:none;
+}  
+
+.numericText {
+	text-align:right;
+	min-width:75px;
+}
+
+.numberText input {
+	text-align:right;  
+}
+
+.formSubHeading {
+	text-decoration:underline; 
+	padding-bottom:10px;
+}
+
+.horizontalTabbedMenu {
+	position:absolute; 
+	z-index:2; 
+	top:-19px; 
+	left:28px;
+}
+
+.verticalTabbedMenu {
+	position:absolute; 
+	z-index:2; 
+	top:-13px; 
+	left:28px;
+}
+
+.aplos-history {
+    float: right;
+}  
+
+a:active {
+	outline:none;
+}
+
+.scrollerTable {
+	width:100%;
+}
+
+.aplosCompTabContentContainer {
+	float:left;
+}
+
+.scrollerTable .rich-datascr-button {
+	width:25px;
+	max-width:25px;
+	min-width:25px;
+}
+
+.verticalTabPanel a {
+	color: #33147F;
+	text-decoration: none;
+}
+
+a.tabExtenderUp, a.tabExtenderDown {
+	line-height: 27px;
+	padding-right: 2px;
+}
+
+/************************************************************************
+ * Aplos Small Border
+ */
+
+.aplosSmallBorder a { 
+	text-decoration: none;
+	color: #2F4F4F;
+	font: bold 11px Arial, Helvetica;
+	line-height: 45px;
+	text-shadow: 1px 1px 2px #B8B8B8;
+}
+
+.aplosBtnAnchor { 
+	text-decoration: none;
+	color: #2F4F4F;
+	font: bold 11px Arial, Helvetica;
+	text-shadow: 1px 1px 2px #B8B8B8;
+}
+
+.aplos-first-letter-uppercase:first-letter { text-transform:uppercase; }
+.tabExtenderDown:first-letter { text-transform:uppercase; }
+.tabExtenderUp:first-letter { text-transform:uppercase; }
+.subTabExtenderDown:first-letter { text-transform:uppercase; }
+.subTabExtenderUp:first-letter { text-transform:uppercase; }
+
+.rich-table-subheadercell:first-letter { text-transform:uppercase; }
+
+/************************************************************************
+ * Faces Messages
+ */
+
+.rich-messages {
+	margin: 0px;	
+}
+
+.rich-messages dt {
+	line-height: 35px;	
+	display:block;
+	height : 30px /*  This needs to be set for Chrome, otherwise the height comes in at 16px! A.M. 14 Nov 2011 */
+}  
+
+.rich-messages-label {
+	background-color: lightYellow;
+	border: 1px solid gray;
+	padding: 5px;
+	padding-left: 30px;
+	font: normal 13px Arial;
+	background-image: url('../images/warning.png');
+	background-position: 5px;
+	background-repeat: no-repeat;
+	display:block;
+}
+
+.message-info .rich-messages-label {
+	background-color: lightBlue;
+	background-image: url('../images/action_check.gif');
+}
+
+.message-fatal .rich-messages-label {
+	background-color: lightRed;
+}
+
+/* replaces .editWithRequired .formText */
+.aplos-form-table-with-required .aplos-label {
+	padding-right:0;
+}
+
+.aplos-image-description {
+	padding-left : 10px;  
+}
+
+/* replaces .requiredAsterixCell */
+.aplos-required-asterisk {
+	font-weight:bold; 
+	color:#EE3333; 
+	font-size:12px; 
+	padding-left:3px; 
+	position:relative; 
+	top:3px; 
+	width:10px;
+	min-width:10px;
+}
+
+.req { 
+	font-weight:bold; 
+	color:#EE3333; 
+	font-size:12px; 
+	padding-left:3px; 
+	position:relative; 
+	top:3px; 
+}
+
+/************************************************************************
+ * Misc
+ */
+
+.wizardButtonPanel {
+	float:right;
+}
+
+.limitnotice { color:DimGray; position: relative; top: 15px; left: 70px; }
+
+.aplosSystemToolBarDebugTxt, .aplosSystemToolBarDebugTxt:visited {
+	color : red; 
+}
+
+.aplosSystemToolBarGeneralTxt, .aplosSystemToolBarGeneralTxt:visited {
+	color : green; 
+}
+
+.uploadImageBox {
+  border: 1px solid #44F;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;;
+  border-radius: 25px;
+  text-align:center;
+  width:200px;
+  height:76px;
+  float:left;
+  vertical-align:middle;
+  line-height:70px;
+}
+
+.ui-widget-content .deleteIcon {
+	background-image : url('../images/action_delete.gif');
+}
+
+/*  Primefaces overrides */
+
+
+.ui-datatable th, .ui-datatable tfoot td {
+	padding : 4px 3px;
+	font-size : 11px;
+}
+
+.ui-datatable .ui-sortable-column-icon {
+	right : -3px;
+}
+
+.ui-datatable .ui-datatable-data td, .ui-datatable .ui-datatable-data-empty td {
+	padding : 4px 5px;
+	font-size : 11px;
+}
+
+.ui-confirm-dialog {
+	position:fixed !important;	
+}
+
+.ui-datatable th.aplos-filter-active { background: #EE7 url('/images/ui-bg_glass_75_e6e6e6_1x400.png') 50% 50% repeat-x; } /* highlight columns with active filter values (applied via js) */
+.ui-datatable th.aplos-filter-active input { background: #FFA url('/images/ui-bg_glass_75_e6e6e6_1x400.png') 50% 50% repeat-x; }
+
+.jpassword-info:first-letter { text-transform:uppercase; }
+
+.aplos-wrapped-column-header .ui-dt-c {
+	white-space:normal;
+}
+
+.vertical-text {
+	writing-mode:tb-rl;
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform: rotate(270deg);
+}
+
+
+
+.aplos-article-atom {
+   margin: 0 auto;
+   width: 620px;
+}
+
+.aplos-article-short-description, .aplos-article-content {
+  padding: 10px 0px 10px 0px;
+}
+
+.aplos-article-title {
+  float: left;
+}
+
+.aplos-article-title h1 {
+  margin: 0px;
+}
+
+.aplos-back-to-articles-btn {
+  float: right;
+}
+
+.aplos-article-image {
+  padding-top:10px;
+  clear:both;
+}
+
+.aplos-article-list-item {
+  clear:both;
+}
+
+.scrollToTop{
+	width:100px; 
+	height:130px;
+	padding:10px; 
+	text-align:center; 
+	font-weight: bold;
+	color: #444;
+	text-decoration: none;
+	position:fixed;
+	bottom: 80px;    
+	right: 90px;
+	display:none;
+	background: url('../images/scroll-to-top.png') no-repeat 0px 20px;
+}
+.scrollToTop:hover{
+	text-decoration:none;
+}
+
+
+/********************************************************************************
+	Imported from modern as this is now the default.
+	
+	Need to remove anything that will almost definately need to be changed in other
+	themes and add it specifically into the modern.css.  This will be colors, font
+	changes and anything else that is likely to be inherited from higher tags.
+*********************************************************************************/
+
+	.centreContent{
+	width: 100%;
+	margin: auto auto;
+}
+
+/* Data Table */
+
+.dataTD {
+	border: 1px solid lightgrey;	
+}
+
+th {
+	/* padding: 5px;
+	font-weight: normal; */
+	text-align: left;
+	background-color:transparent;
+}
+
+
+
+.listDatatable .rich-table-thead {
+	background-image:url('../images/modern/subListTopExtender.png');
+}
+
+#tableBackgroundAndContent .rich-table-thead {
+	background-image:none;
+	height:42px;
+}
+
+.listDatatable .rich-table-thead {
+	height:30px;
+}
+
+.listDatatable .rich-table-cell{
+	/* background-color: #F3F3F3; */
+}
+
+.rich-table-subheadercell > div { position: relative; top: 3px; }
+
+/************************************************************************
+ * Faces Messages
+ */
+.fading-rich-messages {
+	margin: 0px;
+	position:fixed;
+	bottom: 20px;
+	right: 20px;
+}
+
+.rich-messages dt {
+	line-height: 35px;
+}
+
+.rich-messages-label {
+	background-color: lightYellow;
+	padding: 7px 10px 7px 30px;
+	font: bold 13px Arial;
+	border: 1px solid lightgray;
+	color: #444;
+	
+	background-image: url('../images/warning.png');
+	background-position: 5px;
+	background-repeat: no-repeat;
+	
+	margin-top:2px;
+	margin-left:13px;
+	max-width:920px;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.message-info .rich-messages-label {
+/*	background-color: lightBlue;	*/
+	background-image: url("/images/action_check.gif");
+}
+
+.message-fatal .rich-messages-label {
+	background-color: lightRed;
+}
+
+/***************************************************** Message Box */
+
+.messageTitle {
+	font: bold 19px Verdana;
+	color: black;
+}
+
+.messageText {
+	font: bold 13px Tahoma;
+	color: black;
+}
+
+.messageBox {
+	clear: both;
+	margin: 0 auto;
+	position: relative;
+	color: black;
+	padding: 10px;
+	width: 500px;
+	z-index: 1050;
+}
+
+.messageBack {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background-color: #000800;
+	opacity: 0.5;
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity = 50);
+}
+
+
+
+.btn {
+	position: relative;
+	top: 14px;
+}
+
+
+
+
+.topLoginBarButtons .btnRightPnl {
+	padding-top:10px;
+}
+
+#agentButton {
+	position: absolute;
+	top: 150px;
+	z-index: 10;
+}
+
+#agentButton2 {
+	position: absolute;
+	top: 150px;
+	z-index: 10;
+}
+
+#agentSearch {
+	position: absolute;
+	top: 160px;
+	z-index: 10;
+}
+
+.subTabExtenderUp, .subTabExtenderDown {
+	text-align: center;
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+a.tabExtenderUp, a.tabExtenderDown {
+	padding: 8px;
+	line-height: 28px;
+}
+
+#mainFrame {
+	position: absolute;
+	top: 108px;
+	left: 0px;
+}
+
+.tabPanelDiv {
+	left: 23px;
+	top: 50px;
+}
+
+.subTabPanelDiv {
+	position: absolute;
+	top: 102px;
+	left: 50px;
+	z-index: 2;
+}
+
+
+table.edit .fieldDescription {
+	text-align: right;
+	color: darkgray;
+	font: normal 11px Arial;
+	padding-bottom: 20px;
+}
+
+table.edit .fieldDefault {
+	padding-left:10px;
+	color: darkgray;
+	font: normal 11px Arial;
+}
+
+.aplosTextInput {
+	position: relative;
+	border: 0px solid white;
+	color: black;
+	background-color: white;
+	font: normal 13px Tahoma, Helvetica;
+}
+
+.searchField {
+	position: relative;
+	width: 100px;
+	top: 12px;
+	border: 0px solid white;
+	color: black;
+	background-color: white;
+	font: normal 13px Tahoma, Helvetica;
+}
+
+.formContentSubDiv {
+	top: 150px;
+	z-index: 10;
+}
+
+.stdLink,.mainMenuLink,.subMenuLink, .stdLink:visited {
+	color: #33147F;
+	text-decoration: none;
+}
+
+.stdLink:hover {
+	color: #0090FF;
+}
+
+/* Ajax Loading Panel */
+
+.loadingPanel {
+	background-color: rgb(242, 242, 242);
+}
+
+/********************************************************************* Table */
+
+.listHeaderDiv table {
+	width: 100%;	
+}
+
+.algorithmSetUpTable {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.algorithmSetUpTable td {
+	padding: 5px;
+	background-color: white;
+	border: 2px solid lightgrey;
+}
+
+th a {
+	color: #33147F;
+	text-decoration: none;
+}
+
+.dataTD {
+	background-color: white;
+	border: 2px solid lightgrey;
+}
+
+.tabExtenderUp {
+	background-image: url('../images/modern/tabsExtenderUp.png');
+	background-repeat: repeat-x;
+}
+
+.tabExtenderDown {
+	background-image: url('../images/modern/tabsExtenderDown.png');
+	background-repeat: repeat-x;
+}
+
+.subTabExtenderUp {
+	background-image: url('../images/modern/subTabExtenderUp.png');
+	background-repeat: repeat-x;
+}
+
+.subTabExtenderDown {
+	background-image: url('../images/modern/subTabExtenderDown.png');
+	background-repeat: repeat-x;
+}
+
+
+
+.outerListDiv {
+	top: 7px;
+	width: 865px;
+}
+
+.listHeaderDiv {
+	top: 150px;
+	left: 30px;
+	width: 100%;
+}
+
+.listContentDiv {
+	top: 182px;
+	width: 100%;
+}
+
+.listNavigationDiv {
+	top: 482px;
+	width: 830px;
+}
+
+
+.detailsHeader {
+	top: 95px;
+	left: 60px;
+}
+
+.detailsHeaderNoTabs {
+	position: absolute;
+	top: 105px;
+	left: 60px;
+}
+
+.detailHeader {
+	font: bold 16px Tahoma;	
+}
+
+.largeDividerDiv {
+	top: 135px;
+}
+
+/********************************************************************* Forms */
+
+.formText {
+	padding-top: 6px;
+	vertical-align: top;
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2F4F4F;
+	padding-right: 20px;
+	width: 100px;
+}
+
+.formField {
+	padding: 2px;	
+}
+
+table.edit .formField {
+	width: 200px;
+}
+
+table.edit .formField input[type='text'],table.edit .formField input[type='password'],table.edit .formField select
+	{
+	width: 200px;
+	padding: 3px;
+	border: 1px solid #d9d9d9;
+	font-size: 12px;
+}
+
+.formField input, .formField select {
+	/* max-width2: 160px; */
+}
+
+.formHeader {
+	padding: 0px;
+	margin: 0px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+#studentForm .formField input, #studentForm .formField select {
+	/* max-width2: 300px; */
+}
+
+
+#subFrame {
+	top: 155px;
+	left: 35px
+}
+
+#subList {
+	top: 175px;
+	left: 60px;
+}
+
+#subTabPanel {
+	position: absolute;
+	top: 102px;
+	left: 50px;
+	z-index: 2;
+}
+
+#toolBar {
+	position: absolute;
+	top: 150px;
+	left: 580px;
+}
+
+#buttonNew {
+	position: absolute;
+	top: 137px;
+	left: 55px;
+	z-index: 10;
+}
+
+#mainFrame {
+	position: absolute;
+	top: 108px;
+	left: 0px;
+}
+
+.editTabPanel {
+	position: absolute;
+	top: 116px;
+	left: 49px;
+	z-index: 2;
+}
+
+#editSubFrame {
+	position: absolute;
+	top: 168px;
+	left: 35px;
+}
+
+.classGridDiv {
+	background-color:#EBEBEB;
+}
+
+.outerClassDiv {
+	background-color:#def0e2;
+}
+
+.innerClassDiv {
+	background-color:#def0e2;
+}
+
+.rolloverButtonRight {
+	display:inline-block;
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+	height: 45px;
+}
+
+.rolloverButtonLeft {
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+	height: 45px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.rolloverButtonMiddle {
+	background-position:0px 1px;
+	background-repeat: repeat-x;
+	height: 45px;
+}
+
+.rolloverButtonHeight {
+}
+
+
+#topBarImgTopRightDiv {
+	min-height:63px;
+	background-image:url('../images/modern/topBarTopRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+}
+
+#topBarImgTopLeftDiv {
+	min-height:63px;
+	background-image:url('../images/modern/topBarTopLeft2.png');
+	background-repeat:no-repeat;
+	background-position:0% 0%;
+	margin-left:8px;
+	padding-left:14px;
+	padding-right:20px;
+}
+
+#topBarBgTopDiv {
+	background-image:url('../images/modern/topBarTopExtender.png');
+	background-position:bottom center;
+	background-repeat: repeat-x;
+	min-height:63px;
+}
+
+#imgBottomRightDiv {
+	height: 20px;
+	background-image:url('../images/modern/topBarBottomRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+}
+
+#imgBottomLeftDiv {
+	height: 20px;
+	background-image:url('../images/modern/topBarBottomLeft.png');
+	background-repeat:no-repeat;
+	padding-left:20px;
+	padding-right:20px;
+}
+
+#bgBottomDiv {
+	background-image:url('../images/modern/topBarBottomExtender.png');
+	background-repeat: repeat-x;
+	background-position:bottom center;
+	height:20px;
+}
+
+#bgRightDiv {
+	background-image:url('../images/modern/topBarRightExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+}
+
+#tableImgTopRight {
+	background-image:url('../images/modern/subListTopRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+	min-height: 30px;
+	margin-bottom: -20px;
+	margin-right: -12px;
+}
+
+#tableImgTopLeft {
+	background-image:url('../images/modern/subListTopLeft.png');
+	background-repeat:no-repeat;
+	min-height: 30px;
+	padding-left:28px;
+	padding-right:28px;
+	margin-left: -10px;
+}
+
+#tableBgTop {
+	background-image:url('../images/modern/subListTopExtender.png');
+	background-repeat: repeat-x;
+	min-height: 30px;
+}
+
+#tableBgRight2 {
+	background-image:url('../images/modern/subListRightExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+}
+
+#tableBgLeft2 {
+	background-image:url('../images/modern/subListLeftExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+}
+
+#tableBackgroundAndContent {
+	margin:0px;
+	background-repeat:repeat;
+	position:relative;
+	top:-10px;
+}
+
+#backendBreadCrumbs {
+	color: #a0a0a0;
+	font: bold 11px Trebuchet MS;
+	text-decoration:none;
+	position:relative;
+	margin: auto;
+	width: 1000px;
+}
+
+#backendBreadCrumbs a {
+	text-decoration:none;
+	color: #a0a0a0;
+	font: bold 11px Trebuchet MS;
+}
+
+#backendBreadCrumbs a:hover {
+	text-shadow: black 1px 1px 1px;
+}
+
+#backendBreadCrumbs #frameBgRight > div {
+	padding:5px 15px 0px 15px; 
+}
+
+#backendBreadCrumbs #frameImgTopRight, #backendBreadCrumbs #frameBgTop {
+	min-height:1px !important;
+}
+
+#themeChanger {
+	color: white;
+	font: bold 12px Garamond;
+	text-decoration:none;
+	margin-top:8px;
+	margin-left:15px;
+}
+
+#themeChanger a {
+	margin-left: 10px;
+	text-decoration:none;
+	color: white;
+	font: bold 11px Garamond;
+}
+
+#aplosFooter {
+	border-top:1px solid #AC5C5C;
+	background-color: #DDD;
+	color: grey;
+	text-align: right;
+	font: bold 33px Garamond;
+	padding:20px;
+	padding-right: 40px;
+	font-size:15px;
+}
+
+#aplosFooter a {
+	color: grey;
+	font: bold 33px Garamond;
+	text-decoration: none;
+}
+
+.bodyWrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -92px;
+}
+#aplosFooter, #push {
+	height: 51px;
+}
+
+#mainMenuBarContainer{
+	min-height: 40px;
+	width: 100%;
+}
+
+#aploraNavigationBar {
+	width: 1000px;
+	margin: auto;
+	padding-bottom:0px;
+}
+
+.aplosMainMenu {
+	width: 100%;
+	text-align: center;
+}
+
+.menulink a {
+	color: #717171;
+	font-family: Raavi;
+	font-size: 14px;
+	width:100%;
+}
+
+#subMenuBarImgTopRightDiv div {
+	line-height: 10px;
+	height: 10px;
+	min-height:10px;
+	max-height:10px;
+	padding-bottom:20px;
+	padding-top: 0px;
+	margin-top: 0px;
+	margin-left:0px;
+}
+
+#subMenuBarImgTopRightDiv a {
+	line-height: 30px;
+}
+
+#aploraNavigationBar div.highlight a {
+    color: #44bbbb;
+}
+
+#aploraNavigationBar div.current a {
+	cursor: default;
+	color: #A26464;
+}
+
+.aplosMainMenu div {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	display: block;
+	float: left;
+	height:20px
+	margin-left:10px;
+	margin-right:10px;
+	border-left: solid #C5C5C5 1px;
+	text-align:center;
+}
+
+#subMenuBarImgTopRightDiv div:first-child {
+	border-left: solid white 1px;
+}
+
+
+#mainMenuBarImgTopRightDiv div {
+	
+}
+
+.aplosMainMenu div.current {
+	color: #A26464;
+}
+
+.aplosMainMenu div.highlight a {
+    color: #44bbbb;
+}
+
+.aplosMainMenu div.current a {
+	cursor: default;
+	color: #A26464;
+}
+
+.aplosMainMenu a {
+	color: #717171;
+	font: bold 12px Trebuchet MS;
+	text-decoration: none;
+	text-align:center;
+	margin-left:15px;
+}
+
+#mainMenuBarImgTopRightDiv {
+	background-image:url('../images/modern/mainTabRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+	padding-right:2px;
+	margin-right:-2px;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+#mainMenuBarImgTopLeftDiv {
+	background-image:url('../images/modern/mainTabLeft5.png');
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+	padding-left: 0px;
+}
+
+#mainMenuBarBgTopDiv {
+	background-image:url('../images/modern/mainTabExtender.png');
+	background-position:bottom center;
+	background-repeat: repeat-x;
+	margin-right:45px;
+	margin-left:47px;
+}
+
+#subMenuBarContainer {
+	min-height: 30px;
+	width: 100%;
+}
+
+.subTabPanelBar {
+	margin: auto ;
+	height: 30px;
+	width: 1000px;
+	color: white;
+}
+
+#aploraSubNavigationBar a {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+#subMenuBarImgTopRightDiv {
+	background-image:url('../images/modern/subTabRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 100%;
+	padding-right:2px;
+	margin-left:8px;
+	border-left: solid #9C9C9C 1px;
+}
+
+#subMenuBarImgTopLeftDiv {
+	background-image:url('../images/modern/subTabLeft.png');
+	background-repeat:no-repeat;
+	background-position:0% 100%;
+}
+
+#subMenuBarBgTopDiv {
+	background-image:url('../images/modern/subTabExtender.png');
+	background-position:bottom center;
+	background-repeat: repeat-x;
+	margin-right:15px;
+}
+
+#frame {
+	width:1000px;
+	margin:auto;
+}
+
+#frameImgTopRight {
+	background-image:url('../images/modern/frameTopRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+}
+
+#frameImgTopLeft {
+	background-image:url('../images/modern/frameTopLeft.png');
+	background-repeat:no-repeat;
+	background-position:0% 0%;
+	margin-left:3px;
+}
+
+#frameBgTop {
+	/* background-image:url('../images/modern/frameTopExtender.png'); */
+	background-repeat: repeat-x;
+	background-position:0% 0%;
+	background-color:#F3F3F3;
+}
+
+#frameBgLeft {
+	background-image:url('../images/modern/frameLeftExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:0%;
+}
+
+#frameBgRight {
+	background-image:url('../images/modern/frameRightExtender.png');
+	height:100%;
+	background-repeat:repeat-y;
+	background-position:100%;
+	
+}
+
+#frameImgBottomRight {
+	min-height:30px;
+	background-image:url('../images/modern/frameBottomRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+}
+
+#frameImgBottomLeft {
+	height:30px;
+	background-position:0% 0%;
+	background-image:url('../images/modern/frameBottomLeft.png');
+	background-repeat:no-repeat;
+	padding-left:67px;
+	padding-right:67px;
+	margin-left: 3px;
+}
+
+#frameBgBottom {
+	background-image:url('../images/modern/frameBottomExtender.png');
+	background-repeat: repeat-x;
+	background-position:center bottom;
+	min-height:30px;
+}
+
+.rich-table, .rich-table-header, .rich-table-header-continue,
+  .rich-table-footer, .rich-subtable-footer,.rich-table-headercell,
+  .rich-table-subheader, .rich-table-subheadercell,
+  .rich-datascr, .rich-datascr-button-dsbld, .rich-datascr-button,
+  .rich-dtascroller-table, .scrollerTable {
+     background-image:none;
+     background-color:transparent;
+}
+
+.rich-dtascroller-table {
+	
+}
+
+.rich-table, .rich-table-thead, .rich-table-subheader, .rich-table-subheadercell {
+	border: none;
+}
+
+.rich-table-cell, .rich-table-row {
+	border-right:none;
+	border-left:none;
+}
+
+.rich-table-subheadercell {
+	padding-top: 8px;
+	height:30px;
+	color: white;
+	text-shadow: black 2px 2px 2px;
+	text-align:left !important;
+}
+
+td > .rich-table .rich-table-subheadercell {
+	padding-top: 4px;
+	height:18px;
+}
+
+.rich-table-row {
+	border-left: solid 1px grey;
+	border-right: solid 1px grey;
+}
+
+.rich-table-cell {
+	color: #606060;
+}
+
+.searchFieldMiddleDiv .searchTextBox {
+	border:0 ;
+	width:150px;
+	max-width:150px;
+	background-color: transparent;
+	padding-top: 0; /* chrome */
+}
+
+/* ### the important's are needed because the search reuses aplos small border which injects styles in the element ### */
+
+.searchFieldRightDiv {
+	height:20px;
+	line-height: 15px;
+	padding-right: 30px;
+	background-image:url('../images/modern/searchFieldRight.png') !important; 
+	background-repeat: no-repeat;
+	background-position:99% -12px !important;
+}
+
+.searchFieldLeftDiv {
+	height:20px;
+	margin-right: -2px;
+	line-height: 15px;
+	background-image:url('../images/modern/searchFieldLeft.png') !important;
+	background-repeat: no-repeat;
+	background-position:0px -13px !important;
+}
+
+.searchFieldMiddleDiv {
+	height: 20px;
+	margin-left: 9px;
+	margin-top: 1px;
+	line-height: 14px;
+	background-image:url('../images/modern/searchFieldMiddle.png') !important; 
+	background-position:0 -12px !important;
+}
+
+.aplos-wdt-search-panel .aplos-search-panel-active .searchFieldLeftDiv {
+	background-image:url('../images/modern/hi_searchFieldLeft.png') !important; 
+	background-position:2px 0px !important;
+}
+
+.aplos-wdt-search-panel .aplos-search-panel-active .searchFieldMiddleDiv {
+	background-image:url('../images/modern/hi_searchFieldMiddle.png') !important; 
+	background-position:0 0px !important;
+}
+
+.aplos-wdt-search-panel .aplos-search-panel-active {
+	background-image:url('../images/modern/hi_searchFieldRight.png') !important; 
+	background-position:99% 0px !important;
+}
+
+/* ### */
+ 
+#topLoginBarRightDiv {
+	float:right;
+	margin-top: 18px;
+}
+
+#topLoginBarLeftDiv {
+	min-height:30px;
+	background-image:url('../images/modern/topLoginBarLeft.png');
+	background-repeat:no-repeat;
+	background-position:0% 0%;
+	padding-left:17px;
+	margin-left:3px;
+	/* line-height:30px; */
+}
+
+#topLoginBarMiddleDiv {
+	max-height:30px;
+	background-image:url('../images/modern/topLoginBarExtender.png');
+	background-repeat:y-repeat;
+	background-position:0% 0%;
+	/* line-height:30px; */
+}
+
+#topLoginBarUserName {
+	min-height: 30px;
+	line-height: 30px;
+	height:30px;
+	color: white;
+	text-shadow: black 2px 2px 2px;
+	position: relative;
+    top: 2px;
+    display:inline;
+}
+
+.topLoginBarButtons {
+	min-height: 27px;
+	max-height: 27px;
+	line-height: 27px;
+	height:27px;
+	vertical-align: middle;
+	top: -7px;
+	position:relative;
+}
+ 
+#editImage {
+	background-image: url('../images/modern/edit.gif');
+	background-position: center center; 
+	margin-left:5px;
+	width:20px;
+	height:20px;
+}
+
+#topLoginBarUserBtns {
+	float:right;
+}
+
+.fieldDescription {
+	color:black;
+	font-size:70%;
+}
+
+.dashboardLink {
+	border:0px outset transparent;
+	background:transparent;
+	display:block;
+	text-align:center;
+	width:80%;
+	height:100%;
+	margin:1px;
+}
+
+.dashboardLink:hover {
+	background:#CCCCCC;
+	color:#9b4242;
+	border-color:#7f3131;
+	text-shadow: #7f3131 -0px -0px 5px;
+}
+/*
+.ui-slider-horizontal {
+	background:darkred url('../images/modern/slider.jpg') !important;
+} */
+
+.ui-slider-horizontal a.ui-slider-handle {
+	text-align:center !important;
+	font-weight:bold !important;
+	text-decoration:none !important;
+	color:#EEEEEE !important;
+	background:#252525 !important;
+	width:20px !important;
+}
+
+.siteDropdown {
+	background-color:#8b3d3d;
+	background-image:none;
+	top:17px;
+	left:18px;
+	position:relative;
+	color:white;
+	border:0;
+	height:24px;
+	font-size:20px;
+	font-weight:bold;
+	text-shadow: black 2px 2px 2px;
+}
+
+span.siteDropdown { background-color:transparent; }
+
+.aplosSystemToolBarDebugTxt, .aplosSystemToolBarGeneralTxt {
+	position:relative;
+	left:-60px;
+}
+
+/* Dashboard and new Job changes */
+
+.blendedLink {
+	color:#D0D0D0;
+}
+
+a:hover .blendedLink {
+	color:#909090;
+}
+
+
+.semiBlendedLink {
+	color:#A0A0A0;
+}
+
+a:hover .semiBlendedLink {
+	color:#707070;
+}
+
+.dashboard-frame-title th { background-color:#792222; color:white; position:relative; top:-3px; left:-1px; }
+.dashboard-frame-rows td { color: dimgrey; padding:2px 0; border-bottom:1px solid black; }
+.dashboard-frame-rows td.left { padding-left:2px; }
+.alternatingRow td { background-color:#E8E8E8; }
+.dashboard-frame { float:left; margin:5px; }
+.subtotal td { border-top:2px solid black; }
+.weektotal td { border-top:2px solid black; background-color:#B0B0B0 !important; /* important because of day total */ color:black !important; }
+td.dayTotal { background-color:#E0E0E0; color:black; border-left:1px solid black; }
+.weektotal td .blendedLink { color:#555555 !important; }
+td.dayTotal .blendedLink { color:#999999; }
+.frame-title { position:relative; top:1px; display:inline; text-shadow: #FAE0E0 1px -1px 2px; color:#481717; background-color:#b18282; padding:0px 5px 4px 5px; margin-left:10px; font-size:16px; border-top:2px solid #B0B0B0; border-left:2px solid #B0B0B0; border-right:2px solid #B0B0B0; }
+
+
+/*********************
+
+ everything above here was modern_original - the new scripts framework doesnt play nicely with @import
+
+*********************/
+
+body {
+	font: normal 11px Arial, Tahoma, Helvetica;
+}
+
+html, body {
+	height: 100%;
+}
+
+/* Layout, Navigation and Components */
+
+.aplos-frontend { padding:0; margin:0; }
+.aplos-wrapper { width:1000px; margin:0 auto; background-color:white; } 
+.aplos-wrapper a img { border:0; }
+.aplos-wrapper .aplos-header { z-index:4;  width:1000px; }
+.aplos-wrapper .aplos-main-container { position:relative; z-index:2;  width:1000px; }
+.aplos-wrapper .aplos-footer { z-index:3; width:1000px; }
+.aplos-header .aplos-right-column { float:right; }
+/* replaces nav */.aplos-navigation { padding:0; margin:0; list-style:none; } /* styled dependant on container */
+.aplos-navigation a { text-decoration:none; }
+/* replaces selected */ .aplos-navigation .aplos-active { /* placeholder */ }
+.aplos-message-container { color: #a0a0a0; font: bold 11px Trebuchet MS; text-decoration:none; position:relative; margin: auto; width: 1000px; }
+
+.aplos-notice { position:relative; width:96%; max-width:890px; margin:15px auto; background-color:#EEEEEE; padding:15px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.aplos-notice h3 { margin:0 0 5px 0; }
+.aplos-notice small { color:#999999; }
+  
+/* Navigation SubMenus (Dropdowns) */
+.aplos-navigation { z-index:500; margin:0; padding:0; list-style:none; white-space:nowrap; } 
+.aplos-navigation > li { float:left; }
+.aplos-dropdown-content { z-index:500; }
+.aplos-navigation .aplos-navigation > li { float:none; }
+.aplos-navigation > li > a { display:block; float:left; padding:0 10px 0 10px; text-decoration:none; }
+.aplos-navigation > li.aplos-has-submenu > a { /* dont remove height rule or submenus arent useable */ height:42px; } 
+.aplos-navigation > li, .aplos-navigation .aplos-navigation > li > a { position:relative; } 
+.aplos-navigation li .aplos-dropdown-content { background-color:#FFFFFF; z-index:500; position:absolute; left:0px; top:29px; display:none; border:2px solid #C9150D; padding:0; } 
+/* IE6 only */ .aplos-navigation table { border-collapse:collapse; margin:-1px -10px; font-size:1em; width:0; height:0; } 
+.aplos-navigation :hover .aplos-dropdown-content { display:block; z-index:900; } 
+.aplos-navigation .aplos-dropdown-content .aplos-dropdown-column { display:block; float:left; padding:5px 5px 10px 5px; margin:0; width:135px; } 
+.aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul { padding:0; margin:0; list-style:none; } 
+.aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul li  { padding:0; margin:0; } 
+.aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul li a { text-decoration:none; background:url('../images/modern/submenu-divider.png') no-repeat left center; } 
+.aplos-dropdown-column strong { width:125px; padding:0; margin:5px 0 0 5px; display:block; float:left; }
+.aplos-dropdown-column strong a { position:relative; left:-5px; padding:0; }
+.aplos-menu-spacer { height:19px; display:block; float:left; }
+.aplos-dropdown-column .aplos-sub-navigation li:first-child strong { margin-top:0; }
+	
+/* Form Items */
+
+/* replaces editWithRequired */ .aplos-form-table-with-required {  }
+/* replaces edit */ .aplos-form-table {  }
+   
+.aplos-labelled-box { color:#DCDCDC; }
+.aplos-labelled-box:focus,.aplos-labelled-box:active  { color:#000000; }
+
+/* replaces formText */
+.aplos-label { /*padding-top: 6px; i cant see why this would be here, but it throws off all the backend fields */ vertical-align: top; text-align: right; font-size: 11px; font-weight: bold; color: #2F4F4F; padding-right: 20px; width: 150px; min-width: 150px; }
+.aplos-label:first-letter { text-transform:capitalize; }
+/* replaces requiredAsterixCell (common) */
+.aplos-required-asterisk { vertical-align:top; font-weight:bold; color:#EE3333; font-size:12px; padding-left:3px; position:relative; top:3px; width:10px; min-width:10px; }
+/* replaces fieldDescription */
+.aplos-form-table .aplos-description { text-align: right; color: darkgray; font: normal 11px Arial; padding-bottom: 20px; }
+
+table.aplos-form-table .aplos-field { width: 200px; }
+.aplos-field input[type='text'],table.aplos-form-table .aplos-field input[type='password'],table.aplos-form-table .aplos-field select { width: 230px; padding: 3px; border: 1px solid #d9d9d9; font-size: 12px; }
+.aplos-half-field input[type='text'],table.aplos-form-table .aplos-half-field input[type='password'],table.aplos-form-table .aplos-half-field select { width: 110px; padding: 3px; border: 1px solid #d9d9d9; font-size: 12px; }
+.aplos-half-field select,table.aplos-form-table .aplos-half-field select { width: 118px; }
+
+.aplos-terms { list-style:none; padding:0; margin:0 0 0 2px; }
+.aplos-terms li { padding:3px 0; font-size:70%; }
+.aplos-float-box { float:left; }
+	
+/* replaces numericText */
+.aplos-numeric { text-align:right; } 
+.aplos-align-left { text-align:left; } /* these are useful when flipping page dir, rather than when they are hard coded and need !important to override */
+.aplos-align-center { text-align:center; }
+.aplos-align-right { text-align:right; }
+.aplos-align-top { vertical-align:top; }
+/* replaces formField */
+.aplos-field { width: 250px; vertical-align:top; }
+.aplos-field textarea { width:500px; height:100px }
+	
+/* replaces aplosBtnAnchor */
+.aplos-command-button, .aplosSmallBorder a { vertical-align:middle; text-decoration:none; color:#000000; font-weight:bold; }
+.aplos-command-button:visited, .aplosSmallBorder a:visited { color:#000000; }
+.aplos-command-button:hover, .aplosSmallBorder a:hover { color:#33147F; } /* a shade of navy */
+/* replaces btnLeftPnl */
+.aplos-command-button-left, .aplosSmallBorderLeftDiv { padding-left:30px; padding-right:30px; height:20px; background-repeat:no-repeat; display:inline-block; background-position:0% -12px; background-image:url('../images/modern/btnLeft.png'); }
+/* replaces btnRightPnl, capitalize used for translation purposes */
+.aplos-command-button-middle, .aplosSmallBorderMiddleDiv { font-family:Tahoma, "Times new roman"; text-transform:capitalize; padding:3px 0 0 0; position:relative; height:17px; display:inline-block; background-position:0px -12px; background-repeat: repeat-x; background-image:url('../images/modern/btnMiddle.png'); }
+/* replaces aplosSmallBorder */ 
+.aplos-command-button-right, .aplosSmallBorderRightDiv { height:20px; background-repeat:no-repeat; background-position:100% -12px; cursor:pointer; display:inline-block; background-image:url('../images/modern/btnRight.png'); }
+
+.aplosSmallBorder { /* nothing */ }
+.aplosSmallBorder a { line-height: 14px; }
+
+
+
+/* editField wraps the page so causes positioning to break if you remove these styles */
+.aplos-frontend-template-body-panel { position:absolute; width:100%; height:100%; }
+
+.aplos-static-content-container { padding:0; margin: 15px; }
+  
+/* Styles [mostly] related to product list pages */  
+    
+.aplos-product-list-header { float:left;clear:both;display:block;width:100%; }
+.aplos-product-list-header > h1 { float:left; position:relative; top:-18px; }
+.aplos-product-list-container { width:100%; float:left; clear:both; }
+.aplos-product-list-container .aplos-no-stock { margin:10px; font-weight:bold; }
+
+.aplos-list-product { float:left; position:relative; width:145px; height:290px; padding:0; margin:0 21px 15px 0; border:1px solid #BCBEC0; /* light grey */ }    
+.aplos-list-product .aplos-image-wrapper { display:block; text-align:center; height:196px; width:143px; margin:0 auto; padding:0; border:1px solid transparent; border-bottom:1px solid #BCBEC0;}
+.aplos-list-product .aplos-image-wrapper img { display:block; margin:0 auto; padding:0; border:0; }
+.aplos-list-product > div { position:relative; margin:5px; height:74px; width:135px; }
+.aplos-list-product .aplos-list-product-name { font-size:11px; padding:0; margin:0 0 7px 0; min-height: 36px; height: 36px; }
+.aplos-list-product a { margin:0; padding:0; font-size:12px; color:#000000; text-decoration:none; }
+.aplos-list-product a .aplos-colour { font-weight:normal; font-size:11px; }
+.aplos-list-product .aplos-details { bottom:0; height: 18px; width:100%; }
+.aplos-list-product .aplos-price {  }
+.aplos-crossout { color:#BCBEC0; text-decoration:line-through; }
+.aplos-list-product .aplos-colour-thumbs { clear:right; padding: 0; margin: 5px 0 0 1px; list-style:none; } 
+.aplos-list-product .aplos-colour-thumbs li { margin:0 4px 5px 0; display:block; float:left; width:21px; height:20px; border:1px solid #DEDFE2; }
+.aplos-list-product .aplos-review-stars { clear:right; padding: 0; margin: 13px 0 0 1px; list-style:none; } 
+.aplos-list-product .aplos-review-stars li { margin:0 4px 0 0; display:block; float:left; width:23px; height:22px; background-image:url('../images/modern/star.png'); }
+.aplos-list-product .aplos-review-stars li.aplos-half-star { background-image:url('../images/modern/half-star.png'); }
+.aplos-list-product .aplos-review-stars li.aplos-full-star { background-image:url('../images/modern/full-star.png'); }
+.aplos-list-product .aplos-review-count { margin-top:10px; margin-bottom:4px; float:left; }
+.aplos-list-product .aplos-review-score { margin-top:10px; margin-bottom:4px; float:right; }
+.aplos-list-product .aplos-command-button { margin:2px auto 0px; display:block; }
+.aplos-row-last { margin-right:0; }
+.aplos-unimportant { color:#CACACA; }
+.aplos-total, .rich-table-subfootercell { background-color:#EAEAEA; }
+.rich-table-subfootercell { padding:0; }
+.rich-table-subfootercell span { margin:3px; }
+.aplos-grand-total { background-color:#D0D0D0; }
+
+.aplos-product-list-paging { float:right; }
+.aplos-product-list-paging a { padding:1px 4px 1px 1px; text-decoration:none; color:#777777; text-align:center; }
+.aplos-product-list-paging a:hover { background-color:#999999; color:#000000; }
+	
+/* Styles [mostly] related to product quantity/size/colour grids */
+
+.aplos-ecommerce-qty-grid td { border-spacing:0; padding:1px; width:22px; text-align:center; vertical-align:middle; }
+.aplos-ecommerce-qty-grid th { border-spacing:0; padding:8px 1px 3px 1px; font-size:9px; text-align:center;
+/*
+ -moz-transform: rotate(45deg); 
+ -o-transform: rotate(45deg); 
+ -webkit-transform: rotate(45deg); 
+ filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.25);
+ -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.25)";
+ */
+}
+.aplos-ecommerce-qty-grid .aplos-category  { font-size:12px; text-align:right; width:auto; min-width:50px; padding-right:3px; }
+th.aplos-hover, tr.aplos-hover td { background-color:#F5F5F5; color:navy; }
+.aplos-ecommerce-qty-grid td { height:20px; max-height:20px; }
+.aplos-ecommerce-qty-grid td .aplos-value { border:1px solid #898A8C; text-align:center; width:20px; height:16px; padding:1px; color:#EEEEEE; background-image:none; }
+.aplos-ecommerce-qty-grid td a.aplos-value { display:block; padding:3px 1px 0 1px; height:15px; }
+.aplos-ecommerce-qty-grid td a.aplos-value img { border:0; }
+.aplos-ecommerce-qty-grid td .aplos-value:hover { border-color:#000000 ; }
+.aplos-ecommerce-qty-grid td .aplos-spacer { width:22px; height:18px; border:1px solid #898A8C; padding:0px; color:#FFFFFF; }
+.aplos-ecommerce-qty-grid td:hover .aplos-value,.aplos-ecommerce-qty-grid td .aplos-value:focus { color:#FFFFFF ; }
+.aplos-in-stock { background-color:#1691D5; }
+.aplos-wait-period { background-color:#EFB27F; }
+.aplos-ecommerce-qty-grid td a.aplos-wait-period { padding-top:0px; padding-bottom:2px; text-decoration:none; font-weight:bold; } 
+.aplos-low-stock { background-color:#A94462; }
+.aplos-out-of-stock { background-color:#BBAAAA; }
+.aplos-not-stocked { background-color:#CECECE; }
+.aplos-ecommerce-qty-grid .aplos-active, .aplos-expander dt.aplos-active { background-color:#107A0A; /* last grid item clicked */}
+.aplos-ecommerce-qty-grid .aplos-error { background-color:#FF4444; border:2px solid #FF8300; }
+.aplos-swatch { display:block;width:22px; height:20px; font-weight:bold;color:silver; background-repeat:no-repeat; background-position:50% 50%; line-height:17px; }
+
+/* styles mostly relating to size-chart's */
+.aplos-ecommerce-size-chart { border-collapse:collapse; }
+.aplos-ecommerce-size-chart input { width: 37px; /* big enough for 135cm */ }
+.aplos-ecommerce-size-chart.aplos-backend th { text-align:center; }
+.aplos-ecommerce-size-chart.aplos-backend td { text-align:center; }
+.aplos-ecommerce-size-chart th { background-color:#DADADA; font-size:85%; vertical-align:top;  text-align:left; }
+.aplos-ecommerce-size-chart td { vertical-align:top; text-align:left; } 
+.aplos-ecommerce-size-chart .aplos-measurement { padding-left:3px; background-color:#EAEAEA; font-weight:bold; font-size:90%; width:100px; }
+.aplos-ecommerce-size-chart.aplos-backend .aplos-measurement { text-align:left; }
+.aplos-ecommerce-size-chart .aplos-type { font-size:70%; font-color:silver; display:block; font-style:italic; width:100%; }
+.aplos-ecommerce-size-chart tbody { overflow-x: auto; }
+.aplos-fill-width { width:100%; }
+
+/* Styles [mostly] related to individual product pages */
+.aplos-individual-product { width:988px; margin:0 11px; }
+.aplos-individual-product .aplos-product-images-container { float:left; width:308px; margin:16px 10px 0 0; }
+.aplos-individual-product .aplos-main-product-image-container { border:1px solid #BCBEC0; text-decoration:none; display:block; width:308px; height:421px; position:relative; display:table-cell; vertical-align:middle; }
+.aplos-main-product-image-container .aplos-main-product-image { max-width:308px; max-height:421px; margin:0 auto; }
+.aplos-main-product-image-container .aplos-caption { border:1px solid #BCBEC0; position:absolute; bottom:10px; right:10px; height:26px; text-align:justify; color:#000000; line-height:12px; width:52px; padding:2px 0 0 24px; margin:0; background-position:2px 2px; background-repeat:no-repeat; background-color:white; background-image:url('../images/zoom.png'); }
+.aplos-individual-product .aplos-product-thumbnails-container { float:left; margin:8px 10px 0 0; width:315px; }
+.aplos-product-thumbnails-container .aplos-product-thumbnail { float:left; border:1px solid #BCBEC0; display:block; width:55px; height:74px; padding:0; margin:7px 6px 7px 0; } /* this is a commandLink containing an image */
+.aplos-product-thumbnails-container .aplos-product-thumbnail img { max-width:55px; max-height:74px; width:55px; height:74px; }
+.aplos-product-thumbnails-container .aplos-caption { padding:0; margin:0; position:relative; top:2px; }
+.aplos-product-thumbnails-container .aplos-caption img { vertical-align:middle; position:relative; top:-4px; width:20px; height:21px; margin-right:0 1px; }
+.aplos-product-details-container { float:left; width:465px; padding:0; }
+.aplos-product-details-container .aplos-product-tabs-container { width:465px; margin:-10px 0 6px 0; }
+.aplos-product-tabs-container .aplos-title { font-size:14px; margin:0 0 10px 0; }
+.aplos-product-tabs-container .aplos-price { color:#24205C; font-size:14px; }
+.aplos-product-tabs-container .aplos-details { font-size:12px; } /* description field */
+.aplos-product-details-container .aplos-product-grid-container { border:1px solid #BCBEC0; width:455px; margin:0; position:relative; padding:5px; min-height:100px; }
+.aplos-product-grid-container .aplos-ecommerce-qty-grid { min-height:60px; padding-bottom:40px }
+.aplos-product-grid-container .aplos-grid-key { position:absolute; bottom:10px; left:10px; width:81px; height:22px; line-height:11px; border:1px solid #BCBEC0; color:#BCBEC0; font-weight: bold; text-decoration:none; }
+.aplos-product-grid-container .aplos-buttons { float:right; }
+.aplos-product-crossselling-container { float:left; width:183px; margin:0; padding:0; }	
+.aplos-product-crossselling-container .aplos-crossselling-navigation-container { text-align:center; width:183px; margin:0; padding:0; }
+.aplos-product-crossselling-container .aplos-crossselling-thumbnails-container { width:183px; margin:0; padding:0; }
+.aplos-crossselling-thumbnails-container .aplos-product-thumbnail { width:84px; height:111px; border:1px solid #BCBEC0; }	
+.aplos-product-tabs-container .prReviewEngine { margin-top:5px; }
+.aplos-kit-item-link { color:#888888; } /* a shade of grey */
+.aplos-kit-item-link:hover { color:#33147F; } /* a shade of navy */
+	
+.aplos-expander { /* placeholder */ }
+.aplos-expander span { position:relative; padding:5px 5px 3px 5px; z-index:5; background-color:white; border-bottom:1px solid #BCBEC0; height:14px; display:block; }
+.aplos-expander dl { float:left; font-weight:normal; margin:0; padding:5px; display:none; position:relative; z-index:3; top:-3px; left:-1px; width:140px; border:1px solid #BCBEC0; background-color:#FFFFFF; }
+.aplos-expander dt { padding:2px; float:left; text-align:center; margin:3px; width:18px; height:14px; color:#EEEEEE; }
+.aplos-expander dd { float:left; clear:right; margin:0; padding:0; width:105px; height:16px; margin:4px 3px; vertical-align:middle; }
+.aplos-expander:hover span { border-bottom:1px solid white; height:16px; }
+.aplos-expander:hover dl { display:block; }
+
+/* jQuery tabs component override for product page */
+.aplos-product-details-container .ui-tabs { border: 0; } /* container */
+.aplos-product-details-container .ui-tabs-nav { border:0; background-image: none; background-color: transparent; } /* tabs */
+.aplos-product-details-container .ui-tabs-nav li { border:0; background-color: transparent; top:0; }
+.aplos-product-details-container .ui-tabs-nav li a { padding:4px; color:#24205C; font-size:10px; }
+.aplos-product-details-container .ui-tabs-nav .ui-state-default { background: transparent; }
+.aplos-product-details-container .ui-tabs-nav .ui-state-active a { font-weight:bold; }
+.aplos-product-details-container .ui-tabs .ui-tabs-panel { padding:5px; border:1px solid #BCBEC0; }
+
+/* sign in pages */
+.aplos-existing-customer-signin .aplos-email { width:198px; }
+.aplos-existing-customer-signin .aplos-password { width:204px; }
+.aplos-existing-customer-signin .aplos-password-btn { /* placeholder */ }
+.aplos-existing-customer-signin .aplos-sign-in-btn { margin-right:0; }
+.aplos-checkout-sign-in-or-sign-up > .aplos-form-table { width:100%; margin:0 auto 30px auto; }
+.aplos-checkout-sign-in-or-sign-up > .aplos-form-table .aplos-form-table { margin:15px 0; }
+.aplos-checkout-sign-in-or-sign-up > .aplos-form-table .aplos-form-table .aplos-label { min-width:1px; text-align:left; width:auto; }
+.aplos-checkout-sign-in-or-sign-up > .aplos-form-table td { vertical-align:top; }
+.aplos-sign-in-buttons { text-align:right; padding-right:23px; /* this paddign was hard coded into a cell, dont know why */ }
+.aplos-checkout-sign-in-or-sign-up > .aplos-form-table td .aplos-sign-in-buttons { padding-right:0; }
+.aplos-signin-signup-left-half { width:400px; border-right:1px solid silver; }
+.aplos-signin-pad-left { padding-left:250px; }
+.aplos-signin-signup-right-half { padding-left:80px }
+.aplos-frontend-brochure-atom .aplos-label { width:85px; min-width : 85px; }
+
+/* checkout procedure */
+.aplos-checkout { padding:0 50px; }
+.aplos-checkout-wizard-contents { /* works with aplos-checkout to align it center */ margin-right:50px; }
+.aplos-checkout-wizard-contents table { margin:0 auto; }
+.aplos-cart-list .stdBtnCommand, .aplos-checkout-wizard-steps .aplos-navigation li a { /* (h:commandButton, styled like google because they dont steal much attention) */ -webkit-border-radius: 2px; -webkit-user-select: none; background-color: #F5F5F5; background-image: linear-gradient(top,#f5f5f5,#f1f1f1); background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1); border: 1px solid #DCDCDC; border-radius: 2px; color: #666666; cursor: pointer; font-size: 11px; font-weight: bold; padding: 0 8px; text-align: center; }
+.aplos-cart-list .stdBtnCommand:hover, .aplos-checkout-wizard-steps .aplos-navigation li a:hover { background-image: -webkit-linear-gradient(top,#e8e8e8,#f1f1f1); background-color: #e8e8e8; background-image: linear-gradient(top,#e8e8e8,#f1f1f1); background-image: -o-linear-gradient(top,#e8e8e8,#f1f1f1); border: 1px solid #C6C6C6; color: #333333; }
+.aplos-checkout-wizard-steps { position:relative; width:900px; padding-bottom:50px; }
+.aplos-checkout-wizard-steps .aplos-navigation { list-style:none; float:right; }
+.aplos-checkout-wizard-steps .aplos-navigation li { float:left; }		
+.aplos-checkout-wizard-steps .aplos-navigation li a { padding:5px 8px; }
+.aplos-checkout-wizard-steps .aplos-navigation li a.aplos-active, .aplos-checkout-wizard-steps .aplos-navigation li a.aplos-active:hover { background-color: #C9150D; border-color: #A7030B; color:#FFFFFF; background-image:none; position: relative; }
+.aplos-checkout-wizard-steps .aplos-navigation li a.aplos-disabled, .aplos-checkout-wizard-steps .aplos-navigation li a.aplos-disabled:hover { background-color: #FBFBFB; border-color: #EFEFEF; color:#DDDDDD; background-image:none; }
+.aplos-checkout-wizard-steps .aplos-navigation li a.aplos-enabled { /* placeholder */ }
+.aplos-checkout-payment .aplos-checkout-wizard-contents, .aplos-checkout-confirm .aplos-checkout-wizard-contents { margin-right: 0; }
+.aplos-checkout-payment .aplos-checkout-wizard-contents table, .aplos-checkout-confirm .aplos-checkout-wizard-contents table { margin: 0; }
+.aplos-cart-logo { vertical-align:middle; }
+.aplos-cart-summary { margin-left:10px; display:inline; }
+.aplos-cart-list { /* TODO check if this width can change to 100% */ width:920px; margin:15px auto 0 auto; border-collapse: collapse; }
+.aplos-cart-list th { font-weight:bold; color:#848484; font-size:11px; padding-left:0; }
+.aplos-cart-list tfoot tr > td { border-spacing:0; padding:5px 0; }
+.aplos-cart-list tfoot tr:first-child > td { border-top: 1px solid #848484; padding-top:15px;}
+.aplos-cart-list tfoot .aplos-title { font-weight:bold; }
+.aplos-cart-list tfoot .aplos-command-button { margin-top:15px; display:inline-block; }
+.aplos-cart-list .aplos-empty { color:#848484; padding:25px; text-align:center; }
+.aplos-cart-list .aplos-remaining { color:#A4A4A4; }
+.aplos-cart-list td { vertical-align:top; }
+.apos-kit-contents { margin:0; padding:0; list-style:none; display:block; /* the block is to force us to the next line */ }
+.aplos-name .apos-kit-contents li:before { content: " - "; }
+.aplos-checkout-wizard-contents .aplos-cart-list { width:100%; }
+.aplos-checkout-controls { /* top of page */ text-align:right; padding:0 0 10px 0; }
+.aplos-checkout-controls .aplos-command-button { left:15px; position:relative; padding:2px; }
+.next-previous-buttons { /* bottom of page */ width:900px; margin: 40px auto 0 auto; }
+.next-previous-buttons tr td { padding-top:15px; }
+.aplos-checkout .aplos-title { margin:20px 0px; }
+.aplos-divider, .aplos-checkout .aplos-section { margin-top:20px; }
+.aplos-checkout-addresses .aplos-label { width:auto; min-width:1px; }
+.aplos-checkout-addresses .aplos-field { width:165px; }
+.aplos-checkout-addresses th { text-transform: capitalize; }
+.aplos-payment-success p { padding-bottom:30px; }
+.aplos-cart-list .aplos-align-top .aplos-command-button { margin-top:0; }
+.aplos-voucher-divider { border-top: 1px solid #DADADA; }	
+.aplos-cart-controls { /* placeholder */ }
+
+/* specific atoms */
+.aplos-request-catalogue-atom > h3 { margin-left:20px; margin-bottom:5px; }	
+.aplos-request-catalogue-atom > p { margin-left:20px; margin-bottom:20px; }
+.aplos-friend-referral-atom-backend .aplos-label { width:300px; max-width:300px; min-width:300px; }
+.aplos-friend-referral-atom-backend .aplos-required-asterisk { width:16px; max-width:16px; min-width:16px; }
+.aplos-friend-referral-atom-backend .aplos-field { width:500px; max-width:500px; min-width:500px; }
+.aplos-friend-referral-atom { margin-left:20px; }	
+.aplos-friend-referral-atom .aplos-float-box { position:relative; margin:8px; background-color:#F8F8F8; border:1px solid #D8D8D8; padding:8px; width:150px; height:120px; } 
+.aplos-friend-referral-atom .aplos-float-box .aplos-controls { position:absolute; bottom:3px; right:3px; }	
+.aplos-atom-header { /* placeholder */ } 
+.aplos-atom-footer { /* placeholder */ }	
+.aplos-competition-atom { margin-left:20px; text-align:left; }	
+.aplos-atom-backend { /* placeholder, only present on competition currently */ }
+.aplos-associated-products-atom { width:196px; padding:10px 0; margin-left:8px; }
+.aplos-associated-products-atom .aplos-float-box { position:relative; border:1px solid #BCBEC0; padding:0; width:86px; height:114px; margin: 6px 9px 5px 0px; }
+.aplos-associated-products-atom .aplos-float-box img { /* width:100%; height:100%; */ position:absolute; top:0; left:0; margin:0; padding:0; }
+.aplos-cross-selling-atom { margin:15px 0 15px 18px; }
+.aplos-cross-selling-atom .aplos-list-product { margin-right:16px; }
+.aplos-blog-atom { margin:5px 11px; }
+.aplos-blog-atom hr { border:0; background-color:#848484; height:1px; clear:both; }
+.aplos-blog-controls { width:250px; float:left; }
+.aplos-blog-controls .aplos-title { font-size:12px; }
+.aplos-blog-controls a { text-decoration:none; color:#151515; }
+.aplos-blog-articles { width:728px; float:left; }
+.aplos-blog-aticle { position:relative; margin-bottom:35px; }
+.aplos-blog-aticle .aplos-blog-article-header { background-color:#FAFAFA; margin-bottom:10px; width:100%; position:relative; float:left; border-bottom:1px solid #848484; }
+.aplos-blog-aticle .aplos-title { margin-left:8px; font-size:18px; float:left; }
+.aplos-blog-aticle img { margin:0 auto 10px; }
+.aplos-blog-article-text { margin:8px; }
+.aplos-blog-article-date { margin-right:8px; float:right; color:#848484; }
+.aplos-next-previous-product-atom { display:inline; margin-left:8px; width:196px; text-align:center; }
+.aplos-next-previous-product-atom .aplos-controls a { margin:5px; font-weight:bold; text-decoration:none; color:#000000; }
+.aplos-next-previous-product-atom .aplos-controls a .aplos-icon { color:#848484; }
+.aplos-next-previous-product-atom .aplos-controls a .aplos-next-previous-product-atom-previous-icon { /* placeholder */ }
+.aplos-next-previous-product-atom .aplos-controls a .aplos-next-previous-product-atom-next-icon { /* placeholder */ }
+.aplos-next-previous-product-atom .aplos-summary .aplos-title { text-transform: capitalize; }
+.aplos-forum-atom { position:relative; margin: 50px 60px; }
+.aplos-forum-atom > h1 { position:relative; left: -10px; } 
+.aplos-forum-atom .aplosDataTableToolbar { position:relative; top:-15px; left:-12px; }
+.aplos-forum-atom > .aplos-title { margin-bottom: 30px; }
+.aplos-forum-post { position:relative; margin-bottom:35px; }
+.aplos-forum-post .aplos-forum-post-header { background-color:#FAFAFA; margin-bottom:10px; width:100%; position:relative; float:left; border-bottom:1px solid #848484; }
+.aplos-forum-post .aplos-title { margin-left:8px; font-size:12px; float:left; }
+.aplos-forum-post img { margin:0 auto 10px; display:block }
+.aplos-forum-post-message { margin:8px; }
+.aplos-forum-post-date { margin-right:8px; float:right; color:#848484; }
+.aplos-forum-atom #tableImgTopRight,
+.aplos-forum-atom #tableImgTopLeft, 
+.aplos-forum-atom #tableBgTop { background-color:#EAEAEA; background-image:none; /* it has to style with frontend themes */ }
+.aplos-forum-atom .listDatatable td { padding:5px 0; }
+.aplos-forum-atom .listDatatable td a { color:#151515; text-decoration:none; }
+.aplos-forum-atom .listDatatable td a:hover { text-decoration:underline; }
+
+/* competitions atom */
+.aplos-winner-names { list-style:none; margin:0; padding:0; }
+
+/* Login Page notices */
+
+.failedAttemptNotification { padding:10px; text-align:center; width:400px; background-color:#DDDD66; margin:10px auto; border:4px solid black; }
+.simpleAplosNotification  { padding:10px; text-align:center; width:620px; background-color:#ADD8E6; margin:10px auto; border:4px solid black; }
+.disabledNotification { padding:10px; text-align:center; width:400px; background-color:#FF6666; margin:10px auto; border:4px solid black; }
+.lockedOut { background-color:#DDDD66; }
+.lockedOutText { color:#999955;}
+.lockedOutText a { color:dimgray; }
+.lockedOutText a:hover { color:black }
+.forgottenPasswordNotification { font-size:85%; padding:0 10px 10px 10px; text-align:left; width:404px; background-color:#DADADA; margin:10px auto; border:2px solid black; }
+.forgottenPasswordNotification h4 { margin:10px 0; }
+.forgottenPasswordNotification a { text-decoration:none; color:#444444; font-weight:bold; }
+.forgottenPasswordNotification a:hover { text-decoration:none; background-color:#BABABA; }
+
+.aplos-history { background-color:#FCFCFC; float:right; border:0; color:#4A4A4A; max-width: 200px; width: 200px; }
+
+/* Sitemap Atom */
+.aplos-sitemap .aplos-navigation { z-index:10; list-style:inside; white-space:nowrap; } 
+.aplos-sitemap .aplos-navigation > li { float:left; padding: 10px; }
+.aplos-sitemap .aplos-dropdown-content { z-index:10; }
+.aplos-sitemap .aplos-navigation > li > a { font-weight:bold; float:none; padding:0; height:auto; text-decoration:none; }
+.aplos-sitemap .aplos-navigation > li > a:hover { text-decoration: underline; }
+.aplos-sitemap .aplos-navigation li .aplos-dropdown-content { z-index:10; position:relative; display:block; border:0; padding:0; margin:0; top:0; } 
+/* IE6 only */ .aplos-sitemap .aplos-navigation table { margin:0px; } 
+.aplos-sitemap .aplos-navigation :hover .aplos-dropdown-content { z-index:11; } 
+.aplos-sitemap .aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul { list-style:inside; }
+.aplos-sitemap .aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul li { width:135px; }
+.aplos-sitemap .aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul li a { text-decoration:none; background:none; font-weight:normal; } 
+.aplos-sitemap .aplos-navigation .aplos-dropdown-content .aplos-dropdown-column ul li a:hover { text-decoration: underline; }
+.aplos-sitemap .aplos-dropdown-column strong a { left:0px; }
+
+.aplos-recipient,.aplos-tag { display:block; float:left; background-color:#E8E8E8; border:1px solid #F8F8F8; padding:0 0 4px 2px; margin:1px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.aplos-no-recipient { display:block; float:left; background-color:#E89898; border:1px solid #F89898; padding:0 0 4px 2px; margin:1px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+
+.aplos-address-title { text-decoration: underline; font-size:12.5px; }
+	
+/* Primefaces-specific fixes */
+.ui-datatable .ui-column-filter { width: 90%; }
+.ui-datatable th, .ui-button-text { font-size: 0.8 em; }
+.aplos-body .ui-widget { font-size : inherit }
+.ui-autocomplete-item { font-size : 11px }
+.ui-autocomplete { position:relative !important; } /* jQuery makes it absolute which makes it touch other thigns inappropriately */
+
+.aplos-faded { color: #D0D0D0; }
+.aplos-part-faded { color: #9A9A9A; }
+
+.nease-inner-edit-datatable thead { background-image: url('../images/modern/subListTopExtender.png'); background-position: -3px 0; }
+.nease-inner-edit-datatable thead td, .nease-inner-edit-datatable thead th { color:white; height: 23px; vertical-align:middle; }
+.nease-inner-edit-datatable td, .nease-inner-edit-datatable { background-color:#EAEAEA; }
+.nease-inner-edit-datatable { border-collapse:collapse; border-left: 1px solid #bbbbbb; border-right: 1px solid #bbbbbb; }
+.nease-inner-edit-datatable td { border-bottom: 1px solid #bbbbbb; padding-left:2px; }
+
+#listAndEditHeading, .aplos-listAndEditHeading { font-family: Verdana; font-size: 18px; font-style: italic;	color: #995454; font-weight: normal; }
+
+.aplos-mojarra-datatable-wrapper { margin-top:4px; clear: both; } /* clear is important for FF when the checkbox drops down a line */
+.aplos-ui-dialog { z-index:2000 !important; max-width:500px; position:fixed !important; } /* fixing this is important for quickView (starts absolute but resizeable makes it relative). Absolute will cause it to appear offscreen once we have scrolled down */
+.aplos-backend .ui-widget-overlay { display:none !important; /* adjusting z-indexes does nothing, as soon as its altered js changes it back */ }
+.aplos-lower-right-control-panel { margin:3px 0 0 0; padding:0; display:block; }
+.aplos-forgotten-password-link { padding-right: 10px; }
+
+.aplos-quickview-hover-trigger { color: #0038E0; } /* unclickable/text */
+a.aplos-quickview-hover-trigger { color: #0078D0; }
+
+
+.aplos-individual-product .twitter-share-button { width:80px !important; }
+.aplos-individual-product .aplos-add-this { display:block; text-decoration:none; margin:0px 0px 0px -35px; width:100%; }
+.aplos-individual-product .aplos-add-this li { float:left; margin:2px; } 
+.aplos-individual-product .addthis_button_facebook_like iframe { width:46px !important; }
+.aplos-individual-product .aplos-product-details-container .ui-tabs .ui-tabs-panel { padding-bottom: 10px !important; /* for add this */ }
+
+.aplos-checkout-payment .aplos-paypal-button { float:right;padding-right:150px;padding-top:42px }
+
+.galleryContainer .ui-widget-content {
+	background : none;
+	border : none;
+	color : inherit;
+}
+
+
+.aplosControlPanel { min-width:1000px; border-top: 1px solid #998888/*AC5C5C*/; background-color:#DDDDDD; height:50px; position:fixed; bottom:0; left:0; z-index:500; width:100%; padding:0; margin:0; -moz-box-shadow: 0px -2px 10px 0px #BBB; -webkit-box-shadow: 0px -2px 10px 0px #BBB;  box-shadow: 0px -2px 10px 0px #BBB;}
+.aplosControlPanelPane { margin:8px 10px; padding:0; }
+.aplosControlPanelLeft { float:left; position:relative; text-align:left; }
+.aplosControlPanelLeft .ui-messages { z-index:1000; min-width: 250px; max-width: 430px; font-family: Arial,sans-serif; font-size: 1.1em; position: absolute; bottom: -3px; left: 8px; }
+.aplosControlPanelLeft .ui-corner-all { -moz-box-shadow: 2px 2px 3px 0px #666; -webkit-box-shadow: 2px 2px 3px 0px #666;  box-shadow: 2px 2px 3px 0px #666; }
+.aplosControlPanelLeft .ui-messages-info-summary, .aplosControlPanelLeft  .ui-messages-warn-summary, .aplosControlPanelLeft .ui-messages-error-summary, .aplosControlPanelLeft .ui-messages-fatal-summary, .aplosControlPanelLeft .ui-message-info-summary { font-weight:normal; }
+.aplosControlPanelLeft .ui-messages-info { border: 1px solid #999999; background-color:#FFFFDD; -moz-box-shadow: 2px 2px 8px 0px #666; -webkit-box-shadow: 2px 2px 8px 0px #666;  box-shadow: 2px 2px 8px 0px #666; }
+.aplosControlPanelLeft .ui-messages-error { }
+.aplosControlPanelRight { height:100%; width:1000px; margin:0 auto; text-align:right; /* float:right; margin-right:15px; */ }
+.aplosControlPanelRight .aplos-command-button-middle { text-align: center; min-width: 39px; /* min width is size of cancel button (for uniformity) */ }
+.aplos-control-panel-buttons { position:relative; right: 12px; }
+.aplos-control-panel-buttons .aplos-command-button { position: relative; margin-right: -16px; }
+.aplos-control-panel-buttons .editButtons .aplos-command-button { margin-right: -18px; }
+.aplos-contact-details { top:3px; font-size: 11px; display:block; text-align:right; color: #555555; position:relative; right:10px; }
+.aplos-site-link, .aplos-site-link:visited { display:block; margin-bottom:3px; color: #555555; position:relative; top:-1px; vertical-align:middle; font: bold 20px garamond; text-decoration: none; }
+.aplos-site-link:hover { color:#AC5C5C; }
+.aplosControlPanel .aplos-highlighted { color: #883333; }
+.aplosControlPanelLeft .ui-corner-all span { display: inline-block; }
+.aplos-set-active-buttons { padding-right: 2px; }
+
+
+table.aplos-form-table-with-required .aplos-field .aplos-date-input-dropdowns select {
+	width:auto;
+}
+
+.aplos-testiomnials-what {
+	font-weight:bold;
+}
+#aplos-testimonials li{ 
+  display:none;
+}
+#aplos-testimonials ul{
+  list-style:none;
+}
+
+.aplos-sortable li {
+	list-style-type: none;
+}
+
+.aplos-sortable .aplos-column {
+	padding:10px;
+	float:left;
+}
+
+

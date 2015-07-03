@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+		version="2.0">
+	<namespace>http://www.aplossystems.co.uk/aplosComponents</namespace>
+
+	<tag>
+		<tag-name>ajax</tag-name>
+		<behavior>
+			<behavior-id>com.aplos.core.component.behavior.ajax.AjaxBehavior</behavior-id>
+			<handler-class>com.aplos.core.component.behavior.ajax.AjaxBehaviorHandler</handler-class>
+		</behavior>
+	</tag>
+
+	<tag>
+		<tag-name>param</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.parameter.Parameter</component-type>
+			<handler-class>com.aplos.core.component.parameter.ParameterHandler</handler-class>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>ajaxJsFunction</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.ajaxjsfunction.AjaxJsFunction</component-type>
+			<renderer-type>com.aplos.core.component.ajaxjsfunction.AjaxJsFunctionRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>deferredScript</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.deferredscript.DeferredScript</component-type>
+			<renderer-type>com.aplos.core.component.DeferredScript</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>jsFunction</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.jsfunction.JsFunction</component-type>
+			<renderer-type>com.aplos.core.component.jsfunction.JsFunctionRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>autoComplete</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.autocomplete.AutoComplete</component-type>
+			<renderer-type>com.aplos.core.component.autocomplete.AutoCompleteRenderer</renderer-type>
+			<handler-class>org.primefaces.component.autocomplete.AutoCompleteHandler</handler-class>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>dataTable</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.datatable.DataTable</component-type>
+			<renderer-type>com.aplos.core.component.datatable.DataTableRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>column</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.datatable.AplosColumn</component-type>
+			<handler-class>com.aplos.core.component.datatable.ColumnHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[Unique identifier of the component in a namingContainer.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean value to specify the rendering of the component, when set to false component will not be rendered.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An el expression referring to a server side UIComponent instance in a backing bean.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Property to be used for sorting.]]></description>
+			<name>sortBy</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Inline style of the column.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Style class of the column.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Custom pluggable sortFunction.]]></description>
+			<name>sortFunction</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Property to be used for filtering.]]></description>
+			<name>filterBy</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Inline style of the filter element.]]></description>
+			<name>filterStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Style class of the filter element.]]></description>
+			<name>filterStyleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A collection of selectitems for filter dropdown.]]></description>
+			<name>filterOptions</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Match mode for filtering.]]></description>
+			<name>filterMatchMode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Location of the column filter with respect to header content. Options are 'bottom'(default) and 'top'.]]></description>
+			<name>filterPosition</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Defines the number of rows the column spans.]]></description>
+			<name>rowspan</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Defines the number of columns the column spans.]]></description>
+			<name>colspan</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Shortcut for header facet.]]></description>
+			<name>headerText</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Shortcut for footer facet.]]></description>
+			<name>footerText</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Enables selection mode, valid values are "single" and "multiple".]]></description>
+			<name>selectionMode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Disables row selection when true.]]></description>
+			<name>disabledSelection</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Maximum number of characters for an input filter.]]></description>
+			<name>filterMaxLength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies resizable feature at column level. Datatable's resizableColumns must be enabled to use this option.]]></description>
+			<name>resizable</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<tag-name>wrappedDataTable</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.datatable.WrappedDataTable</component-type>
+			<renderer-type>com.aplos.core.component.datatable.WrappedDataTableRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>overlayInputText</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.OverlayInputText</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>commandButton</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.CommandButton</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>panel</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.AplosPanel</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>namingContainer</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.AplosNamingContainer</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>systemToolbar</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.SystemToolbar</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>standardDateTableCell</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.StandardDateTableCell</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>breadCrumbs</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.BreadCrumbs</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>frontendCmsMenu</tag-name>
+		<component>
+			<component-type>com.aplos.cms.component.FrontendCmsMenu</component-type>
+		</component>
+	</tag>
+	
+	<!--  ///////  TODO: is there a better way to handle this?  //////  -->
+	<tag>
+		<tag-name>serviceClientFrontendCmsMenu</tag-name>
+		<component>
+			<component-type>com.aplos.thebeautyproject.component.ServiceClientFrontendCmsMenu</component-type>
+		</component>
+	</tag>
+	<!--  ////// -->
+	
+	<tag>
+		<tag-name>scriptsAndStylesWriter</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.ScriptsAndStylesWriter</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>themeChanger</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.ThemeChanger</component-type>
+		</component>
+	</tag>
+		
+	<tag>
+		<tag-name>flatMenuBar</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.menubar.DynamicMenuBar</component-type>
+			<renderer-type>com.aplos.core.component.menubar.FlatMenuBarRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>tabbedMenuBar</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.menubar.DynamicMenuBar</component-type>
+			<renderer-type>com.aplos.core.component.menubar.TabbedMenuBarRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>aplosSmallBorder</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.AplosSmallBorder</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>sortable</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.Sortable</component-type>
+		</component>
+	</tag>
+	
+	<tag>
+        <tag-name>address</tag-name>
+        <source>components.address</source>
+        <attribute>
+        	<name>test</name>
+        </attribute>
+    </tag>
+	
+	<tag>
+        <tag-name>addressMobile</tag-name>
+        <source>components.addressMobile</source>
+        <attribute>
+        	<name>test</name>
+        </attribute>
+    </tag>
+
+</facelet-taglib>

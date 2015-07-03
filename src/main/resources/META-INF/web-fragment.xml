@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment>
+	<name>core</name>
+  
+	  <context-param>
+		  <param-name>primefaces.THEME</param-name>
+		  <param-value>#{ contextListener.primefacesTheme }</param-value>
+	  </context-param>
+
+	<!-- ================================================================= -->
+	<!-- Standard JSF 2.0 Configuration Parameters -->
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+
+
+
+	<!-- ================================================================= -->
+	<!-- Facelets -->
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.LIBRARIES</param-name>
+		<param-value>/WEB-INF/aplos.taglib.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.RESOURCE_RESOLVER</param-name>
+		<param-value>com.aplos.common.application.TemplateResolver</param-value>
+	</context-param>
+	<!-- 
+		This is overriden in AplosFaceletCacheFactory using the AplosContextListener method
+		getFaceletRefreshPeriod()
+	 -->
+	<context-param>
+		<param-name>facelets.REFRESH_PERIOD</param-name>
+		<param-value>-1</param-value>
+	</context-param>
+
+	<!-- ================================================================= -->
+	<!-- JBoss EL -->	
+	<context-param>
+		<param-name>com.sun.faces.expressionFactory</param-name>
+		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
+	</context-param>
+	
+	<!-- ================================================================= -->
+	<!-- Redirection Filter -->
+  
+  	<filter>
+		<filter-name>RedirectFilter</filter-name>
+		<filter-class>com.aplos.common.filters.RedirectFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RedirectFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>ResourceFilter</filter-name>
+		<filter-class>com.aplos.common.filters.ResourceFilter</filter-class>
+	</filter>
+
+	<!-- ================================================================= -->
+	<!-- CacheHeader Filter -->
+
+	<filter>
+		<filter-name>CacheHeaderFilter</filter-name>
+		<filter-class>com.aplos.common.filters.CacheHeaderFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CacheHeaderFilter</filter-name>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.swf</url-pattern>
+	</filter-mapping>
+
+	<!-- ================================================================= -->
+	<!-- Resource filter -->
+	<!-- This has been placed before the database session filter as it doesn't
+	need access to the DB and it means that a DB session won't be created for
+	resource requests (or a JSF session).  This could be done via a isResource
+	check though if it ever needs to be moved after the DatabaseFilter -->
+
+	<filter-mapping>
+		<filter-name>ResourceFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.xml</url-pattern>
+		<url-pattern>*.json</url-pattern>
+	</filter-mapping>
+
+	<!-- ================================================================= -->
+	<!-- Hibernate -->
+	<filter>
+		<filter-name>DatabaseFilter</filter-name>
+		<filter-class>com.aplos.common.filters.DatabaseSessionRequestFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>DatabaseFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- ================================================================= -->
+	<!-- UrlRewrite Filter -->
+
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>com.aplos.common.filters.UrlRewriteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+
+	<!-- ================================================================= -->
+	<!-- Primefaces file upload - required to set forms to Multipart -->
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>com.aplos.core.listeners.FileUploadFilter
+		</filter-class>
+		<init-param>
+			<param-name>thresholdSize</param-name>
+			<param-value>512000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>uploadDirectory</param-name>
+			<param-value>/primefaces-upload-temp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>SessionTimeoutFilter</filter-name>
+		<filter-class>
+			com.aplos.common.filters.SessionTimeoutFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>SessionTimeoutFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+		<url-pattern>*.jsf</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<!-- ================================================================= -->
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>EditorUploadServlet</servlet-name>
+		<servlet-class>com.aplos.common.servlets.EditorUploadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditorUploadServlet</servlet-name>
+		<url-pattern>/editorUpload/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ContentServlet</servlet-name>
+		<servlet-class>com.aplos.cms.servlets.ContentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ContentServlet</servlet-name>
+		<url-pattern>/content/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>FormFileServlet</servlet-name>
+		<servlet-class>com.aplos.cms.servlets.FormFileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FormFileServlet</servlet-name>
+		<url-pattern>/formfile/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MediaServlet</servlet-name>
+		<servlet-class>com.aplos.common.servlets.MediaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MediaServlet</servlet-name>
+		<url-pattern>/media/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>FormServlet</servlet-name>
+		<servlet-class>com.aplos.cms.servlets.FormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FormServlet</servlet-name>
+		<url-pattern>/form/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TemplateServlet</servlet-name>
+		<servlet-class>com.aplos.common.servlets.TemplateServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TemplateServlet</servlet-name>
+		<url-pattern>/templateServlet/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>XmlServlet</servlet-name>
+		<servlet-class>com.aplos.common.servlets.XmlServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>XmlServlet</servlet-name>
+		<url-pattern>/xmlServlet/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>documentservlet</servlet-name>
+		<servlet-class>
+			com.aplos.common.servlets.DocumentServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>documentservlet</servlet-name>
+		<url-pattern>/documentservlet</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>com.aplos.common.listeners.AplosSessionListener</listener-class>
+	</listener>
+
+	<!-- Deny access to the Facelets files if not through the FacesContext -->
+	<security-role>
+		<role-name>developer</role-name>
+	</security-role>
+	<security-constraint>
+		<display-name>Restrict XHTML Documents</display-name>
+		<web-resource-collection>
+			<web-resource-name>XHTML</web-resource-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>Only Let 'developer's access XHTML pages</description>
+			<role-name>developer</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<jsp-config>
+		<jsp-property-group>
+			<display-name></display-name>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>false</el-ignored>
+			<scripting-invalid>false</scripting-invalid>
+			<is-xml>false</is-xml>
+		</jsp-property-group>
+	</jsp-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-fragment>

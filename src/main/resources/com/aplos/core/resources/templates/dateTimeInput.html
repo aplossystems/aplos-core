@@ -1,0 +1,23 @@
+<!-- Date Time Input -->
+
+
+<script>
+	{ID}DateTimeSelector = new DateTimeSelector( 
+							document.getElementById( "{MINUTE_SELECT_ID}" ),
+							document.getElementById( "{HOUR_SELECT_ID}" ),
+							document.getElementById( "{DAY_SELECT_ID}" ),
+							document.getElementById( "{MONTH_SELECT_ID}" ),
+							document.getElementById( "{YEAR_SELECT_ID}" ),
+							document.getElementById( "{HIDDEN_TEXT_ID}" ),
+							{MIN_YEAR}, {MAX_YEAR},
+							{MINIMUM_HOUR}, {MAXIMUM_HOUR}, {MINUTE_STEP} );
+
+																	
+	function toggle{ID}DateTimeSelector(value) {
+		if ( value ) {
+			{ID}DateTimeSelector.enable();
+		} else {
+			{ID}DateTimeSelector.disable();
+		}
+	}					
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components"
+    xmlns:cc="http://java.sun.com/jsf/composite">
+  <h:body>   
+  	<cc:interface>
+    	<cc:attribute name="style" targets="reinstateButton,deleteButton" />
+    </cc:interface>     
+    <cc:implementation>
+     		<p:confirmDialog styleClass="aplos-ui-dialog" message="Are you sure you want to delete this #{ cc.associatedBean.entityName }" header="Confirm deletion" severity="alert" widgetVar="#{ cc.jsFriendlyClientId }deleteBeanConfirmation">
+	    		<aploscc:ajaxButton value="Ok" action="#{ cc.finishDelete }" />  
+		        <aploscc:ajaxButton value="Cancel" onclick="#{ cc.jsFriendlyClientId }deleteBeanConfirmation.hide();return false;" />
+		    </p:confirmDialog>  
+	    	<h:panelGroup rendered="#{ cc.renderActiveButtons }" styleClass="editButtons aplos-set-active-buttons">
+				<aploscc:ajaxButton id="deleteButton" value="Delete" onclick="#{ cc.jsFriendlyClientId }deleteBeanConfirmation.show();return false;" rendered="#{ cc.active }"/>
+				<aploscc:ajaxButton id="reinstateButton" value="Reinstate" action="#{ cc.doReinstate }" rendered="#{ not cc.active }" />
+	    	</h:panelGroup>
+    </cc:implementation>    
+  </h:body>
+</html>

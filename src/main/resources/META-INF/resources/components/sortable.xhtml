@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents">
+  <h:body>   
+    <cc:interface>
+    	<cc:attribute name="value"/>
+    	<cc:facet name="panelContent"/>
+    </cc:interface>
+    <cc:implementation>
+		<script>
+		  $(function() {
+		    $( ".aplos-sortable" ).sortable({
+			 	start: function(event, ui) 
+				     {
+				          ui.item.startPos = ui.item.index();
+				     },
+			 	stop: function( event, ui ) {
+		    		  positionUpdated( ui.item.startPos, ui.item.index() );
+		    	  }
+		    });
+		    $( ".aplos-sortable" ).disableSelection();
+		  });
+		</script>
+		<aplos:ajaxJsFunction name="positionUpdated" action="#{cc.postionUpdated}">
+			<aplos:param name="previousIdx" assignTo="#{cc.previousIdx}" />
+			<aplos:param name="newIdx" assignTo="#{cc.newIdx}" />
+		</aplos:ajaxJsFunction>
+		<ul class="aplos-sortable">
+			<aplos:panel id="sortable-wrapper">
+				<!-- 
+					I tried to get this working with nested composite components but in the end I couldn't find a way.
+					The ui:repeat saves the state of the children as it cycles through the indexes, unfortunately when
+					it tries to get the value of a component inside the composite component the composite component hasn't
+					been pushed on the state which is done afterwards in the encodebegin method.  I'm not sure if this
+					is fixed in later versions or not, it might be possible to create a new version of the ui:repeat but
+					I don't have the time at the moment.
+				 -->
+				<ui:repeat value="#{ cc.attrs.value }" var="panelVar" varStatus="status">
+			  		<li class="ui-state-default">
+			  			<cc:insertChildren />
+			  		</li>
+				</ui:repeat>
+			</aplos:panel>
+		</ul>
+    </cc:implementation>    
+  </h:body>
+</html>

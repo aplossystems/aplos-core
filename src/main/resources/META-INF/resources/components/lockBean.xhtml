@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="beanName"></cc:attribute>
+    	<cc:attribute name="style"></cc:attribute>
+    	<cc:attribute name="reRender" ></cc:attribute>
+    </cc:interface>
+    <cc:implementation>
+		<h:commandButton value="Lock" action="#{ cc.lockBeanAction }" image="#{ cc.lockBeanImage }" rendered="#{ cc.determineAplosAbstractBean().deletable }" title="This document is unlocked and can be deleted, click to lock" >
+   			<p:ajax event="action" update="#{ cc.attrs.reRender }"/>
+   		</h:commandButton>
+		<h:commandButton value="Unlock" action="#{ cc.unlockBeanAction }" image="#{ cc.unlockBeanImage }" rendered="#{ !cc.determineAplosAbstractBean().deletable }" title="This document is locked and cannot be deleted, click to unlock" >
+   			<p:ajax event="action" update="#{ cc.attrs.reRender }"/>
+   		</h:commandButton>
+    </cc:implementation>    
+  </h:body>
+</html>

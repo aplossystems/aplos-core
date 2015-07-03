@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+	xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="creditCardDetails"></cc:attribute>
+    	<cc:attribute name="storedCreditCardDetails"></cc:attribute>
+    	<cc:attribute name="creditCardEntryListener"></cc:attribute>
+    	<cc:attribute name="usingStoredCreditCardDetails"></cc:attribute>
+    	<cc:attribute name="validationRequired"></cc:attribute>
+    	<cc:attribute name="rememberCreditCardDetails"></cc:attribute>
+    </cc:interface>
+    <cc:implementation>
+		<aplos:panel id="creditCardPanel">
+			<aplos:panel rendered="#{ cc.attrs.storedCreditCardDetails != null and cc.attrs.usingStoredCreditCardDetails != null and cc.attrs.creditCardDetails != null }" >
+				<div style="padding-bottom:20px">
+				<!-- Without the booleanConverter the component would break on the servers with
+				     and IllegalArgumentException : argument type mismatch.  This error wouldn't happen
+				     in the local environment so don't remove the booleanConverter without testing
+				     in the live environment first.
+				 -->
+					<h:selectOneRadio
+						value="#{cc.attrs.usingStoredCreditCardDetails}"
+						id="is_using_stored_credit_card" label="Use stored card details" 
+						layout="pageDirection"
+						title="Use stored card details?"  converter="booleanConverter">
+						<f:selectItems value="#{cc.storedDetailsSelectItems}" />
+                        <p:ajax process="@form" event="change" update="creditCardPanel" />
+					</h:selectOneRadio>
+				</div>
+			</aplos:panel>
+			<aplos:panel rendered="#{ cc.attrs.usingStoredCreditCardDetails }">
+				<table class="aplos-form-table aplos-form-table-with-required">
+					<tr>
+						<td class="aplos-label">Card number</td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field">#{ cc.attrs.storedCreditCardDetails.hiddenCardNumber }</td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Expiry date</td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field">#{ cc.attrs.storedCreditCardDetails.expiryDateString }</td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Security number</td>
+						<td class="aplos-required-asterisk">*</td>
+						<td class="aplos-field"><h:inputText
+							value="#{cc.attrs.storedCreditCardDetails.cvv}"
+							onfocus="this.select()" name="securityno2" id="securityno2"
+							style="width:43px;" alt="securityno"
+							class="input_rev" label="Security number"
+							required="#{ cc.attrs.validationRequired }"
+							validator="#{ cc.validateCvv }">
+						</h:inputText></td>
+					</tr>
+				</table>
+			</aplos:panel>
+			<aplos:panel rendered="#{ cc.attrs.usingStoredCreditCardDetails == null or !cc.attrs.usingStoredCreditCardDetails }">
+				<table class="aplos-form-table aplos-form-table-with-required">
+					<tr>
+						<td class="aplos-label">Card type</td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field"><h:selectOneListbox size="1"
+							id="cardTypeSelector"
+							value="#{cc.attrs.creditCardDetails.cardType}"
+							converter="aplosAbstractBeanConverter">
+							<f:selectItems value="#{cc.cardTypeSelectItems}" />
+						</h:selectOneListbox></td>
+					</tr>
+					<tr>
+						<td class="aplos-label"></td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field">
+							<img src="#{request.contextPath}/images/creditcards2.jpg" alt="" border="0" style="padding-top: 4px" />
+						</td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Name on card</td>
+						<td class="aplos-required-asterisk">*</td>
+						<td class="aplos-field"><h:inputText
+							required="#{ cc.attrs.validationRequired }"
+							value="#{cc.attrs.creditCardDetails.cardholderName}"
+							onfocus="this.select()" type="text" name="cardname" id="cardname"
+							alt="name on card" class="input_rev"
+							label="Name on card" validatorMessage="Enter your full name" /></td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Card number</td>
+						<td class="aplos-required-asterisk">*</td>
+						<td class="aplos-field"><h:inputText
+							value="#{cc.attrs.creditCardDetails.cardNumber}"
+							onfocus="this.select()" name="cardno" id="cardno"
+							required="#{ cc.attrs.validationRequired }"
+							alt="card number" class="input_rev"
+							label="Card number"
+							validator="#{ cc.validateCreditCardNumber }">
+						</h:inputText></td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Start date</td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field"><h:selectOneMenu
+							value="#{cc.attrs.creditCardDetails.startMonth}"
+							onfocus="this.select()" name="startM" id="startM"
+							style="width:50px;" class="input_rev">
+							<f:selectItems
+								value="#{cc.startMonthSelectItems}" />
+						</h:selectOneMenu> /&#160; <h:selectOneMenu
+							value="#{cc.attrs.creditCardDetails.startYear}"
+							onfocus="this.select()" name="startY" id="startY"
+							style="width:65px;" class="input_rev">
+							<f:selectItems
+								value="#{cc.startYearSelectItems}" />
+						</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Expiry date</td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field"><h:selectOneMenu
+							value="#{cc.attrs.creditCardDetails.expiryMonth}"
+							onfocus="this.select()" name="expiryM" id="expiryM"
+							style="width:50px;" class="input_rev">
+							<f:selectItems value="#{cc.monthSelectItems}" />
+						</h:selectOneMenu> /&#160; <h:selectOneMenu
+							value="#{cc.attrs.creditCardDetails.expiryYear}"
+							onfocus="this.select()" name="expiryY" id="expiryY"
+							style="width:65px;" class="input_rev">
+							<f:selectItems value="#{cc.endYearSelectItems}" />
+						</h:selectOneMenu></td>
+					</tr>
+	
+					<tr>
+						<td class="aplos-label">Issue number </td>
+						<td class="aplos-required-asterisk"></td>
+						<td class="aplos-field"><h:selectOneMenu
+							value="#{cc.attrs.creditCardDetails.issueNo}"
+							onfocus="this.select()" name="issue" id="issue"
+							style="width:50px;" class="input_rev">
+							<f:selectItems
+								value="#{cc.issueNumberSelectItems}" />
+							</h:selectOneMenu>(Maestro/Solo only)</td>
+					</tr>
+					<tr>
+						<td class="aplos-label">Security number</td>
+						<td class="aplos-required-asterisk">*</td>
+						<td class="aplos-field"><h:inputText
+							value="#{cc.attrs.creditCardDetails.cvv}"
+							onfocus="this.select()" name="securityno" id="securityno"
+							style="width:43px;" alt="securityno"
+							class="input_rev" label="Security number"
+							required="#{ cc.attrs.validationRequired }"
+							validator="#{ cc.validateCvv }">
+						</h:inputText></td>
+					</tr>
+				</table>
+				<aplos:panel rendered="#{ cc.attrs.rememberCreditCardDetails != null }">
+					<table width="450" border="0" cellspacing="3" cellpadding="0">
+						<tr>
+							<td style="width: 30px"><h:selectBooleanCheckbox
+								value="#{cc.attrs.rememberCreditCardDetails}"
+								label="" name="remember" id="remember" class="select_button"
+								style="width:14px; height:14px;" /></td>
+							<td>Remember my payment details for my next purchase</td>
+						</tr>
+					</table>
+				</aplos:panel>
+			</aplos:panel>
+		</aplos:panel>
+    </cc:implementation>    
+  </h:body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	  <h:body>        
+	    <cc:interface>
+	    	<cc:attribute name="key" />
+	    	<cc:attribute name="fileDetails" />
+	    	<cc:attribute name="displayWidth" default="300" />
+	    	<cc:attribute name="resizeWidth" />
+	    	<cc:attribute name="resizeHeight" />
+	    	<cc:attribute name="collectionKey" />
+	    	<cc:attribute name="types" default="png,jpg,jpeg,gif,bmp" />
+	    	<cc:attribute name="showSaveBtn" default="true" type="boolean"/>
+	    </cc:interface>
+	    <cc:implementation>
+	    	<aplos:panel styleClass="aplos-image-uploader" id="#{'outerMostPnl'}">
+	    		<p:commandLink id="#{'renderImageJsFunctionButton'}" />
+	    		<p:outputPanel id="#{'innerPnl'}">
+	    			<p:outputPanel id="#{'uploadedPnl'}" rendered="#{ !cc.showFileUploader }">
+	    				<p:outputPanel id="#{'imageContainer'}" >
+	    					<p:commandLink id="#{'iuTrigger_Uploaded'}" action="#{ cc.determineFileDetails().setShowFileUploader( true ) }" execute="@form" update="innerPnl">
+	    						<h:graphicImage id="#{'uploadedTriggerImage'}" value="#{ cc.determineFileDetails().getFullFileUrl( false ) }&amp;maxWidth=#{ cc.attrs.displayWidth }&amp;provideDefaultIfMissing=true" />
+	    					</p:commandLink>
+	    				</p:outputPanel>
+	    			</p:outputPanel>
+	    			
+	    			<p:outputPanel id="#{'defaultRenderedPnl'}" rendered="#{ cc.showFileUploader }">
+	    				<p:fileUpload mode="simple" id="#{'inputFileUpload'}" value="#{ cc.uploadedFile }"></p:fileUpload>
+	    				<p:outputPanel styleClass="aplos-image-uploader-button-panel" id="#{'buttonPnl'}">
+	    					<aploscc:ajaxButton id="#{'saveCommandBtn'}" value="Save" action="#{ cc.saveFileOwnerObject }" rendered="#{ cc.attrs.showSaveBtn }"/>
+	    					
+	    					
+	    					<aploscc:ajaxButton id="#{'downloadCommandLink'}" value="Download" action="#{ cc.downloadFile }" rendered="#{ cc.determineFileDetails().fileExists() }" target="_blank" styleClass="aplos-command-button aplos-quickview-button-trigger aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}"/>
+	    					<aploscc:ajaxButton ajaxEnabled="true" id="#{'deleteCommandBtn'}" value="Delete" action="#{ cc.deleteBtnAction }" rendered="#{ cc.determineFileDetails().fileExists() }"  reRender="#{cc.clientId}:innerPnl"/>
+	    					<aploscc:ajaxButton ajaxEnabled="true" id="#{'cancelCommandBtn'}" value="Cancel" action="#{ cc.cancelBtnAction }" rendered="#{ cc.determineFileDetails().fileExists() }" reRender="#{cc.clientId}:innerPnl"/>
+	    				</p:outputPanel>
+	    			</p:outputPanel>
+	    		</p:outputPanel>
+	    	</aplos:panel>
+	    </cc:implementation>    
+   </h:body>
+</html>

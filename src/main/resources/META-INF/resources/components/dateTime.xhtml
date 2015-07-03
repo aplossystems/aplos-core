@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+       	<!-- ajaxOnchange expects an id (or space-seperated list), not a boolean -->
+       	<cc:attribute name="ajaxOnchange" />
+    	<cc:attribute name="defaultDate" />
+    	<cc:attribute name="startYearDiff" default="0" />
+    	<cc:attribute name="endYearDiff" default="0" />
+    	<cc:attribute name="showCheckbox" default="true" />   
+       	<cc:attribute name="showTime" default="false" />
+       	<cc:attribute name="showDate" default="true" />
+       	<cc:attribute name="minimumTime" default="00:00" />
+       	<cc:attribute name="maximumTime" default="23:59" />
+       	<cc:attribute name="minuteStep" default="1" />
+       	<cc:attribute name="disabled" default="false" />
+       	<!-- TODO <cc:attribute name="required" default="false" /> -->
+    </cc:interface>
+    <cc:implementation>	 
+		<aplos:panel id="dateDropdowns" styleClass="aplos-date-input-dropdowns">
+			<aplos:panel rendered="#{cc.attrs.showDate}" layout="none">
+				<!-- The id is wrapped in EL as there's a bug in JSF where anything in a c:forEach doesn't carry across it's id correctly 
+					 unless wrapped in EL.  This component is used in c:forEach on at least cmsPageRevisionEdit -->
+				<!-- Process was changed to not include the colons as the Actual age on the YouStudy student edit page wasn't updating
+				     otherwise, if the colon is needed elsewhere please make sure the solution works in both cases. -->
+				<h:selectOneMenu id="${'dayDd'}" name="dayDd" value="#{cc.day}" disabled="#{!cc.dateChkBoxSelected}">
+					<f:selectItems value="#{cc.daySelectItems}" />
+					<p:ajax process="#{ cc.clientId }" event="change" update="#{ cc.attrs.ajaxOnchange }" disabled="#{ cc.ajaxOnchangeDisabled }" />
+				</h:selectOneMenu>
+				<h:selectOneMenu id="${'monthDd'}" value="#{cc.month}" disabled="#{!cc.dateChkBoxSelected}" converter="javax.faces.Integer">
+					<f:selectItems value="#{cc.monthSelectItems}" /> 
+					<p:ajax process="#{ cc.clientId }" event="change" update="dayDd #{ cc.attrs.ajaxOnchange }" />
+				</h:selectOneMenu>
+				<h:selectOneMenu id="${'yearDd'}" value="#{cc.year}" disabled="#{!cc.dateChkBoxSelected}" converter="javax.faces.Integer">
+					<f:selectItems value="#{cc.yearSelectItems}" />
+					<p:ajax process="#{ cc.clientId }" event="change" update="dayDd #{ cc.attrs.ajaxOnchange }" />
+				</h:selectOneMenu>
+			</aplos:panel>
+	    	<aplos:panel rendered="#{cc.attrs.showTime}" layout="none">
+	    		<h:selectOneMenu id="${'hourDd'}" value="#{cc.hour}" disabled="#{!cc.dateChkBoxSelected}" converter="javax.faces.Integer">
+					<f:selectItems value="#{cc.hourSelectItems}" />
+					<p:ajax process="#{ cc.clientId }" event="change" update="minuteDd #{ cc.attrs.ajaxOnchange }" />
+				</h:selectOneMenu>
+				<h:selectOneMenu id="${'minuteDd'}" value="#{cc.minute}" disabled="#{!cc.dateChkBoxSelected}" converter="javax.faces.Integer">
+					<f:selectItems value="#{cc.minuteSelectItems}" />
+					<p:ajax process="#{ cc.clientId }" event="change" update="#{ cc.attrs.ajaxOnchange }" disabled="#{ cc.ajaxOnchangeDisabled }" />
+				</h:selectOneMenu>
+	    	</aplos:panel>
+		</aplos:panel>
+    	<aplos:panel rendered="#{cc.attrs.showCheckbox}" layout="none">
+    		<h:selectBooleanCheckbox id="${'checkboxComponent'}" value="#{cc.dateChkBoxSelected}" action="#{ cc.setTodaysDate }">
+    			<p:ajax process="#{ cc.clientId }" event="change" update="dateDropdowns #{cc.attrs.ajaxOnchange}" />
+    		</h:selectBooleanCheckbox>
+    	</aplos:panel>
+    </cc:implementation>    
+   </h:body>
+</html>
+

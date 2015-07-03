@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="showEditButtons" default="true" />
+    	<cc:attribute name="showSetActiveButtons" default="false" />
+    	<cc:attribute name="showGrowl" default="true" />
+       	<cc:attribute name="style" targets="controlPanelContainer" />
+       	<cc:facet name="leftControlPanel"/>
+       	<cc:facet name="upperRightControlPanel"/>
+    </cc:interface>
+    <cc:implementation>	 
+    	<!-- Aplos Control Panel : Begin (must be nested within a h:form) -->
+    	<script type="text/javascript" >
+			$j(".ui-messages .ui-corner-all").live("click", function() {
+				$j(this).fadeOut(1000);
+			});
+			if (#{! empty facesContext.maximumSeverity}) {
+				$(document).ready(function() {
+					$j('.controlPanelDefaultText').hide();
+				});
+			}			
+		</script>
+		
+    	<h:panelGroup layout="block" id="controlPanelContainer" styleClass="aplosControlPanel" style="padding-top:2px">
+            <h:panelGroup layout="block" styleClass="aplosControlPanelRight aplosControlPanelPane">
+	    		<aplos:panel layout="block" styleClass="aplosControlPanelLeft aplosControlPanelPane" title="Click to close">
+	    			<aplos:panel layout="none"  rendered="#{empty cc.facets.leftControlPanel}">
+	    				<p:messages autoUpdate="true" rendered="#{ cc.attrs.showGrowl }" id="controlPanelGrowl" showDetail="false" />
+	    				<a href="http://www.aplossystems.co.uk">
+	    					<img src="#{request.contextPath}/images/#{themeManager.theme}/AplosLogo.png" style="margin:-5px"/>
+	    				</a>
+			    	</aplos:panel>
+			    	<aplos:panel layout="none"  rendered="#{not empty cc.facets.leftControlPanel}" >
+			    		<cc:renderFacet name="leftControlPanel" />
+			    	</aplos:panel>
+	   			</aplos:panel>
+            	<aplos:panel layout="none" rendered="#{empty cc.facets.upperRightControlPanel}" >
+            		<h:panelGroup layout="block" rendered="#{ cc.editButtonsValid }" styleClass="aplos-control-panel-buttons">
+		            	<aplos:panel layout="none" id="editPanel" rendered="#{ cc.attrs.showEditButtons and cc.editButtonsValid }">
+		        			<!-- these are the default edit buttons (not overridden) -->
+		        			<aploscc:editButtons ajaxApplyButton="#{ backingPage.ajaxApplyButton }" />
+		        		</aplos:panel>
+		        		<br/>
+		        		<aplos:panel layout="none" id="activePanel" rendered="#{ cc.attrs.showSetActiveButtons and cc.editButtonsValid }">
+		        			<aploscc:setActiveButtons />
+		        		</aplos:panel>
+		        	</h:panelGroup>	
+		        	<aplos:panel layout="block" id="listPanel" rendered="#{ cc.showListBackButton and cc.listButtonsValid }" styleClass="aplos-control-panel-buttons">
+	        			<!-- these are the default list buttons (not overridden) -->
+	        			<aploscc:ajaxButton value="Back" action="#{cc.listBackButtonAction}" />
+	        		</aplos:panel>
+		    	</aplos:panel>
+		    	<aplos:panel layout="none" rendered="#{not empty cc.facets.upperRightControlPanel}" >
+		    		<!-- Right upper panel overridden. -->
+		    		<h:panelGroup layout="block" styleClass="aplos-control-panel-buttons">
+		    			<cc:renderFacet name="upperRightControlPanel" />
+		    		</h:panelGroup>
+		    	</aplos:panel>
+		    	
+            	<aplos:panel layout="none" rendered="#{empty cc.facets.lowerRightControlPanel}" >
+            		<h:panelGroup layout="block" rendered="#{ cc.editButtonsValid }" styleClass="aplos-lower-right-control-panel">
+            			<aploscc:setActiveButtons rendered="#{ cc.editActionButtonsValid }"/>
+		        		<aplos:panel id="infoPanel">
+							<aploscc:quickView textOnly="true" text="Info" button="true" bean="#{backingPage.resolveAssociatedBean()}" view="audit" title="Audit Information" />
+		        		</aplos:panel>
+		        	</h:panelGroup>	
+	        		<h:panelGroup rendered="#{ not cc.editButtonsValid and not (cc.showListBackButton and cc.listButtonsValid) }" styleClass="aplos-contact-details">
+	    				<a href="http://www.aplossystems.co.uk" title="Click to visit our website" class="aplos-site-link" target="_blank">Aplos Systems Website</a>
+						<span class="controlPanelDefaultText">
+							<aplos:panel rendered="#{currentUser == null or !currentUser.superuser}" layout="none">
+								<span class="aplos-highlighted">Email&#160;&#160;</span>info@aplossystems.co.uk
+								&#160;&#160;&#160;&#160;<span class="aplos-highlighted">Phone&#160;&#160;</span>0800 520 0690
+							</aplos:panel>
+							<aplos:panel rendered="#{currentUser != null and currentUser.superuser}" layout="none">
+								<span title="Emails will be redirected to this address when in debug mode" class="aplos-highlighted">Superuser Email Redirect&#160;:&#160;&#160;</span><h:outputText escape="false" title="Emails will be redirected to this address when in debug mode" value="#{cc.emailRedirectStr}" />
+							</aplos:panel>
+						</span>
+					</h:panelGroup>
+		    	</aplos:panel>
+		    	<aplos:panel layout="none" rendered="#{not empty cc.facets.lowerRightControlPanel}" >
+		    		<!-- Right lower panel overridden. -->
+		    		<h:panelGroup styleClass="aplos-control-panel-buttons">
+		    			<cc:renderFacet name="lowerRightControlPanel" />
+		    		</h:panelGroup>
+		    	</aplos:panel>
+           	</h:panelGroup>
+    	</h:panelGroup>
+    	<!-- Aplos Control Panel : End -->
+    </cc:implementation>    
+   </h:body>
+</html>
+

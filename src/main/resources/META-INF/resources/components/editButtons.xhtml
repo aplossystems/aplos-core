@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components"
+    xmlns:cc="http://java.sun.com/jsf/composite">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="style" targets="applyButton,okButton,cancelButton" />
+    	<cc:attribute name="showApplyButton" default="true" />
+    	<cc:attribute name="ajaxApplyButton" default="true" />
+    </cc:interface>
+    <cc:implementation>
+    	<aplos:panel rendered="#{ cc.attrs.showApplyButton }" layout="none">
+    		<aploscc:ajaxButton id="applyButton" value="Apply" action="#{ cc.determineEditPage().applyBtnAction }" ajaxEnabled="#{ cc.attrs.ajaxApplyButton }" title="This will save changes and stay on this page" />
+    	</aplos:panel>
+    	<aploscc:ajaxButton id="okButton" value="Ok" action="#{ cc.determineEditPage().okBtnAction }" title="This will save changes and then go to the previous page" />
+    	<aploscc:ajaxButton id="cancelButton" value="Cancel" action="#{ cc.determineEditPage().cancelBtnAction }" immediate="true" title="This will discard changes and then go to the previous page" />
+    </cc:implementation>    
+   </h:body>
+</html>

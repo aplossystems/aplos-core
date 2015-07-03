@@ -1,0 +1,1 @@
+$j = $; //in a script because otherwise it is in the head AFTER all other scripts

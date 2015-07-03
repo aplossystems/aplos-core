@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+    	<!-- 'bean' expects an EL expression evaluating to an address aplos abstract bean object -->
+    	<cc:attribute name="bean" />
+    	<!-- what to display as the link/button text -->
+    	<cc:attribute name="text" default="#{cc.attrs.bean.displayName}" />
+    	<!-- Should the link be displayed as a command button -->
+    	<cc:attribute name="button" default="#{false}" />
+    	<!-- see cc.isBeanValid for usage -->
+    	<cc:attribute name="warnOnNull" default="#{false}" />
+       	<!-- choose not display a link/button -->
+       	<cc:attribute name="textOnly" default="#{false}" />
+       	<!-- where we want to use a viewfile that isnt default but doesnt match the bean name (eg a superclasses view) -->
+       	<cc:attribute name="view" />
+       	<!-- the header displayed in the dialog -->
+       	<cc:attribute name="title" default="Quick View" />
+       	<cc:attribute name="style" targets="aplosQuickViewLink" />
+       	<cc:facet name="quickView"/>
+    </cc:interface>
+    <cc:implementation>	 
+    	<!-- Aplos Quick View : Begin (must be nested within a h:form) -->
+    	<aplos:panel layout="none" rendered="#{ !cc.beanValid }">
+    		<div class="disabledNotification">
+				Error: 'bean' attribute for #{cc.id} Quick View does not evaluate to a valid aplos bean.
+			</div>
+    	</aplos:panel>
+    	<aplos:panel layout="none" rendered="#{ cc.beanValid }">
+    	
+			<aplos:panel rendered="#{cc.attrs.button}">
+				<aploscc:ajaxButton id="aplosQuickViewLink" value="#{cc.displayText}" action="#{cc.determineAction}" styleClass="aplos-command-button aplosBtnAnchor aplos-quickview-button-trigger aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}" disabled="#{ !cc.attrs.bean.editable or cc.attrs.textOnly }"/>
+			</aplos:panel>
+			
+			<aplos:panel rendered="#{cc.attrs.bean.editable and !cc.attrs.button and !cc.attrs.textOnly}">
+				<!-- Define the trigger - LINK -->
+				<h:commandLink styleClass="aplos-quickview-hover-trigger aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}" value="#{cc.displayText}" action="#{cc.determineAction}"></h:commandLink>
+			</aplos:panel>
+			
+			<aplos:panel rendered="#{(!cc.attrs.bean.editable or cc.attrs.textOnly) and !cc.attrs.button}">
+				<!-- Define the trigger - TEXT - LINK, DISABLED -->
+				<span class="aplos-quickview-hover-trigger aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}">#{cc.displayText}</span>
+			</aplos:panel>
+			
+
+			
+			<!-- Define the Dialog -->
+			<!-- the composite id is for uniqueness in datatables -->
+			<p:dialog styleClass="aplos-ui-dialog" widgetVar="dlgAplosQuickView_#{cc.attrs.bean.id}_#{cc.id}">  
+			 	<h3 style="text-align:left;">#{cc.attrs.title}</h3>
+			 	<style type="text/css">
+			 		#qvContainer_#{cc.attrs.bean.id}_#{cc.id} table tr td:first-child { font-weight:bold;padding-right:10px;text-align:left; }
+			 		#qvContainer_#{cc.attrs.bean.id}_#{cc.id} table , #qvContainer_#{cc.attrs.bean.id}_#{cc.id} table td { border:0; }
+			 	</style>
+			 	<div id="qvContainer_#{cc.attrs.bean.id}_#{cc.id}">
+				 	<aplos:panel layout="none" rendered="#{not empty cc.facets.quickView}">
+				 		 <cc:renderFacet name="quickView" />
+					</aplos:panel>
+				 	<aplos:panel layout="none" rendered="#{empty cc.facets.quickView}">
+				 		<!-- View File: #{cc.viewFilename} -->
+				 		<ui:include  src="/quickview/#{cc.viewFilename}.xhtml" >
+				 			<ui:param name="quickviewBean" value="#{ cc.attrs.bean }" />
+				 		</ui:include>
+				 	</aplos:panel>
+			 	</div>
+	    		<br/><br/>
+	   		</p:dialog> 
+	   		
+	   		<aplos:panel layout="none" rendered="#{!cc.attrs.button}">
+		   		<script type="text/javascript">
+		   		
+		   			//HOVER JAVASCRIPT (TEXT/LINKS)
+	
+		   			
+		   			 $(document).ready(function() {
+						 aplosJavascript.registerQuickview(dlgAplosQuickView_#{cc.attrs.bean.id}_#{cc.id}, $(".aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}"), false);
+		   			 });
+		   			 
+		    	</script>
+	    	</aplos:panel>
+	    	
+	    	<aplos:panel layout="none" rendered="#{cc.attrs.button}">
+		   		<script type="text/javascript">
+	
+		   			//CLICK JAVASCRIPT (BUTTONS)
+		   		
+		   			 $(document).ready(function() {
+						 aplosJavascript.registerQuickview(dlgAplosQuickView_#{cc.attrs.bean.id}_#{cc.id}, $(".aplos-quickview-trigger_#{cc.attrs.bean.id}_#{cc.id}"), true);	    		 
+		   			 });
+		   			 
+		    	</script>
+	    	</aplos:panel>
+	    	
+		</aplos:panel>
+    	<!-- Aplos Quick View : End -->
+    </cc:implementation>    
+   </h:body>
+</html>
+

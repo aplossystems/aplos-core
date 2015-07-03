@@ -1,0 +1,472 @@
+#mainLogo {
+	width: 180px;
+}
+
+#backendBreadCrumbs {
+	color: #a0a0a0;
+	font: bold 10px 'Open Sans',sans-serif;
+	text-decoration:none;
+	position:relative;
+	margin: auto;
+	width: 1000px;
+	clear:both;
+	background-color:#{commonConfiguration.highlightColour};
+	padding:8px 0px 8px 0px;
+}
+
+.aplos-history {
+	margin-right:8px;
+}
+
+.breadCrumbsDiv {
+	float:left;
+	padding:2px 0px 2px 8px;
+	width: 750px;
+}
+
+#backendBreadCrumbs a {
+	text-decoration:none;
+	color: #FFFFFF;
+	font: bold 10px 'Open Sans',sans-serif;
+}
+
+.outerWebsiteHeaderBar {
+	padding-bottom:0px;
+	background-color:#{commonConfiguration.mainHeaderColour};
+}
+
+.aplosNavigationBar {
+	padding-bottom:0px;
+	background-color:#{commonConfiguration.subHeaderColour};
+}
+
+.websiteHeaderBar {
+	width:1000px;
+	height:80px;
+	margin: auto;
+}
+
+.siteTabPanelBar {
+	width:1020px;
+	margin: auto;
+	clear:both;   
+}
+
+.mainTabPanelBar {
+	width:1020px;
+	margin: auto;
+	clear:both;    
+	height: 36px;
+}
+
+.subTabPanelBar {
+	width:1020px;
+	margin: auto;
+	clear:both;
+	height: 36px;
+}
+
+.aplosMainMenu div, .aplosMainMenu li {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	display: block;
+	float: left;
+	height:20px;
+	margin-left:10px;
+	margin-right:10px;
+	border-left: solid #FFFFFF 1px;
+	text-align:center;
+}
+
+.aplosMainMenu li {
+	margin-left:0px;
+	padding-right:10px;
+}
+
+.aplosMainMenu a, .aplosMainMenu li a {
+	color: #{commonConfiguration.subHeaderTextColour};
+	font: bold 12px 'Open Sans',sans-serif;
+	text-decoration: none;
+	text-align:center;
+	margin-left:15px;
+}
+
+.aplosMainMenu li a { 
+	padding:0px;
+}
+
+.aplosMainMenu div.current a, .aplosMainMenu li.current a {
+    color: #{commonConfiguration.highlightColour};
+}
+
+.aplosControlPanel { min-width:1000px; border: 0px; background-color:#{commonConfiguration.highlightColour}; height:50px; position:fixed; bottom:0; left:0; z-index:500; width:100%; padding:0; margin:0;}
+.aplosControlPanelPane { margin:8px 10px; padding:0; }
+.aplosControlPanelLeft { float:left; position:relative; text-align:left; }
+.aplosControlPanelLeft .ui-messages { z-index:1000; min-width: 250px; max-width: 430px; font-family: Arial,sans-serif; font-size: 1.1em; position: absolute; bottom: 37px; left: 8px; }
+.aplosControlPanelLeft .ui-corner-all { -moz-box-shadow: 2px 2px 3px 0px #666; -webkit-box-shadow: 2px 2px 3px 0px #666;  box-shadow: 2px 2px 3px 0px #666; }
+.aplosControlPanelLeft .ui-messages-info-summary, .aplosControlPanelLeft  .ui-messages-warn-summary, .aplosControlPanelLeft .ui-messages-error-summary, .aplosControlPanelLeft .ui-messages-fatal-summary, .aplosControlPanelLeft .ui-message-info-summary { font-weight:normal; }
+.aplosControlPanelLeft .ui-messages-info { border: 1px solid #999999; background-color:#FFFFDD; -moz-box-shadow: 2px 2px 8px 0px #666; -webkit-box-shadow: 2px 2px 8px 0px #666;  box-shadow: 2px 2px 8px 0px #666; }
+.aplosControlPanelLeft .ui-messages-error { }
+.aplosControlPanelRight { height:100%; width:1000px; margin:0 auto; text-align:right; /* float:right; margin-right:15px; */ }
+.aplosControlPanelRight .aplos-command-button-middle { text-align: center; min-width: 39px; /* min width is size of cancel button (for uniformity) */ }
+.aplos-control-panel-buttons { position:relative; right: 0px; float:right }
+.aplos-control-panel-buttons .aplos-command-button { position: relative; margin-right: -16px; }
+.aplos-control-panel-buttons .editButtons .aplos-command-button { margin-right: -24px; }
+.aplos-contact-details { top:3px; font-size: 11px; display:block; text-align:right; color: #FFFFFF; position:relative; right:10px; }
+.aplos-site-link, .aplos-site-link:visited { display:block; margin-bottom:3px; color: #FFFFFF; position:relative; top:-1px; vertical-align:middle; font: bold 20px garamond; text-decoration: none; }
+.aplos-site-link:hover { color:#FFFFFF; }
+.aplosControlPanel .aplos-highlighted { color: #FFFFFF; font-weight:bold }
+.aplosControlPanelLeft .ui-corner-all span { display: inline-block; }
+.aplos-set-active-buttons { padding-right: 2px; }
+.aplos-lower-right-control-panel { margin-right: 26px; }
+ 
+#topLoginBarRightDiv {
+	min-height:30px;
+	background-image:url('../images/modern/topLoginBarRight.png');
+	background-repeat:no-repeat;
+	background-position:100% 0%;
+	float:right;
+	margin-top: 18px;
+	/* line-height:30px; */
+}
+
+body {
+	font: normal 11px 'Open Sans',sans-serif;
+}
+   
+.aplos-labelled-box { color:#{commonConfiguration.highlightColour}; }
+
+/* replaces formText */
+.aplos-label { 
+	vertical-align: top; 
+	text-align: right; 
+	font-size: 11px; 
+	font-weight: bold; 
+	color: #{commonConfiguration.mainHeaderColour}; 
+	padding-right: 20px; 
+	width: 150px; 
+	min-width: 150px; 
+}
+
+.aplos-field {
+	font-size:12px;
+}
+
+table.aplos-form-table-with-required .aplos-field .aplos-date-input-dropdowns select {
+	padding:2px 0px;
+}
+
+table.aplos-form-table .aplos-field { width: 270px; }
+.aplos-field input[type='text'],table.aplos-form-table .aplos-field input[type='password'],table.aplos-form-table .aplos-field select {
+	width: 230px; 
+	border: 2px solid #{commonConfiguration.mainHeaderColour};
+    font-size: 12px;
+    padding: 6px; 
+}
+
+/* Otherwise they are too short in firefox */
+table.aplos-form-table .aplos-field select {
+	width: 245px;
+}
+
+table.aplos-form-table-with-required .aplos-field { width: 270px; }
+.aplos-field input[type='text'], .aplos-field input[type='password'], .aplos-field select {
+	width: 230px; 
+	border: 2px solid #{commonConfiguration.mainHeaderColour};
+    font-size: 12px;
+    padding: 6px;
+}
+
+.aplos-field .aplos-date-input-dropdowns select { 
+	border: 2px solid #{commonConfiguration.mainHeaderColour};
+    font-size: 12px;
+    padding:2px 0px;
+    width:auto;
+}
+
+/* Otherwise they are too short in firefox */
+table.aplos-form-table-with-required .aplos-field select {
+	width: 245px;
+}
+.aplos-command-button-marginless .aplos-command-button {
+	margin-right:0px;
+}
+
+.aplos-file-uploader input {
+	width:174px;
+}
+
+.aplos-command-button-thin .aplos-command-button, 
+.aplos-file-uploader .aplos-command-button,
+.aplos-image-uploader .aplos-command-button,
+.aplosControlPanel .aplos-command-button {
+	margin-right:4px;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+}
+
+/* replaces aplosBtnAnchor */
+.aplosSmallBorder a { vertical-align:middle; text-decoration:none; color:#000000; font-weight:bold; }
+.aplosSmallBorder a:hover { color:#33147F; } /* a shade of navy */
+
+.aplos-command-button {
+    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColour};
+    color: #{commonConfiguration.subHeaderTextColour};
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700 !important;
+    height: 54px;
+    line-height: 54px;
+    padding: 0 21px;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+    vertical-align: middle;
+    text-decoration: none;
+    margin-right:30px;
+}
+.aplos-command-button:hover {
+    background: none repeat scroll 0 0 #{commonConfiguration.highlightColour};
+    color:#FFF;
+}
+
+.centreContent .aplos-command-button {
+    background: none repeat scroll 0 0 #{commonConfiguration.mainHeaderColour};
+    color: #FFF;
+}
+
+.centreContent .aplos-command-button:hover {
+    background: none repeat scroll 0 0 #000;
+}
+
+.aplosControlPanel .aplos-command-button {
+    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColour};
+    color : #{commonConfiguration.subHeaderTextColour};
+}
+
+.aplosControlPanel .aplos-command-button:hover {
+    background: none repeat scroll 0 0 #{commonConfiguration.highlightColour};
+}
+
+
+#listAndEditHeading, .aplos-listAndEditHeading { font-family: 'Open Sans',sans-serif; font-size: 18px; color: #{commonConfiguration.mainHeaderColour}; font-weight: normal; }
+
+#topLoginBarRightDiv {
+	background-image:none;
+}
+#topLoginBarLeftDiv {
+	background-image:none;
+}
+#topLoginBarMiddleDiv {
+	background-image:none;
+}
+
+.ui-widget-header {
+	background:-moz-linear-gradient(center top , rgba(184, 186, 170, 0.8), rgba(197, 200, 183, 0)) repeat scroll 0 0 #{commonConfiguration.subHeaderColour};	
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background:-moz-linear-gradient(center top , rgba(184, 186, 170, 0.8), rgba(197, 200, 183, 0)) repeat scroll 0 0 #FFFFFF;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    background: none repeat scroll 0 0 #ffffff;
+}
+
+div.jpassword { 
+	width:250px !important;
+}
+
+
+#aploraSubNavigationBar a {
+	line-height:18px;
+}
+
+
+#topLoginBarUserName {
+    text-shadow: 2px 2px 2px gray;
+    margin-right:20px;
+}
+
+.dashboard-add-panel {
+	margin:10px;
+	padding:10px;
+	background-color:#e74c3c;
+	width:293px;
+	border-radius: 5px;
+	color:white;
+	transition: all 0.4s ease 0s;
+	float:left;
+}
+
+.dashboard-add-link {
+	font-weight:bold;
+	font-size:24px;
+	text-decoration:none;
+}
+
+.dashboard-add-number {
+	float:left;
+	padding:10px;
+}
+
+.dashboard-add-number a {
+	text-decoration:none;
+	color:white;
+	opacity: 0.7;
+    filter: alpha(opacity=70);
+	transition: all 0.4s ease 0s;
+}
+
+.dashboard-add-number a:hover {
+	opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.dashboard-add-plus {
+	float:right;
+}
+
+.dashboard-add-image {
+	float:right;
+	padding-top:25px;
+	padding-right:10px;
+}
+
+.dashboard-chart-panel {
+	float:left;
+	background-color:#f8f8f8;
+	margin:10px;
+	padding:20px;
+	width:273px;
+	border-radius: 5px;
+}
+
+.dashboard-chart-panel h2 {
+	margin-top:0px;
+}
+
+h2 {
+	color:#{commonConfiguration.mainHeaderColour};
+}
+
+#topLoginBarUserName a {
+	text-decoration:none;
+	color:#d92027;
+	font-weight:bold;
+	text-shadow:none;
+	transition: all 0.4s ease 0s;
+}
+
+#topLoginBarUserName a:hover {
+	color:#{commonConfiguration.highlightColour};    
+	text-shadow: 2px 2px 2px gray;
+}
+
+.s-btn:hover, .btn:hover {
+    background: none repeat scroll 0 0 #9fc74a !important;
+    color:white;
+}
+
+#frame { 
+	clear:both;
+}
+
+.promotionalMessage {
+	color: #{commonConfiguration.highlightColour};
+	font-weight: bold;
+    padding: 10px;
+}
+
+
+
+.aplos-contact-page-atom {
+  color:white;
+}
+
+.aplos-contact-page-atom .aplos-field  input {
+    box-shadow: none !important;
+    height: 50px;
+    outline: medium none;
+    padding: 15px 7px 15px 22px;
+}
+
+.aplos-contact-page-atom .aplos-field  input, .aplos-contact-page-atom .aplos-field  textarea {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0;
+    box-shadow: none;
+    color: #D2D3D5;
+    float: left;
+    font: 14px/18px 'Open Sans',sans-serif;
+    outline: medium none;
+    position: relative;
+    text-transform: uppercase;
+    width: 400px;
+    margin-bottom:10px;
+}
+
+.aplos-contact-page-atom .aplos-label {    
+    color: #FFFFFF;
+    font-size: 14px;
+    padding-top:12px;
+    font-family: 'Open Sans',sans-serif;
+    font-weight:normal;
+}
+
+.aplos-contact-page-atom .aplos-required-asterisk {    
+    padding-top: 8px;
+    font-size: 15px;
+}
+
+
+
+.aplos-contact-page-atom input, .aplos-contact-page-atom textarea {
+  width: 100%;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  font: 14px/18px "Open Sans",sans-serif;
+  margin-bottom: 10px;
+  outline: medium none;
+  outline: medium none;
+}
+
+.aplos-contact-page-atom input[type='text'], .aplos-contact-page-atom textarea {
+  padding: 15px 7px 15px 22px;
+  height: 50px;
+}
+
+.aplos-contact-page-atom textarea {
+  height: 150px;
+}
+
+.aplos-contact-page-atom .aplos-command-button {
+  text-align:right;
+  float:right;
+}
+
+.contact-form-container {
+  width: 500px;
+  margin:auto;
+}
+
+
+@media only screen and (max-width: 767px) {
+  
+  .contact-form-container {
+    width: 420px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+	#mainLogo {
+		width:120px;
+	}
+  .contact-form-container {
+    width: 250px;
+  }
+}

@@ -1,0 +1,114 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core" 
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" 
+  xmlns:cc="http://java.sun.com/jsf/composite"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aploscc="http://java.sun.com/jsf/composite/components"
+  xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+  xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+         
+    <cc:interface>
+    	<cc:attribute name="dataTableState" />
+    	<cc:attribute name="ignoreEditable" default="false" />
+    	<cc:attribute name="idColHeader" />
+    	<cc:attribute name="showNewBtn" default="true" />
+    	<cc:attribute name="showSearch"/>
+    	<cc:attribute name="showSearchTxt" default="true" />
+    	<cc:attribute name="showDeleteColumn" default="true" />
+    	<cc:attribute name="showlockColumn" default="false" />
+    	<cc:attribute name="showToggleDeleted" default="true" />
+    	<cc:attribute name="hardDelete" default="false" />
+    	<cc:attribute name="multiSelect" default="false" />
+    	<cc:attribute name="searchTxt" default="Search" />
+    	<cc:attribute name="idFilterStyle" default="width:30px" />
+    	<cc:attribute name="rowStyleClass"/>
+    	<cc:attribute name="deleteBeanReRender"/>
+    	<cc:attribute name="twoStageHardDelete" default="false"/>
+    	
+    	<cc:attribute name="selectProcess"/>
+    	<cc:attribute name="selectUpdate"/>
+    	<cc:attribute name="selectOnStart"/>
+    	<cc:attribute name="selectOnSuccess"/>
+    	<cc:attribute name="selectComplete"/>
+    	
+    	<cc:facet name="tableFooter"/>
+    </cc:interface>
+    <cc:implementation>
+    
+    	<aploscc:ajaxButton id="#{'newBtn'}" value="New" rendered="#{cc.attrs.dataTableState.showingNewBtn and cc.attrs.showNewBtn}" action="#{ cc.attrs.dataTableState.lazyDataModel.goToNew }"/>
+    	<aploscc:ajaxButton id="#{'showDeletedBtn'}" value="#{ cc.showingDeletedBtnValue }" action="#{ cc.attrs.dataTableState.toggleShowingDeleted }" reRender="#{cc.mojarraBugFixPnlId} @this" rendered="#{ cc.attrs.dataTableState.showingShowDeletedBtn and cc.attrs.showToggleDeleted }" />
+    	<aploscc:ajaxButton id="#{'resetBtn'}" value="Reset" action="#{ cc.resetFilters }" reRender="#{cc.mojarraBugFixPnlId} @this" rendered="#{ cc.attrs.dataTableState.showingResetBtn }" />
+    	
+    	<p:confirmDialog message="Are you sure you want to delete this #{ cc.attrs.dataTableState.lazyDataModel.beanDao.entityName }" header="Confirm deletion" severity="alert" widgetVar="#{ cc.jsFriendlyClientId }deleteBeanConfirmation" rendered="#{ cc.showingDeleteColumn and cc.attrs.showDeleteColumn }">
+    		<p:commandButton value="Ok" update="mojarraBugFixPnl" oncomplete="#{ cc.jsFriendlyClientId }deleteBeanConfirmation.hide()"  
+                    actionListener="#{ cc.attrs.dataTableState.lazyDataModel.deleteBean }" />  
+	        <p:commandButton value="Cancel" onclick="#{ cc.jsFriendlyClientId }deleteBeanConfirmation.hide()" type="button" />
+	    </p:confirmDialog>  
+	    
+    	<h:panelGroup layout="block" rendered="#{ cc.showingSearch }" style="float:right; position:relative; top:-2px" class="aplos-wdt-search-panel">
+	    	<h:outputText value="#{ cc.determineSearchTxt() }" rendered="#{ cc.attrs.showSearchTxt }" style="margin-right:10px;" />
+	    	<aploscc:smallBorder isSearchText="true">
+	    		<h:inputText value="#{ cc.attrs.dataTableState.searchText }" styleClass="aplosTextbox searchTextBox aplosDatatableSearchTextBox" multiline="true">
+	    			<aplos:ajax event="keyup" update="#{ cc.getMojarraBugFixPnlClientId( false ) }" onstart="return captureEnter(this.cfg.eventObj);" oncomplete="applyStylingToActiveFiltersInDatatables()" requestDelay="300"/>
+	    		</h:inputText>
+	    	</aploscc:smallBorder>
+    	</h:panelGroup>
+    	<!-- This is a fix for IE7 (otherwise the dataTable doesn't show in YouStudy -->
+    	<div style="clear:both" />
+			
+    	<h:panelGroup id="#{'mojarraBugFixPnl'}" layout="block" styleClass="aplos-mojarra-datatable-wrapper">
+    		
+	    	<aplos:panel rendered="#{cc.attrs.dataTableState == null}">
+	    	
+	    		<!-- Where I have seen this issue before it has been caused by a HibernateQueryException when trying to create or retrieve the state -->
+	    	
+				<div class="disabledNotification">
+					<h3>Missing DataTableState</h3>
+					The table cannot be rendered. The value assigned to dataTableState for this datatable (#{cc.clientId}) resolves to null. This can happen if the bean class is not mapped or when other errors occur.
+					<br/><br/>
+				</div>
+			</aplos:panel>
+	    	<aplos:dataTable id="#{'internalDataTable'}" styleClass="internalDataTable" value="#{ cc.dataTableValue }" rows="#{ cc.attrs.dataTableState.maxRowsOnPage }"
+	    		rendered="#{cc.attrs.dataTableState != null}" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+	    		currentPageReportTemplate="{firstRowOfPage} - {lastRowOfPage} of {totalRows}"
+	    	    var="tableBean" dataTableState="#{ cc.attrs.dataTableState }" first="#{ cc.attrs.dataTableState.firstRowIndex }"
+	    		rowsPerPageTemplate="#{ cc.attrs.dataTableState.rowsPerPageTemplate }" paginator="#{ cc.attrs.dataTableState.usingPagination }"
+	    		paginatorAlwaysVisible="#{ cc.attrs.dataTableState.paginatorAlwaysVisible }" selectionMultiple="#{cc.selectedRows}"
+	    		selectionSingle="#{cc.selectedRow}"
+	    		rowStyleClass="#{ cc.attrs.rowStyleClass }" selectionMode="#{ cc.attrs.selectionMode }">
+				<p:column rendered="#{cc.attrs.multiSelect}" selectionMode="multiple" style="width:18px" />
+				<p:column style="width:35px;text-align:center"  rendered="#{ cc.attrs.dataTableState.showingEditPencilColumn }" styleClass="#{ cc.attrs.dataTableState.lazyDataModel.archiveStyleClass }">
+					<h:commandButton action="#{ cc.selectBean }" image="/images/edit.gif"></h:commandButton>
+				</p:column>
+				<p:column style="width:35px" rendered="#{ cc.attrs.dataTableState.showingIdColumn and cc.attrs.dataTableState.showingIdColumnFilter }" filterBy="#{ tableBean.id }" sortBy="#{ tableBean.id }" filterStyle="#{ cc.attrs.idFilterStyle }" styleClass="#{ cc.attrs.dataTableState.lazyDataModel.archiveStyleClass }">
+					<f:facet name="header">
+						<h:outputText value="id" rendered="#{ cc.attrs.idColHeader == null }" />
+						<h:outputText value="#{ cc.attrs.idColHeader }" rendered="#{ cc.attrs.idColHeader != null }" />
+					</f:facet>
+					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{!tableBean.editable and !cc.attrs.ignoreEditable}" value="#{ cc.beanId }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
+					<aploscc:quickView action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean() }" rendered="#{ cc.attrs.dataTableState.showingQuickView }" bean="#{tableBean}" text="#{cc.beanId}" /> 
+				</p:column>
+				<p:column style="width:35px" rendered="#{ cc.attrs.dataTableState.showingIdColumn and !cc.attrs.dataTableState.showingIdColumnFilter }" sortBy="#{ tableBean.id }" filterStyle="#{ cc.attrs.idFilterStyle }">
+					<f:facet name="header">
+						<h:outputText value="id" rendered="#{ cc.attrs.idColHeader == null }" />
+						<h:outputText value="#{ cc.attrs.idColHeader }" rendered="#{ cc.attrs.idColHeader != null }" />
+					</f:facet>
+					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{!tableBean.editable and !cc.attrs.ignoreEditable}" value="#{ tableBean.id }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
+					<aploscc:quickView action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean() }" rendered="#{ cc.attrs.dataTableState.showingQuickView }" bean="#{tableBean}" text="#{tableBean.id}" /> 
+				</p:column>
+				<cc:insertChildren></cc:insertChildren>
+				<aplos:column  rendered="#{ cc.showingDeleteColumn }" style="#{ cc.deletedColumnWidth }" actionAllowed="false">
+					<aploscc:deleteBean hardDelete="#{cc.attrs.hardDelete}" confirmationBoxName="#{ cc.jsFriendlyClientId }deleteBeanConfirmation" reRender="#{ cc.getMojarraBugFixPnlClientId( false ) } #{ cc.attrs.deleteBeanReRender }" twoStageHardDelete="#{cc.attrs.twoStageHardDelete}"/>
+				</aplos:column>
+				<p:column width="24px" rendered="#{ cc.attrs.showLockColumn }">
+					<aploscc:lockBean reRender="#{ cc.getMojarraBugFixPnlClientId( false ) }"/>
+				</p:column> 
+				<cc:renderFacet name="tableFooter" />
+			</aplos:dataTable>
+		</h:panelGroup>
+    </cc:implementation>
+    
+</ui:component>

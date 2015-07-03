@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:aplos="http://www.aplossystems.co.uk/aplosComponents"
+    xmlns:aploscc="http://java.sun.com/jsf/composite/components">
+  <h:body>        
+    <cc:interface>
+    	<!-- 'bean' expects an EL expression evaluating to an address object (it doesn't like the field name 'address') -->
+    	<cc:attribute name="bean" />
+    	<cc:attribute name="title" />
+    	<!-- used validation not validation required as attribute name cannot match the el for a method signature -->
+    	<cc:attribute name="validation" default="false" />
+    	<!-- The following settings all take the values true/false/required -->
+   		<cc:attribute name="ecommerceFieldsRequired" />
+   		<cc:attribute name="contactTitle" />
+   		<cc:attribute name="contactName" />
+   		<cc:attribute name="companyName" />
+    	<cc:attribute name="line1" />
+    	<!-- line2 / line3 treat 'required' only as 'true' -->
+    	<cc:attribute name="line2" />
+    	<cc:attribute name="line3" />
+    	<cc:attribute name="city" />
+    	<cc:attribute name="country" />
+    	<cc:attribute name="state" />
+    	<cc:attribute name="postcode" /> <!-- postcode is safe in that it is only required if the country requires it -->
+    	<cc:attribute name="email" />
+    	<cc:attribute name="phone" />
+    	<cc:attribute name="phone2" />
+    	<cc:attribute name="mobile" />
+    	<cc:attribute name="fax" />
+    </cc:interface>
+    <cc:implementation>
+    	<aplos:panel layout="none" rendered="#{ !cc.addressValid }">
+    		<div class="disabledNotification">
+				Error: 'bean' attribute for #{cc.id} Address Include does not evaluate to a valid address object.
+			</div>
+    	</aplos:panel>
+    	<aplos:panel layout="none" rendered="#{ !cc.validationRequiredValid }">
+    		<div class="disabledNotification">
+				Error: 'validation' attribute for #{cc.id} is not a valid string identifier or boolean resolvable value-expression.
+			</div>
+    	</aplos:panel>
+    	<aplos:panel layout="none" rendered="#{ cc.addressValid }">
+    		<div style="#{ cc.attrs.style }">
+				<aplos:panel id="titlePanel" layout="none" rendered="#{ not empty cc.attrs.title }">
+					<tr>
+						<td class="aplos-label aplos-first-letter-uppercase aplos-address-title"><h3>#{ cc.attrs.title }</h3></td>
+						<td></td><td></td>
+					</tr>
+				</aplos:panel>
+				<aplos:panel id="contactTitlePanel" layout="none" rendered="#{ cc.renderContactTitle }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('CONTACT_TITLE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.contactTitle == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:selectOneListbox rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.contactTitle == 'required' and cc.validationRequired }" label="#{ contextListener.translate('CONTACT_TITLE') }" size="1" id="contactTitleDdl" value="#{cc.attrs.bean.contactTitle}">
+								<f:selectItems value="#{cc.contactTitleSelectItems}" />
+							</h:selectOneListbox>
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.contactTitle.label}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="contactNamePanel" layout="none" rendered="#{ cc.renderContactName }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('CONTACT_FIRST_NAME') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.contactName == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="contactFirstName" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.contactName == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.contactFirstName}" label="#{ contextListener.translate('CONTACT_FIRST_NAME') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.contactFirstName}" />
+					    </div>
+					</div>
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('CONTACT_SURNAME') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.contactName == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="contactSurname" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.contactName == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.contactSurname}" label="#{ contextListener.translate('CONTACT_SURNAME') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.contactSurname}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="companyNamePanel" layout="none" rendered="#{ cc.renderCompanyName }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('COMPANY') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.companyName == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="companyName" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.companyName == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.companyName}" label="#{ contextListener.translate('COMPANY') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.companyName}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="countryPanel" layout="none" rendered="#{ cc.renderCountry }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('COUNTRY') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.country == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:selectOneMenu rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.country == 'required' and cc.validationRequired }" label="#{ contextListener.translate('COUNTRY') }" id="countryDdl" value="#{cc.attrs.bean.country}" converter="aplosAbstractBeanConverter">
+								<f:selectItems value="#{cc.countrySelectItems}" />
+								<p:ajax event="change" process="countryDdl stateTxt stateDdl" update="stateInnerPanel postcodeReqContainer" />
+							</h:selectOneMenu>
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.country}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="line1Panel" layout="none" rendered="#{ cc.renderLine1 }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('ADDRESS') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.line1 == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="line1" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.line1 == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.line1}" label="#{ contextListener.translate('ADDRESS') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.line1}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="line2Panel" layout="none" rendered="#{ cc.renderLine2 }">
+					<div class="responsive-form-row">
+					    <label class="desc"></label>
+					    <div class="aplos-field">
+							<h:inputText id="line2" rendered="#{ !cc.attrs.disabled }" value="#{cc.attrs.bean.line2}" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.line2}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="line3Panel" layout="none" rendered="#{ cc.renderLine3 }">
+					<div class="responsive-form-row">
+					    <label class="desc"></label>
+					    <div class="aplos-field">
+							<h:inputText id="line3" rendered="#{ !cc.attrs.disabled }" value="#{cc.attrs.bean.line3}" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.line3}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="cityPanel" layout="none" rendered="#{ cc.renderCity }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('TOWN_OR_CITY') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.city == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="city" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.city == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.city}" label="#{ contextListener.translate('TOWN_OR_CITY') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.city}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="statePanel" layout="none" rendered="#{ cc.renderState }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('COUNTY_OR_STATE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.state == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<p:outputPanel id="stateInnerPanel">
+								<aplos:panel layout="none" rendered="#{ cc.showingStates }">
+							    	<h:selectOneListbox id="stateDdl" size="1" required="#{ cc.attrs.state == 'required' and cc.validationRequired }" label="#{ contextListener.translate('COUNTY_OR_STATE') }" value="#{cc.attrs.bean.countryArea}" converter="aplosAbstractBeanConverter" rendered="#{ !cc.attrs.disabled }">
+										<f:selectItems value="#{cc.stateSelectItems}" />
+									</h:selectOneListbox>
+									<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.countryArea.name}" />
+								</aplos:panel>
+								<aplos:panel layout="none" rendered="#{ !cc.showingStates }">
+									<h:inputText id="stateTxt" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.state == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.state}" label="#{ contextListener.translate('COUNTY_OR_STATE') }" />
+									<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.state}" />
+								</aplos:panel>
+							</p:outputPanel>
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="postcodePanel" layout="none" rendered="#{ cc.renderPostcode }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('POSTCODE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.validationRequiredLater and cc.postcodeRequired }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="postcode" rendered="#{ !cc.attrs.disabled }" required="#{ cc.postcodeRequired and cc.validationRequired }" value="#{cc.attrs.bean.postcode}" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.postcode}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="emailPanel" layout="none" rendered="#{ cc.renderEmail }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('EMAIL') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.email == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="email" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.email == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.emailAddress}" label="#{ contextListener.translate('EMAIL') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.emailAddress}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="phonePanel" layout="none" rendered="#{ cc.renderPhone }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('PHONE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.phone == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="phone" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.phone == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.phone}" label="#{ contextListener.translate('PHONE') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.phone}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="phone2Panel" layout="none" rendered="#{ cc.renderPhone2 }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('SECOND_PHONE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.phone2 == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="phone2" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.phone2 == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.phone2}" label="#{ contextListener.translate('SECOND_PHONE') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.phone2}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="mobilePanel" layout="none" rendered="#{ cc.renderMobile }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('MOBILE') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.mobile == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="mobile" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.mobile == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.mobile}" label="#{ contextListener.translate('MOBILE') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.mobile}" />
+					    </div>
+					</div>
+				</aplos:panel>
+				<aplos:panel id="faxPanel" layout="none" rendered="#{ cc.renderFax }">
+					<div class="responsive-form-row">
+					    <label class="desc">#{ contextListener.translate('FAX') }<span class="aplos-required-asterisk"><h:outputText value="*" rendered="#{ !cc.attrs.disabled and cc.attrs.fax == 'required' and cc.validationRequiredLater }" /></span></label>
+					    <div class="aplos-field">
+							<h:inputText id="fax" rendered="#{ !cc.attrs.disabled }" required="#{ cc.attrs.fax == 'required' and cc.validationRequired }" value="#{cc.attrs.bean.fax}" label="#{ contextListener.translate('FAX') }" />
+							<h:outputText rendered="#{ cc.attrs.disabled }" value="#{cc.attrs.bean.fax}" />
+					    </div>
+					</div>	
+				</aplos:panel>
+			</div>
+		</aplos:panel>
+    </cc:implementation>    
+   </h:body>
+</html>
+

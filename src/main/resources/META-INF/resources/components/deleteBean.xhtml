@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite">
+  <h:body>        
+    <cc:interface>
+    	<cc:attribute name="confirmationBoxName"></cc:attribute>
+    	<cc:attribute name="beanName"></cc:attribute>
+    	<cc:attribute name="style"></cc:attribute>
+    	<cc:attribute name="hardDelete" ></cc:attribute>
+    	<cc:attribute name="reRender" ></cc:attribute>
+    	<cc:attribute name="twoStageHardDelete" default="false"></cc:attribute>
+    </cc:interface>
+    <cc:implementation>
+		<h:commandButton value="Delete" image="#{ cc.deleteBeanImage }" rendered="#{ !cc.aplosLazyDataModel.dataTableState.showingDeleted and cc.determineAplosAbstractBean().deletable }" >
+   			<p:ajax event="click" listener="#{ cc.deleteBeanAction }" oncomplete="#{ cc.attrs.confirmationBoxName }.show()"/>
+   		</h:commandButton>
+		<h:commandButton value="Reinstate" image="#{ cc.reinstateBeanImage }" rendered="#{ cc.aplosLazyDataModel.dataTableState.showingDeleted }" >
+   			<p:ajax event="click" listener="#{ cc.reinstateBeanAction }" update="#{ cc.attrs.reRender }"/>
+   		</h:commandButton>
+		<h:commandButton value="Hard delete" image="#{ cc.deleteBeanImage }" rendered="#{ cc.aplosLazyDataModel.dataTableState.showingDeleted and cc.determineAplosAbstractBean().deletable and cc.attrs.twoStageHardDelete }" >
+   			<p:ajax event="click" listener="#{ cc.hardDeleteBeanAction }" oncomplete="#{ cc.attrs.confirmationBoxName }.show()"/>
+   		</h:commandButton>
+    </cc:implementation>    
+  </h:body>
+</html>

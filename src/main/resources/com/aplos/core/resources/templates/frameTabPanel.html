@@ -1,0 +1,19 @@
+<div style="position:absolute;z-index:2;top:-10px">
+	<table cellpadding="0" cellspacing="0" style="color:#33147F;">
+		<tr>
+			<td>
+				<img src="{FIRST_TAB_IMAGE}"/>
+			</td>
+			<!-- BEGIN DYNAMIC : menuTabs -->
+				<td class="{TAB_STYLE}" >
+					<h:commandLink xmlns:h="http://java.sun.com/jsf/html" action="{TAB_ACTION}" styleClass="mainMenuLink">
+						<h:outputText value="{TAB_DISPLAY_NAME}"/>
+					</h:commandLink>
+				</td>
+				<td>
+					<img src="{RIGHT_TAB_IMAGE}" />
+				</td>
+			<!-- END DYNAMIC : menuTabs -->
+		</tr>
+	</table>
+</div>
