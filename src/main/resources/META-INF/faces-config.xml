@@ -6,13 +6,6 @@
     version="2.1">
     <name>core</name>
     
-    <!-- This makes sure that we can overide the renderers for the pretty faces components -->
-    <ordering>
-    	<after>
-    		<name>ocpsoft_pretty_faces</name>
-    	</after>
-    </ordering>
-    
     <lifecycle>
 		<!-- Phase Listeners -->
 		<phase-listener>com.aplos.common.listeners.ResourceServerPhaseListener</phase-listener>
