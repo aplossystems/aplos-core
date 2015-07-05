@@ -27,7 +27,7 @@
     	<dependency>
 	      <groupId>com.aplos</groupId>
 	      <artifactId>common</artifactId>
-	      <version>1.8.0-ASPECT</version>
+	      <version>1.10.0-ASPECT</version>
 	    </dependency>
     </dependencies>
 
