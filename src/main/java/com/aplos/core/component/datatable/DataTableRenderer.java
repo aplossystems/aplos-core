@@ -30,8 +30,10 @@ import org.primefaces.util.HTML;
 
 import com.aplos.common.beans.DataTableState;
 import com.aplos.common.module.CommonConfiguration;
+import com.aplos.common.utils.CommonUtil;
 import com.aplos.common.utils.JSFUtil;
 import com.sun.faces.renderkit.RenderKitUtils;
+
 import components.wrappedDataTable2;
 
 @FacesRenderer(componentFamily="com.aplos.core.component",rendererType="com.aplos.core.component.datatable.DataTableRenderer")
@@ -235,14 +237,26 @@ public class DataTableRenderer extends DataRenderer {
 
     protected void encodeRegularTable(FacesContext context, DataTable table, DataTableState dataTableState) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
+        
+        String jqueryClientId = table.getClientId().replace( ":", "_" );
+        String formClientId = RenderKitUtils.getFormClientId(table, context);
 
+        writer.startElement("script", null);
+        writer.writeAttribute( "type", "text/javascript", null);
+        writer.write( "aplosJavascript.registerDatatable('" + jqueryClientId + "', '" + formClientId + "', '" + table.getClientId() + "');");
+        writer.endElement("script");
         writer.startElement("table", null);
         if(table.getTableStyle() != null) {
 			writer.writeAttribute("style", table.getTableStyle(), null);
 		}
+        
+        String tableClass;
         if(table.getTableStyleClass() != null) {
-			writer.writeAttribute("class", table.getTableStyleClass(), null);
+        	tableClass = table.getTableStyleClass() + " " + jqueryClientId;
+		} else {
+			tableClass = jqueryClientId;
 		}
+		writer.writeAttribute("class", tableClass, null);
 
         encodeThead(context, table, dataTableState);
         encodeTFoot(context, table, dataTableState);
@@ -878,14 +892,7 @@ public class DataTableRenderer extends DataRenderer {
 	                javascriptBuf.append("});");
 	                writer.writeAttribute("onClick", javascriptBuf, null);
             	} else {
-	                StringBuilder javascriptBuf = new StringBuilder("mojarra.jsfcljs(document.getElementById('" );
-	                javascriptBuf.append(formClientId);
-	                javascriptBuf.append("'),{");
-	
-	                RenderKitUtils.appendProperty(javascriptBuf, clientId + "_rowClick", clientId + ":" + column.getId() + "-" + rowKey );
-	
-	                javascriptBuf.append("},'') ");
-	                writer.writeAttribute("onClick", javascriptBuf, null);
+	                writer.writeAttribute("class", "aplos-clickable " + column.getId() + "-" + rowKey, null);
             	}
         	}
             writer.startElement("div", null);

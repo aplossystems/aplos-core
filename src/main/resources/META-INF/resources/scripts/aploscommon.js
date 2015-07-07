@@ -147,10 +147,6 @@ aplosJavascript = (function($) {
 			}
 		};
 	
-	var registeredQuickviews = [];
-	
-	var showingQuickviews = [];
-	
 	var quickviewTimeout;
 	
 	return {
@@ -172,10 +168,19 @@ aplosJavascript = (function($) {
 		aplosClearTimeout:function(timeout) {
 			clearTimeout(timeout);
 		},
-		showQuickview:function(quickview) {
-			$('html').click();
-			showingQuickviews.push( quickview );
-			quickview.show();
+		registerDatatable:function(dataTableId, formClientId, clientId) {
+			$j(document).ready(function() {
+				var tableForm = document.getElementById(formClientId);
+				
+				$j("." + dataTableId + " .aplos-clickable" ).click( function() {
+					var rowClickId = clientId + "_rowClick";
+					var cellId = clientId + ":" + this.classList[ 1 ];
+					var a = new Array();
+					a[ rowClickId ] = cellId;
+					mojarra.jsfcljs(tableForm,a,'');
+				});
+				 
+			});
 		},
 		setCookie:function(name,value,days) {
 			var expires = "";
@@ -185,34 +190,6 @@ aplosJavascript = (function($) {
 				expires = "; expires="+date.toGMTString();
 			}
 			document.cookie = name+"="+value+expires+"; path=/";
-		},
-		registerQuickview:function(quickviewVar,quickviewObj,isButton) {
-			if( registeredQuickviews.length == 0 ) {
-				$('html').bind('click', function(event) {
-					for (var i = 0; i < showingQuickviews.length; i++) {
-					    showingQuickviews[i].hide();
-					}
-					showingQuickviews = [];
-	    		});
-	
-	   			//dont dismiss within the dialog
-	    		 $('.aplos-ui-dialog').click(function(event){
-	    		     event.stopPropagation(); 
-	    		 });
-			}
-			registeredQuickviews.push( quickviewVar );
-			if( isButton ) {
-				quickviewObj.click( function () {
-	   			 	setTimeout( function() {aplosJavascript.showQuickview(quickviewVar)}, 300);
-	   			});
-			} else {
-				quickviewObj.hover( function () {
-	   				aplosJavascript.aplosClearTimeout(quickviewTimeout); 
-					quickviewTimeout = setTimeout( function() {aplosJavascript.showQuickview(quickviewVar)}, 600);
-	   			}, function () { 
-	   				aplosJavascript.aplosClearTimeout(quickviewTimeout); 
-	   			});
-			}
 		}
 	}
 })(jQuery);

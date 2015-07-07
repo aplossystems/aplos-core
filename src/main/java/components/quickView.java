@@ -1,4 +1,5 @@
 package components;
+import java.awt.Component;
 import java.io.IOException;
 
 import javax.el.MethodExpression;
@@ -10,6 +11,7 @@ import javax.naming.directory.InvalidAttributeValueException;
 import com.aplos.common.AplosUrl;
 import com.aplos.common.beans.AplosBean;
 import com.aplos.common.utils.ApplicationUtil;
+import com.aplos.common.utils.ComponentUtil;
 import com.aplos.common.utils.FormatUtil;
 import com.aplos.common.utils.JSFUtil;
 
@@ -51,6 +53,19 @@ public class quickView extends UINamingContainer {
 			}
 		}
 		
+	}
+	
+	public boolean isShowingDialog() {
+		if( ComponentUtil.determineBooleanAttributeValue( this, "ajaxEnabled", true) ) {
+			if( ComponentUtil.determineBooleanAttributeValue( this, "showDialog", false) ) {
+				return true;
+			}
+		} 
+		return false;
+	}
+	
+	public void showDialog() {
+		getAttributes().put( "showDialog", true );
 	}
 	
 	public String getBeanTypeString() {

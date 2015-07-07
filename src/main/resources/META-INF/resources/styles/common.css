@@ -1877,4 +1877,8 @@ table.aplos-form-table-with-required .aplos-field .aplos-date-input-dropdowns se
 	float:left;
 }
 
+.qvContainer table tr td:first-child { font-weight:bold;padding-right:10px;text-align:left; }
+
+.qvContainer table, .qvContainer table td, .qvContainer .aplos-form-table td { border:0; }
+
 
