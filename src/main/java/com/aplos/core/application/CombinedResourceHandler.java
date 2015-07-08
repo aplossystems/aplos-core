@@ -19,7 +19,6 @@ import javax.faces.event.SystemEventListener;
 
 import com.aplos.common.beans.Website;
 import com.aplos.common.enums.CombinedResourceStatus;
-import com.aplos.common.utils.ComponentUtil;
 import com.aplos.common.utils.JSFUtil;
 import com.aplos.core.component.deferredscript.DeferredScript;
 import com.aplos.core.component.deferredscript.DeferredScriptRenderer;
