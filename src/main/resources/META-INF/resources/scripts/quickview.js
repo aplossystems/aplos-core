@@ -10,20 +10,8 @@ $j(document).ready( function() {
 	});
 	
 	$j('.aplos-quickview-hover-trigger').hover( function () {
-		var extension = "";
-		for( var i = 0; i < this.classList.length; i++ ) {
-			if( this.classList[ i ].indexOf( "aplos-quickview-trigger_" ) != -1 ) {
-				extension = this.classList[ i ].substring( 24, this.classList[ i ].length );
-				break;
-			}
-		}
-		renderQuickview(extension);
-	});
-
-	
-	$j('.aplos-quickview-button-trigger').hover( function () {
 		aplosJavascript.aplosClearTimeout(quickviewTimeout);
-
+		
 		var extension = "";
 		for( var i = 0; i < this.classList.length; i++ ) {
 			if( this.classList[ i ].indexOf( "aplos-quickview-trigger_" ) != -1 ) {
@@ -32,9 +20,22 @@ $j(document).ready( function() {
 			}
 		}
 		quickviewTimeout = setTimeout( function() {renderQuickview(extension)}, 600);
-		
 	}, function () { 
 		aplosJavascript.aplosClearTimeout(quickviewTimeout); 
+	});
+
+	
+	$j('.aplos-quickview-button-trigger').hover( function () {
+
+		var extension = "";
+		for( var i = 0; i < this.classList.length; i++ ) {
+			if( this.classList[ i ].indexOf( "aplos-quickview-trigger_" ) != -1 ) {
+				extension = this.classList[ i ].substring( 24, this.classList[ i ].length );
+				break;
+			}
+		}
+		renderQuickview(extension);
+		
 	});
 });
 

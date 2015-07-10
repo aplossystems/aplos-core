@@ -861,40 +861,40 @@ public class DataTableRenderer extends DataRenderer {
                 }
         	}
         	
-            if( CommonConfiguration.getCommonConfiguration().isSelectableRowsAllowed()
-            		&& (!(column instanceof AplosColumn) || ((AplosColumn)column).isActionAllowed())
-            		&& table.determineDataTableState().isShowingRowHighlight() ) {
-
-            	wrappedDataTable2 wrappedDataTable = findWrappedDataTable(table);
-
-                String formClientId = RenderKitUtils.getFormClientId(table, context);
-            	if( wrappedDataTable != null && wrappedDataTable.getAttributes().get( "selectUpdate" ) != null ) {
-	                StringBuilder javascriptBuf = new StringBuilder("AplosComponents.ab({source:'").append( clientId ).append( "'" );
-	                javascriptBuf.append(",process:'").append( formClientId ).append("'");
-	                javascriptBuf.append(",update:'").append( wrappedDataTable.getAttributes().get( "selectUpdate" ) ).append("'");
-	
-	                //callbacks
-	                if(wrappedDataTable.getAttributes().get( "selectOnStart" ) != null) {
-	        			javascriptBuf.append(",onstart:function(xhr){").append( wrappedDataTable.getAttributes().get( "selectOnStart" ) ).append(";}");
-	        		}
-	                if(wrappedDataTable.getAttributes().get( "selectComplete" ) != null) {
-	        			javascriptBuf.append(",oncomplete:function(xhr, status, args){").append(wrappedDataTable.getAttributes().get( "selectComplete" )).append(";}");
-	        		}
-
-	                if(wrappedDataTable.getAttributes().get( "selectOnSuccess" ) != null) {
-	        			javascriptBuf.append(",onsuccess:function(data, status, xhr){").append(wrappedDataTable.getAttributes().get( "selectOnSuccess" )).append(";}");
-	        		}
-	                javascriptBuf.append(",params:{");
-	
-	                RenderKitUtils.appendProperty(javascriptBuf, clientId + "_rowClick", clientId + ":" + column.getId() + "-" + rowKey );
-	
-	                javascriptBuf.append("}");
-	                javascriptBuf.append("});");
-	                writer.writeAttribute("onClick", javascriptBuf, null);
-            	} else {
-	                writer.writeAttribute("class", "aplos-clickable " + column.getId() + "-" + rowKey, null);
-            	}
-        	}
+//            if( CommonConfiguration.getCommonConfiguration().isSelectableRowsAllowed()
+//            		&& (!(column instanceof AplosColumn) || ((AplosColumn)column).isActionAllowed())
+//            		&& table.determineDataTableState().isShowingRowHighlight() ) {
+//
+//            	wrappedDataTable2 wrappedDataTable = findWrappedDataTable(table);
+//
+//                String formClientId = RenderKitUtils.getFormClientId(table, context);
+//            	if( wrappedDataTable != null && wrappedDataTable.getAttributes().get( "selectUpdate" ) != null ) {
+//	                StringBuilder javascriptBuf = new StringBuilder("AplosComponents.ab({source:'").append( clientId ).append( "'" );
+//	                javascriptBuf.append(",process:'").append( formClientId ).append("'");
+//	                javascriptBuf.append(",update:'").append( wrappedDataTable.getAttributes().get( "selectUpdate" ) ).append("'");
+//	
+//	                //callbacks
+//	                if(wrappedDataTable.getAttributes().get( "selectOnStart" ) != null) {
+//	        			javascriptBuf.append(",onstart:function(xhr){").append( wrappedDataTable.getAttributes().get( "selectOnStart" ) ).append(";}");
+//	        		}
+//	                if(wrappedDataTable.getAttributes().get( "selectComplete" ) != null) {
+//	        			javascriptBuf.append(",oncomplete:function(xhr, status, args){").append(wrappedDataTable.getAttributes().get( "selectComplete" )).append(";}");
+//	        		}
+//
+//	                if(wrappedDataTable.getAttributes().get( "selectOnSuccess" ) != null) {
+//	        			javascriptBuf.append(",onsuccess:function(data, status, xhr){").append(wrappedDataTable.getAttributes().get( "selectOnSuccess" )).append(";}");
+//	        		}
+//	                javascriptBuf.append(",params:{");
+//	
+//	                RenderKitUtils.appendProperty(javascriptBuf, clientId + "_rowClick", clientId + ":" + column.getId() + "-" + rowKey );
+//	
+//	                javascriptBuf.append("}");
+//	                javascriptBuf.append("});");
+//	                writer.writeAttribute("onClick", javascriptBuf, null);
+//            	} else {
+//	                writer.writeAttribute("class", "aplos-clickable " + column.getId() + "-" + rowKey, null);
+//            	}
+//        	}
             writer.startElement("div", null);
             writer.writeAttribute("class", DataTable.COLUMN_CONTENT_WRAPPER, null);
             column.encodeAll(context);
