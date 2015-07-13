@@ -37,8 +37,8 @@ public class fileUploader2 extends UIInput implements NamingContainer, FileUploa
 		FileDetailsOwnerInter fileDetailsOwner = determineFileDetailsOwner();
 		saveableFileDetails.setFileDetailsOwner(fileDetailsOwner);
 		determinedFileDetails.setShowFileUploading( true );
-		if (CommonUtil.isFileUploaded(getUploadedFile())) {
-			String ext = getUploadedFile().getFileName().substring( getUploadedFile().getFileName().lastIndexOf(".") + 1 );
+		if (CommonUtil.isFileUploaded(determinedFileDetails.getUploadedFile())) {
+			String ext = determinedFileDetails.getUploadedFile().getFileName().substring( getUploadedFile().getFileName().lastIndexOf(".") + 1 );
 			if ( isAcceptableType(ext) ) {
 				innerSaveFileOwnerObject(saveableFileDetails, saveFileDetailsOwner);
 			} else {

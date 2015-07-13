@@ -835,7 +835,6 @@ public class DataTableRenderer extends DataRenderer {
 
         styleClass = column.getStyleClass() == null ? styleClass : styleClass + " " + column.getStyleClass();
 
-
         writer.startElement("td", null);
 
         if(style != null) {
