@@ -37,6 +37,8 @@ public class loggedInUserControls extends UINamingContainer {
 		try {
 			FileUtils.cleanDirectory( new File( CommonWorkingDirectory.PROCESSED_RESOURCES_DIR.getDirectoryPath(true) ) );
 			FileUtils.cleanDirectory( new File( CommonWorkingDirectory.COMBINED_RESOURCES.getDirectoryPath(true) ) );
+			FileUtils.cleanDirectory( new File( CommonWorkingDirectory.MINIFIED_JS.getDirectoryPath(true) ) );
+			FileUtils.cleanDirectory( new File( CommonWorkingDirectory.MINIFIED_CSS.getDirectoryPath(true) ) );
 		} catch( IOException ioex ) {
 			ApplicationUtil.handleError(ioex);
 		}

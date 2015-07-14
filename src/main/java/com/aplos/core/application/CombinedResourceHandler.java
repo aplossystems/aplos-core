@@ -1,9 +1,14 @@
 package com.aplos.core.application;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
@@ -17,8 +22,16 @@ import javax.faces.event.PreRenderViewEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
+import com.aplos.common.application.AplosCssResource;
+import com.aplos.common.application.AplosVersionedResource;
+import com.aplos.common.application.CallableCssMinifier;
+import com.aplos.common.application.CallableJsMinifier;
+import com.aplos.common.application.MinifiedCssResource;
+import com.aplos.common.application.MinifiedJsResource;
+import com.aplos.common.application.PriorityFutureTask;
 import com.aplos.common.beans.Website;
 import com.aplos.common.enums.CombinedResourceStatus;
+import com.aplos.common.utils.ApplicationUtil;
 import com.aplos.common.utils.JSFUtil;
 import com.aplos.core.component.deferredscript.DeferredScript;
 import com.aplos.core.component.deferredscript.DeferredScriptRenderer;
@@ -37,6 +50,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 	private static final String TARGET_BODY = "body";
 	
 	private boolean isDisabled = false;
+	private Map<String,PriorityFutureTask<File>> futureTaskMap = new HashMap<String,PriorityFutureTask<File>>();
 
 	// Properties -----------------------------------------------------------------------------------------------------
 
@@ -54,33 +68,6 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		this.wrapped = wrapped;
 		JSFUtil.getFacesContext().getApplication().subscribeToEvent(PreRenderViewEvent.class, this);
 	}
-
-//    @Override
-//    public Resource createResource(String resourceName, String libraryName) {
-//        Resource resource = super.createResource(resourceName, libraryName);
-//
-//        if(resource != null && libraryName != null ) {
-//        	if( libraryName.equalsIgnoreCase("styles") ) {
-//        		if( resourceName.equalsIgnoreCase("common.css") ) {
-//            		return new AplosCssResource(resource, "1");
-//        		} else if( resourceName.equalsIgnoreCase("modern.css") ) {
-//            		return new AplosCssResource(resource, "1");
-//        		} else {
-//        			return new AplosCssResource(resource, null);
-//        		}
-//        	} else if( resourceName.equalsIgnoreCase("aploscommon.js") ) {
-//        		return new AplosVersionedResource(resource, "1" );
-//        	} else if( resourceName.equalsIgnoreCase("ckeditor/aplosckeditor.js") ) {
-//        		return new AplosVersionedResource(resource, "1" );
-//        	} else if( resourceName.equalsIgnoreCase("components.js") ) {
-//        		return new AplosVersionedResource(resource, "1" );
-//        	} else if( resourceName.equalsIgnoreCase("prettyphoto/css/prettyPhoto.css") ) {
-//        		return new AplosCssResource(resource, null );
-//        	}
-//        } 
-//        
-//        return resource;
-//    }
 
     @Override
     public ResourceHandler getWrapped() {
@@ -181,7 +168,59 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		if (LIBRARY_NAME.equals(libraryName)) {
 			return new CombinedResource(resourceName);
 		} else {
-			return super.createResource(resourceName, libraryName, contentType);
+			Resource resource = super.createResource(resourceName, libraryName, contentType);
+
+	        if(resource != null && libraryName != null ) {
+	        	if( libraryName.equalsIgnoreCase("styles") ) {
+	        		if( resourceName.equalsIgnoreCase("common.css") ) {
+	            		return new AplosCssResource(resource, "1");
+	        		} else if( resourceName.equalsIgnoreCase("modern.css") ) {
+	            		return new AplosCssResource(resource, "1");
+	        		} else {
+	        			return new AplosCssResource(resource, null);
+	        		}
+	        	} else if( resourceName.equalsIgnoreCase("aploscommon.js") ) {
+	        		return new AplosVersionedResource(resource, "1" );
+	        	} else if( resourceName.equalsIgnoreCase("ckeditor/aplosckeditor.js") ) {
+	        		return new AplosVersionedResource(resource, "1" );
+	        	} else if( resourceName.equalsIgnoreCase("components.js") ) {
+	        		return new AplosVersionedResource(resource, "1" );
+	        	} else if( resourceName.equalsIgnoreCase("prettyphoto/css/prettyPhoto.css") ) {
+	        		return new AplosCssResource(resource, null );
+	        	}
+	        } 
+	        
+	        if( resourceName.endsWith( ".js" ) ) {
+	        	String nameLibraryCombo = libraryName + ":" + resourceName;
+	        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
+		            try {
+		    	        CallableJsMinifier callableJsMinifier = new CallableJsMinifier( resource.getResourceName(), resource.getInputStream() );
+		    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
+		    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
+		    	    	executorService.execute(minifyTask);
+		    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
+		            } catch( IOException ioex ) {
+		            	ApplicationUtil.handleError( ioex, false );
+		            }
+	        	}
+	        	resource = new MinifiedJsResource(resource,futureTaskMap.get( nameLibraryCombo ));
+	        } else if(resourceName.endsWith( ".css" )) {
+	        	String nameLibraryCombo = libraryName + ":" + resourceName;
+	        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
+		            try {
+		    	        CallableCssMinifier callableJsMinifier = new CallableCssMinifier( resource.getResourceName(), resource.getInputStream() );
+		    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
+		    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
+		    	    	executorService.execute(minifyTask);
+		    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
+		            } catch( IOException ioex ) {
+		            	ApplicationUtil.handleError( ioex, false );
+		            }
+	        	}
+	        	resource = new MinifiedCssResource(resource,futureTaskMap.get( nameLibraryCombo ));
+	        }
+	        
+	        return resource;
 		}
 	}
 
