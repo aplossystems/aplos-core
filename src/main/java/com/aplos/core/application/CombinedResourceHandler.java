@@ -168,27 +168,28 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		if (LIBRARY_NAME.equals(libraryName)) {
 			return new CombinedResource(resourceName);
 		} else {
+			JSFUtil.getResponse().addHeader( "cache-control", "public, max-age=" + (3600 * 24 * 31) );
 			Resource resource = super.createResource(resourceName, libraryName, contentType);
 
-	        if(resource != null && libraryName != null ) {
-	        	if( libraryName.equalsIgnoreCase("styles") ) {
-	        		if( resourceName.equalsIgnoreCase("common.css") ) {
-	            		return new AplosCssResource(resource, "1");
-	        		} else if( resourceName.equalsIgnoreCase("modern.css") ) {
-	            		return new AplosCssResource(resource, "1");
-	        		} else {
-	        			return new AplosCssResource(resource, null);
-	        		}
-	        	} else if( resourceName.equalsIgnoreCase("aploscommon.js") ) {
-	        		return new AplosVersionedResource(resource, "1" );
-	        	} else if( resourceName.equalsIgnoreCase("ckeditor/aplosckeditor.js") ) {
-	        		return new AplosVersionedResource(resource, "1" );
-	        	} else if( resourceName.equalsIgnoreCase("components.js") ) {
-	        		return new AplosVersionedResource(resource, "1" );
-	        	} else if( resourceName.equalsIgnoreCase("prettyphoto/css/prettyPhoto.css") ) {
-	        		return new AplosCssResource(resource, null );
-	        	}
-	        } 
+//	        if(resource != null && libraryName != null ) {
+//	        	if( libraryName.equalsIgnoreCase("styles") ) {
+//	        		if( resourceName.equalsIgnoreCase("common.css") ) {
+//	            		return new AplosCssResource(resource, "1");
+//	        		} else if( resourceName.equalsIgnoreCase("modern.css") ) {
+//	            		return new AplosCssResource(resource, "1");
+//	        		} else {
+//	        			return new AplosCssResource(resource, null);
+//	        		}
+//	        	} else if( resourceName.equalsIgnoreCase("aploscommon.js") ) {
+//	        		return new AplosVersionedResource(resource, "1" );
+//	        	} else if( resourceName.equalsIgnoreCase("ckeditor/aplosckeditor.js") ) {
+//	        		return new AplosVersionedResource(resource, "1" );
+//	        	} else if( resourceName.equalsIgnoreCase("components.js") ) {
+//	        		return new AplosVersionedResource(resource, "1" );
+//	        	} else if( resourceName.equalsIgnoreCase("prettyphoto/css/prettyPhoto.css") ) {
+//	        		return new AplosCssResource(resource, null );
+//	        	}
+//	        } 
 	        
 	        if( resourceName.endsWith( ".js" ) ) {
 	        	String nameLibraryCombo = libraryName + ":" + resourceName;
