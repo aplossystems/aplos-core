@@ -22,8 +22,6 @@ import javax.faces.event.PreRenderViewEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
-import com.aplos.common.application.AplosCssResource;
-import com.aplos.common.application.AplosVersionedResource;
 import com.aplos.common.application.CallableCssMinifier;
 import com.aplos.common.application.CallableJsMinifier;
 import com.aplos.common.application.MinifiedCssResource;
@@ -207,16 +205,17 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 	        	resource = new MinifiedJsResource(resource,futureTaskMap.get( nameLibraryCombo ));
 	        } else if(resourceName.endsWith( ".css" )) {
 	        	String nameLibraryCombo = libraryName + ":" + resourceName;
-	        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
-		            try {
-		    	        CallableCssMinifier callableJsMinifier = new CallableCssMinifier( resource.getResourceName(), resource.getInputStream() );
+	        	try {
+		        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
+		        		File processedCssFile = MinifiedCssResource.getProcessedFile( resource.getResourceName(), resource.getInputStream() );
+		    	        CallableCssMinifier callableJsMinifier = new CallableCssMinifier( resource.getResourceName(), processedCssFile );
 		    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
 		    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
 		    	    	executorService.execute(minifyTask);
 		    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
-		            } catch( IOException ioex ) {
-		            	ApplicationUtil.handleError( ioex, false );
-		            }
+		        	}
+	        	} catch( IOException ioex ) {
+	        		ApplicationUtil.handleError( ioex, false );
 	        	}
 	        	resource = new MinifiedCssResource(resource,futureTaskMap.get( nameLibraryCombo ));
 	        }
