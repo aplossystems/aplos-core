@@ -1,4 +1,4 @@
-package com.aplos.core.component.deferredscript;
+package com.aplos.core.component.deferrablescript;
 
 import java.io.IOException;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.aplos.core.component.deferredscript;
+package com.aplos.core.component.deferrablescript;
 
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
