@@ -31,8 +31,8 @@ import com.aplos.common.beans.Website;
 import com.aplos.common.enums.CombinedResourceStatus;
 import com.aplos.common.utils.ApplicationUtil;
 import com.aplos.common.utils.JSFUtil;
-import com.aplos.core.component.deferredscript.DeferredScript;
-import com.aplos.core.component.deferredscript.DeferredScriptRenderer;
+import com.aplos.core.component.deferrablescript.DeferrableScript;
+import com.aplos.core.component.deferrablescript.DeferrableScriptRenderer;
 
 
 
@@ -98,6 +98,28 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 //		website.setCombinedResourceStatus(CombinedResourceStatus.DISABLED);
 		if( website != null ) { 
 			repositionPackageCss(website);
+//			if( true ) {
+//
+//				FacesContext context = FacesContext.getCurrentInstance();
+//				UIViewRoot view = context.getViewRoot();
+//				for (UIComponent componentResource : view.getComponentResources(context, TARGET_HEAD)) {
+//					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".js" ) ) {
+//						continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
+//					}
+//					
+//					view.removeComponentResource(context, componentResource);
+//
+//					UIComponent newComponentResource;
+//					newComponentResource = new UIOutput();
+//					view.addComponentResource(context, newComponentResource, TARGET_HEAD);
+//
+//					
+//					newComponentResource.getAttributes().put("library", LIBRARY_NAME);
+//					newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
+//					newComponentResource.setRendererType(DeferrableScriptRenderer.RENDERER_TYPE);
+//
+//				}
+//			}
 			if( website.getCombinedResourceStatus() != null
 				&& !CombinedResourceStatus.DISABLED.equals( website.getCombinedResourceStatus() ) ) {
 				
@@ -120,7 +142,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				}
 		
 				for (UIComponent componentResource : view.getComponentResources(context, TARGET_BODY)) {
-					if (!(componentResource instanceof DeferredScript)) {
+					if (!(componentResource instanceof DeferrableScript)) {
 						continue; // We currently only head support deferred scripts. TODO: support body scripts as well?
 					}
 					builder.add(context, componentResource, TARGET_BODY);
@@ -244,13 +266,13 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 
 		private CombinedResourceBuilder stylesheets;
 		private CombinedResourceBuilder scripts;
-		private Map<String, CombinedResourceBuilder> deferredScripts;
+		private Map<String, CombinedResourceBuilder> deferrableScripts;
 		private List<UIComponent> componentResourcesToRemove;
 
 		public CombinedResourceBuilder() {
 			stylesheets = new CombinedResourceBuilder(EXTENSION_CSS, TARGET_HEAD);
 			scripts = new CombinedResourceBuilder(EXTENSION_JS, TARGET_HEAD);
-			deferredScripts = new LinkedHashMap<String, CombinedResourceBuilder>(2);
+			deferrableScripts = new LinkedHashMap<String, CombinedResourceBuilder>(2);
 			componentResourcesToRemove = new ArrayList<UIComponent>(3);
 		}
 
@@ -279,19 +301,19 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				}
 			}
 			else if (rendererType.equals(RENDERER_TYPE_JS)) {
-				if (ResourceIdentifier.isMojarraResourceRendered(context, id)) { // This is true when o:deferredScript is used.
+				if (ResourceIdentifier.isMojarraResourceRendered(context, id)) { // This is true when o:deferrableScript is used.
 					componentResourcesToRemove.add(component);
 				}
 				else if (scripts.add(component, id)) {
 					ResourceIdentifier.setMojarraResourceRendered(context, id); // Prevents future forced additions by libs.
 				}
-			} else if (component instanceof DeferredScript) {
+			} else if (component instanceof DeferrableScript) {
 				String group = (String) component.getAttributes().get("group");
-				CombinedResourceBuilder builder = deferredScripts.get(group);
+				CombinedResourceBuilder builder = deferrableScripts.get(group);
 
 				if (builder == null) {
 					builder = new CombinedResourceBuilder(EXTENSION_JS, TARGET_BODY);
-					deferredScripts.put(group, builder);
+					deferrableScripts.put(group, builder);
 				}
 
 				builder.add(component, id);
@@ -303,8 +325,8 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 			stylesheets.create(context, RENDERER_TYPE_CSS);
 			scripts.create(context, RENDERER_TYPE_JS);
 
-			for (CombinedResourceBuilder builder : deferredScripts.values()) {
-				builder.create(context, DeferredScriptRenderer.RENDERER_TYPE);
+			for (CombinedResourceBuilder builder : deferrableScripts.values()) {
+				builder.create(context, DeferrableScriptRenderer.RENDERER_TYPE);
 			}
 
 			removeComponentResources(context, componentResourcesToRemove, TARGET_HEAD);
@@ -335,7 +357,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 					this.componentResource = componentResource;
 				} else {
 
-					if (componentResource instanceof DeferredScript) {
+					if (componentResource instanceof DeferrableScript) {
 						mergeAttribute(this.componentResource, componentResource, "onbegin");
 						mergeAttribute(this.componentResource, componentResource, "onsuccess");
 						mergeAttribute(this.componentResource, componentResource, "onerror");
