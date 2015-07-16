@@ -229,7 +229,7 @@ AplosComponents = {
     VIEW_STATE : "javax.faces.ViewState"
 };
 
-AplosComponents.DeferredScript=function(){
+AplosComponents.DeferrableScript=function(){
 	function n(e){
 		if(document.readyState==="complete"){
 			setTimeout(e)
