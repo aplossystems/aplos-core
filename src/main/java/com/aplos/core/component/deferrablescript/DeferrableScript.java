@@ -15,7 +15,7 @@ import com.aplos.core.application.ResourceIdentifier;
 
 /**
  * <p>
- * The <code>&lt;o:deferredScript&gt;</code> is a component based on the standard <code>&lt;h:outputScript&gt;</code>
+ * The <code>&lt;o:deferrableScript&gt;</code> is a component based on the standard <code>&lt;h:outputScript&gt;</code>
  * which defers the loading of the given script resource to the window load event. In other words, the given script
  * resource is only loaded when the window is really finished with loading. So, the enduser can start working with the
  * webpage without waiting for the additional scripts to be loaded. Usually, it are those kind of scripts which are just
@@ -28,7 +28,7 @@ import com.aplos.core.application.ResourceIdentifier;
  * <p>
  * Just use it the same way as a <code>&lt;h:outputScript&gt;</code>, with a <code>library</code> and <code>name</code>.
  * <pre>
- * &lt;o:deferredScript library="yourlibrary" name="scripts/filename.js" /&gt;
+ * &lt;o:deferrableScript library="yourlibrary" name="scripts/filename.js" /&gt;
  * </pre>
  * <p>
  * You can use the optional <code>onbegin</code>, <code>onsuccess</code> and <code>onerror</code> attributes
@@ -37,27 +37,27 @@ import com.aplos.core.application.ResourceIdentifier;
  *
  * @author Bauke Scholtz
  * @since 1.8
- * @see DeferredScriptRenderer
+ * @see DeferrableScriptRenderer
  */
-@FacesComponent(DeferredScript.COMPONENT_TYPE)
+@FacesComponent(DeferrableScript.COMPONENT_TYPE)
 @ResourceDependency(library="components", name="components.js", target="head")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
-public class DeferredScript extends UIComponentBase {
+public class DeferrableScript extends UIComponentBase {
 
 	// Public constants -----------------------------------------------------------------------------------------------
 
 	/** The standard component type. */
-	public static final String COMPONENT_TYPE = "com.aplos.core.component.deferredscript.DeferredScript";
-	public static final String COMPONENT_FAMILY = "com.aplos.core.component.deferredscript";
+	public static final String COMPONENT_TYPE = "com.aplos.core.component.deferrablescript.DeferrableScript";
+	public static final String COMPONENT_FAMILY = "com.aplos.core.component.deferrablescript";
 
 	// Constructors ---------------------------------------------------------------------------------------------------
 
 	/**
-	 * Construct a new {@link DeferredScript} component whereby the renderer type is set to
-	 * {@link DeferredScriptRenderer#RENDERER_TYPE}.
+	 * Construct a new {@link DeferrableScript} component whereby the renderer type is set to
+	 * {@link DeferrableScriptRenderer#RENDERER_TYPE}.
 	 */
-	public DeferredScript() {
-		setRendererType(DeferredScriptRenderer.RENDERER_TYPE);
+	public DeferrableScript() {
+		setRendererType(DeferrableScriptRenderer.RENDERER_TYPE);
 	}
 	
 	@Override
