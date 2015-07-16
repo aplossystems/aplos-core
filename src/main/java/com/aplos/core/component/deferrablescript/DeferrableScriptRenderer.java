@@ -10,9 +10,11 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
+import com.aplos.common.beans.Website;
 import com.aplos.common.utils.ApplicationUtil;
 import com.aplos.common.utils.CommonUtil;
 import com.aplos.common.utils.ComponentUtil;
+import com.aplos.common.utils.JSFUtil;
 
 @FacesRenderer(componentFamily=DeferrableScript.COMPONENT_FAMILY, rendererType=DeferrableScriptRenderer.RENDERER_TYPE)
 public class DeferrableScriptRenderer extends Renderer {
@@ -21,6 +23,7 @@ public class DeferrableScriptRenderer extends Renderer {
 
 	/** The standard renderer type. */
 	public static final String RENDERER_TYPE = "com.aplos.core.component.DeferrableScript";
+	public static final String DEFER_FUNCTION_WRITTEN = "deferFunctionWritten";
 
 	// Actions --------------------------------------------------------------------------------------------------------
 
@@ -34,16 +37,40 @@ public class DeferrableScriptRenderer extends Renderer {
 		Map<String, Object> attributes = component.getAttributes();
 		String library = (String) attributes.get("library");
 		String name = (String) attributes.get("name");
-		Boolean isDeferred = ComponentUtil.determineBooleanAttributeValue( component, "defer", false );
+		Boolean isDeferred = null;
+		if( component.getAttributes().get( "defer" ) == null ) {
+			Website website = Website.getCurrentWebsiteFromTabSession();
+			if( website != null ) {
+				isDeferred = website.isDeferringScript();
+			}
+		}
+		if( isDeferred == null ) {
+			isDeferred = ComponentUtil.determineBooleanAttributeValue( component, "defer", false );
+		}
 		Resource resource = context.getApplication().getResourceHandler().createResource(name, library);
 
 		ResponseWriter writer = context.getResponseWriter();
+		writer.write( "\n" );
 		writer.startElement("script", component);
 		writer.writeAttribute("type", "text/javascript", "type");
 
 		if (resource != null) {
 			if( isDeferred ) {
-				writer.write("AplosComponents.DeferrableScript.add('");
+				if( JSFUtil.getRequest().getAttribute(DEFER_FUNCTION_WRITTEN) == null ) {
+					writer.write( "aplosDeferScript=function(){function n(e){if(document.readyState===\"complete\"){");
+					writer.write("setTimeout(e)}else if(window.addEventListener){window.addEventListener(\"load\",e,false)" );
+					writer.write("}else if(window.attachEvent){window.attachEvent(\"onload\",e)}else if(typeof window.onload===\"function\"){" );
+					writer.write("var t=window.onload;window.onload=function(){t();e()}}else{window.onload=e}}" );
+					writer.write("function r(e){if(e<0||e>=t.length){return} var n=t[e];var i=document.createElement(\"script\");var s=document.head||document.documentElement;");
+					writer.write("i.async=true;i.src=n.url;i.onerror=function(){if(n.error){n.error()}};i.onload=i.onreadystatechange=function(t,s){" );
+					writer.write("if(s||!i.readyState||/loaded|complete/.test(i.readyState)){i.onload=i.onreadystatechange=null;if(s){" );
+					writer.write("i.onerror()}else if(n.success){n.success()}i=null;r(e+1)}};if(n.begin){n.begin()}s.insertBefore(i,null)}" );
+					writer.write("var e={};var t=[];e.add=function(e,i,s,o){t.push({url:e,begin:i,success:s,error:o});if(t.length==1){" );
+					writer.write("n(function(){r(0)})}};return e}();");
+					JSFUtil.getRequest().setAttribute(DEFER_FUNCTION_WRITTEN, true);
+				}
+				
+				writer.write("aplosDeferScript.add('");
 				writer.write(resource.getRequestPath());
 				writer.write('\'');
 	
@@ -68,7 +95,7 @@ public class DeferrableScriptRenderer extends Renderer {
 	
 				writer.write(");");
 			} else {
-				writer.writeAttribute("type", "resource.getRequestPath()", "type");
+				writer.writeAttribute("src", resource.getRequestPath(), "src");
 			}
 		}
 		else {

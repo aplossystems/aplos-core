@@ -239,12 +239,7 @@ public class DataTableRenderer extends DataRenderer {
         ResponseWriter writer = context.getResponseWriter();
         
         String jqueryClientId = table.getClientId().replace( ":", "_" );
-        String formClientId = RenderKitUtils.getFormClientId(table, context);
 
-        writer.startElement("script", null);
-        writer.writeAttribute( "type", "text/javascript", null);
-        writer.write( "aplosJavascript.registerDatatable('" + jqueryClientId + "', '" + formClientId + "', '" + table.getClientId() + "');");
-        writer.endElement("script");
         writer.startElement("table", null);
         if(table.getTableStyle() != null) {
 			writer.writeAttribute("style", table.getTableStyle(), null);
@@ -706,6 +701,15 @@ public class DataTableRenderer extends DataRenderer {
         writer.startElement("tbody", null);
         writer.writeAttribute("id", clientId + "_data", null);
         writer.writeAttribute("class", tbodyClass, null);
+        
+        String jqueryClientId = table.getClientId().replace( ":", "_" );
+        String formClientId = RenderKitUtils.getFormClientId(table, context);
+
+        writer.startElement("script", null);
+        writer.writeAttribute( "type", "text/javascript", null);
+        writer.write( "registerQuickviews();aplosJavascript.registerDatatable('" + jqueryClientId + "', '" + formClientId + "', '" + table.getClientId() + "');");
+        writer.endElement("script");
+        
         if( context.getPartialViewContext().isPartialRequest() ) {
         	RenderKitUtils.setScriptAsRendered(context);
         }

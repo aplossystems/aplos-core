@@ -2,6 +2,10 @@ var showingQuickviews = [];
 var quickviewTimeout;
 	
 $j(document).ready( function() {
+	registerQuickviews();
+});
+
+function registerQuickviews() {
 	$j('html').bind('click', function(event) {
 		for (var i = 0; i < showingQuickviews.length; i++) {
 		    showingQuickviews[i].hide();
@@ -37,7 +41,7 @@ $j(document).ready( function() {
 		renderQuickview(extension);
 		
 	});
-});
+}
 
 function renderQuickview(extension) {
 	

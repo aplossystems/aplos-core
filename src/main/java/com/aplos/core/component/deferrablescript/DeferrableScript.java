@@ -1,5 +1,6 @@
 package com.aplos.core.component.deferrablescript;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
@@ -40,7 +41,11 @@ import com.aplos.core.application.ResourceIdentifier;
  * @see DeferrableScriptRenderer
  */
 @FacesComponent(DeferrableScript.COMPONENT_TYPE)
-@ResourceDependency(library="components", name="components.js", target="head")
+
+@ResourceDependencies({
+	@ResourceDependency(library="primefaces", name="jquery/jquery.js"),
+	@ResourceDependency(library="components", name="components.js")
+})
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
 public class DeferrableScript extends UIComponentBase {
 
@@ -82,14 +87,31 @@ public class DeferrableScript extends UIComponentBase {
 			PartialViewContext ajaxContext = context.getPartialViewContext();
 			UIViewRoot view = context.getViewRoot();
 
-			boolean ajaxRequest = ajaxContext.isAjaxRequest();
-			boolean ajaxRenderAll = ajaxContext.isRenderAll();
-			boolean alreadyAdded = view.getComponentResources(context, "body").contains(this);
+//			boolean ajaxRequest = ajaxContext.isAjaxRequest();
+//			boolean ajaxRenderAll = ajaxContext.isRenderAll();
+//			boolean alreadyAdded = view.getComponentResources(context, "body").contains(this);
+//
+//			if (!(ajaxRequest && !ajaxRenderAll) || !alreadyAdded) {
+//				view.addComponentResource(context, this, "body");
+//				ResourceIdentifier.setMojarraResourceRendered(context, new ResourceIdentifier(this));
+//			}
+			
 
-			if (!(ajaxRequest && !ajaxRenderAll) || !alreadyAdded) {
-				view.addComponentResource(context, this, "body");
-				ResourceIdentifier.setMojarraResourceRendered(context, new ResourceIdentifier(this));
-			}
+//			boolean alreadyAdded = false;
+//			
+//			for( UIComponent resource : view.getComponentResources(context, target) ) {
+//				if( CommonUtil.compare( (String) this.getAttributes().get( "library"), (String) resource.getAttributes().get( "library") ) == 0 
+//						&& CommonUtil.compare( (String) this.getAttributes().get( "library"), (String) resource.getAttributes().get( "library") ) == 0 ) {
+//					alreadyAdded = true;
+//					break;
+//				}
+//			}
+//
+////			if (!(ajaxRequest && !ajaxRenderAll) || !alreadyAdded) {
+//			if (!alreadyAdded) {
+//				view.addComponentResource(context, this, (String) getAttributes().get( "target" ));
+//				ResourceIdentifier.setMojarraResourceRendered(context, new ResourceIdentifier(this));
+//			}
 		}
 	}
 
