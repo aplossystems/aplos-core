@@ -117,10 +117,11 @@ public class DeferrableStyleRenderer extends Renderer {
 				writer.write(");");
 				writer.endElement("script");
 			} else {
-				writer.startElement("script", component);
+				writer.startElement("link", component);
 				writer.writeAttribute("type", "text/css", "type");
 				writer.writeAttribute("rel", "stylesheet", "rel");
 				writer.writeAttribute("href", resource.getRequestPath(), "href");
+				writer.endElement("link");
 			}
 		}
 		else {
