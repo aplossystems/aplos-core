@@ -38,6 +38,14 @@
 	</tag>
 
 	<tag>
+		<tag-name>deferrableStyle</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.deferrablestyle.DeferrableStyle</component-type>
+			<renderer-type>com.aplos.core.component.DeferrableStyle</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
 		<tag-name>jsFunction</tag-name>
 		<component>
 			<component-type>com.aplos.core.component.jsfunction.JsFunction</component-type>

@@ -33,6 +33,8 @@ import com.aplos.common.utils.ApplicationUtil;
 import com.aplos.common.utils.JSFUtil;
 import com.aplos.core.component.deferrablescript.DeferrableScript;
 import com.aplos.core.component.deferrablescript.DeferrableScriptRenderer;
+import com.aplos.core.component.deferrablestyle.DeferrableStyle;
+import com.aplos.core.component.deferrablestyle.DeferrableStyleRenderer;
 
 
 
@@ -97,9 +99,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		Website website = Website.getCurrentWebsiteFromTabSession();
 //		website.setCombinedResourceStatus(CombinedResourceStatus.DISABLED);
 		if( website != null ) { 
-			repositionPackageCss(website);
 			if( website.isDeferringScript() ) {
-
 				FacesContext context = FacesContext.getCurrentInstance();
 				UIViewRoot view = context.getViewRoot();
 				for (UIComponent componentResource : new ArrayList<UIComponent>( view.getComponentResources(context, TARGET_HEAD)) ) {
@@ -121,6 +121,29 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 
 				}
 			}
+			if( website.isDeferringStyle() ) {
+				FacesContext context = FacesContext.getCurrentInstance();
+				UIViewRoot view = context.getViewRoot();
+				for (UIComponent componentResource : new ArrayList<UIComponent>( view.getComponentResources(context, TARGET_HEAD)) ) {
+					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".css" )
+							|| componentResource instanceof DeferrableStyle ) {
+						continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
+					}
+					
+					view.removeComponentResource(context, componentResource);
+
+					UIComponent newComponentResource;
+					newComponentResource = new DeferrableStyle();
+					view.addComponentResource(context, newComponentResource, TARGET_HEAD);
+
+					newComponentResource.getAttributes().put("library", componentResource.getAttributes().get( "library" ));
+					newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
+					newComponentResource.getAttributes().put("defer", true);
+					newComponentResource.setRendererType(DeferrableStyleRenderer.RENDERER_TYPE);
+
+				}
+			}
+			repositionPackageCss(website);
 			if( website.getCombinedResourceStatus() != null
 				&& !CombinedResourceStatus.DISABLED.equals( website.getCombinedResourceStatus() ) ) {
 				
