@@ -14,6 +14,7 @@ import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 import javax.faces.application.ResourceHandlerWrapper;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -125,22 +126,28 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				FacesContext context = FacesContext.getCurrentInstance();
 				UIViewRoot view = context.getViewRoot();
 				for (UIComponent componentResource : new ArrayList<UIComponent>( view.getComponentResources(context, TARGET_HEAD)) ) {
-					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".css" )
-							|| componentResource instanceof DeferrableStyle ) {
-						continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
+					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".css" ) ) {
+						if( !(componentResource instanceof DeferrableStyle && componentResource.getAttributes().get("href") != null && ((String) componentResource.getAttributes().get( "href" )).endsWith( ".css" )) ) {
+							continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
+						}
 					}
 					
 					view.removeComponentResource(context, componentResource);
-
-					UIComponent newComponentResource;
-					newComponentResource = new DeferrableStyle();
-					view.addComponentResource(context, newComponentResource, TARGET_HEAD);
-
-					newComponentResource.getAttributes().put("library", componentResource.getAttributes().get( "library" ));
-					newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
-					newComponentResource.getAttributes().put("defer", true);
-					newComponentResource.setRendererType(DeferrableStyleRenderer.RENDERER_TYPE);
-
+					
+					if( componentResource instanceof DeferrableStyle ) {
+						componentResource.getAttributes().put(UIComponentBase.class.getName() + ".ADDED", Boolean.TRUE);
+						view.addComponentResource(context, componentResource, TARGET_BODY);
+						componentResource.getAttributes().remove(UIComponentBase.class.getName() + ".ADDED");
+					} else {
+						UIComponent newComponentResource;
+						newComponentResource = new DeferrableStyle();
+						view.addComponentResource(context, newComponentResource, TARGET_BODY);
+	
+						newComponentResource.getAttributes().put("library", componentResource.getAttributes().get( "library" ));
+						newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
+						newComponentResource.getAttributes().put("defer", true);
+						newComponentResource.setRendererType(DeferrableStyleRenderer.RENDERER_TYPE);
+					}
 				}
 			}
 			repositionPackageCss(website);

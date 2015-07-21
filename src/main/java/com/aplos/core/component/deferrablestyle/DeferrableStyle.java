@@ -12,6 +12,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
+import com.aplos.common.utils.CommonUtil;
 import com.aplos.core.application.ResourceIdentifier;
 
 /**
