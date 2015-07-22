@@ -211,7 +211,10 @@ final class CombinedResourceInfo {
 				if( firstResource ) {
 					firstResource = false;
 				} else {
-					combinedResourceStrBuf.append( ";\r\n" );
+					if( getExtension().equals( ".js" ) ) {
+						combinedResourceStrBuf.append( ";" );
+					}
+					combinedResourceStrBuf.append( "\r\n" );
 				}
 				
 				StringWriter writer = new StringWriter();
