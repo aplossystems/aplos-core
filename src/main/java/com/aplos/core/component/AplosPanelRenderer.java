@@ -10,6 +10,8 @@ import javax.faces.render.FacesRenderer;
 import org.primefaces.component.outputpanel.OutputPanel;
 import org.primefaces.component.outputpanel.OutputPanelRenderer;
 
+import com.aplos.common.utils.CommonUtil;
+
 @FacesRenderer(componentFamily="org.primefaces.component",rendererType="com.aplos.core.component.AplosPanelRenderer")
 public class AplosPanelRenderer extends OutputPanelRenderer {
 

@@ -57,6 +57,11 @@ public class DeferrableStyleRenderer extends ScriptStyleBaseRenderer {
             href = resource.getRequestPath();
         } else {
         	key = href;
+        	/*
+        	 * This stops it throwing an error when it trys to encode 
+        	 * the children.
+        	 */
+        	attributes.put( "name", href );
         }
         
         /*
@@ -83,62 +88,21 @@ public class DeferrableStyleRenderer extends ScriptStyleBaseRenderer {
 		ResponseWriter writer = context.getResponseWriter();
 		writer.write( "\n" );
 
-			if( isDeferred ) {
-//				writer.startElement("script", component);
-//				writer.writeAttribute("type", "text/javascript", "type");
-//				if( JSFUtil.getRequest().getAttribute(DEFER_STYLE_WRITTEN) == null ) {
-//					writer.write( "aplosDeferStyle=function(){function n(e){if(document.readyState===\"complete\"){");
-//					writer.write("setTimeout(e)}else if(window.addEventListener){window.addEventListener(\"load\",e,false)" );
-//					writer.write("}else if(window.attachEvent){window.attachEvent(\"onload\",e)}else if(typeof window.onload===\"function\"){" );
-//					writer.write("var t=window.onload;window.onload=function(){t();e()}}else{window.onload=e}}" );
-//					writer.write("function r(e){if(e<0||e>=t.length){return} var n=t[e];var i=document.createElement(\"link\");var s=document.head||document.documentElement;");
-//					writer.write("i.media='only x';i.href=n.url;i.type='text/css';i.rel='stylesheet';i.onerror=function(){if(n.error){n.error()}};i.onload=i.onreadystatechange=function(t,s){" );
-//					writer.write("if(s||!i.readyState||/loaded|complete/.test(i.readyState)){i.onload=i.onreadystatechange=null;if(s){" );
-//					writer.write("i.onerror()}else if(n.success){n.success()}i.media='all';i=null;r(e+1)}};if(n.begin){n.begin()}s.insertBefore(i,null)}" );
-//					writer.write("var e={};var t=[];e.add=function(e,i,s,o){t.push({url:e,begin:i,success:s,error:o});if(t.length==1){" );
-//					writer.write("n(function(){r(0)})}};return e}();");
-//					JSFUtil.getRequest().setAttribute(DEFER_STYLE_WRITTEN, true);
-//				}
-//				
-//				writer.write("aplosDeferStyle.add('");
-//				writer.write(resource.getRequestPath());
-//				writer.write('\'');
-//	
-//				String onbegin = (String) attributes.get("onbegin");
-//				String onsuccess = (String) attributes.get("onsuccess");
-//				String onerror = (String) attributes.get("onerror");
-//				boolean hasOnbegin = !CommonUtil.isNullOrEmpty(onbegin);
-//				boolean hasOnsuccess = !CommonUtil.isNullOrEmpty(onsuccess);
-//				boolean hasOnerror = !CommonUtil.isNullOrEmpty(onerror);
-//	
-//				if (hasOnbegin || hasOnsuccess || hasOnerror) {
-//					encodeFunctionArgument(writer, onbegin, hasOnbegin);
-//				}
-//	
-//				if (hasOnsuccess || hasOnerror) {
-//					encodeFunctionArgument(writer, onsuccess, hasOnsuccess);
-//				}
-//	
-//				if (hasOnerror) {
-//					encodeFunctionArgument(writer, onerror, true);
-//				}
-//	
-//				writer.write(");");
-//				writer.endElement("script");
-				writer.startElement("link", component);
-				writer.writeAttribute("type", "text/css", "type");
-				writer.writeAttribute("rel", "stylesheet", "rel");
-				writer.writeAttribute("href", href, "href");
-				writer.writeAttribute( "media", "none", "media" );
-				writer.writeAttribute( "onload", "if(media!='all')media='all'", "media" );
-				writer.endElement("link");
-			} else {
-				writer.startElement("link", component);
-				writer.writeAttribute("type", "text/css", "type");
-				writer.writeAttribute("rel", "stylesheet", "rel");
-				writer.writeAttribute("href", href, "href");
-				writer.endElement("link");
-			}
+//		if( isDeferred ) {
+//			writer.startElement("link", component);
+//			writer.writeAttribute("type", "text/css", "type");
+//			writer.writeAttribute("rel", "stylesheet", "rel");
+//			writer.writeAttribute("href", href, "href");
+//			writer.writeAttribute( "media", "none", "media" );
+//			writer.writeAttribute( "onload", "if(media!='all')media='all'", "media" );
+//			writer.endElement("link");
+//		} else {
+//			writer.startElement("link", component);
+//			writer.writeAttribute("type", "text/css", "type");
+//			writer.writeAttribute("rel", "stylesheet", "rel");
+//			writer.writeAttribute("href", href, "href");
+//			writer.endElement("link");
+//		}
 	}
 	
 	@Override
@@ -167,6 +131,20 @@ public class DeferrableStyleRenderer extends ScriptStyleBaseRenderer {
 
 	@Override
 	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+	}
+	
+	@Override
+	protected String verifyTarget(String toVerify) {
+		if( CommonUtil.isNullOrEmpty(toVerify) ) {
+			return "head";
+		} else {
+			if( toVerify.equalsIgnoreCase( "head" ) ) {
+				return "head";
+			} else if( toVerify.equalsIgnoreCase( "body" ) ) {
+				return "body";
+			}
+		}
+		return null;
 	}
 
 }

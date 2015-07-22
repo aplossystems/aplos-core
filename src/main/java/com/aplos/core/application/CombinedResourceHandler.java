@@ -104,22 +104,26 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				FacesContext context = FacesContext.getCurrentInstance();
 				UIViewRoot view = context.getViewRoot();
 				for (UIComponent componentResource : new ArrayList<UIComponent>( view.getComponentResources(context, TARGET_HEAD)) ) {
-					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".js" )
-							|| componentResource instanceof DeferrableScript ) {
+					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".js" ) ) {
 						continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
 					}
 					
 					view.removeComponentResource(context, componentResource);
 
-					UIComponent newComponentResource;
-					newComponentResource = new DeferrableScript();
-					view.addComponentResource(context, newComponentResource, TARGET_HEAD);
-
-					newComponentResource.getAttributes().put("library", componentResource.getAttributes().get( "library" ));
-					newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
-					newComponentResource.getAttributes().put("defer", true);
-					newComponentResource.setRendererType(DeferrableScriptRenderer.RENDERER_TYPE);
-
+					if( componentResource instanceof DeferrableScript ) {
+						componentResource.getAttributes().put(UIComponentBase.class.getName() + ".ADDED", Boolean.TRUE);
+						view.addComponentResource(context, componentResource, TARGET_BODY);
+						componentResource.getAttributes().remove(UIComponentBase.class.getName() + ".ADDED");
+					} else {
+						UIComponent newComponentResource;
+						newComponentResource = new DeferrableScript();
+						view.addComponentResource(context, newComponentResource, TARGET_BODY);
+	
+						newComponentResource.getAttributes().put("library", componentResource.getAttributes().get( "library" ));
+						newComponentResource.getAttributes().put("name", componentResource.getAttributes().get( "name" ) );
+						newComponentResource.getAttributes().put("defer", true);
+						newComponentResource.setRendererType(DeferrableScriptRenderer.RENDERER_TYPE);
+					}
 				}
 			}
 			if( website.isDeferringStyle() ) {
@@ -127,7 +131,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				UIViewRoot view = context.getViewRoot();
 				for (UIComponent componentResource : new ArrayList<UIComponent>( view.getComponentResources(context, TARGET_HEAD)) ) {
 					if (componentResource.getAttributes().get("name") == null || !((String) componentResource.getAttributes().get( "name" )).endsWith( ".css" ) ) {
-						if( !(componentResource instanceof DeferrableStyle && componentResource.getAttributes().get("href") != null && ((String) componentResource.getAttributes().get( "href" )).endsWith( ".css" )) ) {
+						if( !(componentResource instanceof DeferrableStyle && componentResource.getAttributes().get("href") != null && ((String) componentResource.getAttributes().get( "href" )).contains( ".css" )) ) {
 							continue; // It's likely an inline script, they can't be combined as it might contain EL expressions.
 						}
 					}
@@ -189,7 +193,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		UIViewRoot view = context.getViewRoot();
 		String packageCssName = website.getPackageName() + ".css";
 		for (UIComponent componentResource : view.getComponentResources(context, TARGET_HEAD)) {
-			if (componentResource.getAttributes().get("name").equals( packageCssName ) ) {
+			if( packageCssName.equals( componentResource.getAttributes().get("name") ) ) {
 				view.removeComponentResource(context, componentResource);
 				view.addComponentResource(context, componentResource);
 				break;
