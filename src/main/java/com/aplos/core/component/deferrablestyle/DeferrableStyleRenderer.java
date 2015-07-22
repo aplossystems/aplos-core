@@ -88,21 +88,21 @@ public class DeferrableStyleRenderer extends ScriptStyleBaseRenderer {
 		ResponseWriter writer = context.getResponseWriter();
 		writer.write( "\n" );
 
-//		if( isDeferred ) {
-//			writer.startElement("link", component);
-//			writer.writeAttribute("type", "text/css", "type");
-//			writer.writeAttribute("rel", "stylesheet", "rel");
-//			writer.writeAttribute("href", href, "href");
-//			writer.writeAttribute( "media", "none", "media" );
-//			writer.writeAttribute( "onload", "if(media!='all')media='all'", "media" );
-//			writer.endElement("link");
-//		} else {
-//			writer.startElement("link", component);
-//			writer.writeAttribute("type", "text/css", "type");
-//			writer.writeAttribute("rel", "stylesheet", "rel");
-//			writer.writeAttribute("href", href, "href");
-//			writer.endElement("link");
-//		}
+		if( isDeferred ) {
+			writer.startElement("link", component);
+			writer.writeAttribute("type", "text/css", "type");
+			writer.writeAttribute("rel", "stylesheet", "rel");
+			writer.writeAttribute("href", href, "href");
+			writer.writeAttribute( "media", "none", "media" );
+			writer.writeAttribute( "onload", "if(media!='all')media='all'", "media" );
+			writer.endElement("link");
+		} else {
+			writer.startElement("link", component);
+			writer.writeAttribute("type", "text/css", "type");
+			writer.writeAttribute("rel", "stylesheet", "rel");
+			writer.writeAttribute("href", href, "href");
+			writer.endElement("link");
+		}
 	}
 	
 	@Override
