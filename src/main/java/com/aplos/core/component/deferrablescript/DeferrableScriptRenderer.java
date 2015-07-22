@@ -35,8 +35,21 @@ public class DeferrableScriptRenderer extends ScriptStyleBaseRenderer {
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
 		Map<String, Object> attributes = component.getAttributes();
+        Map<Object, Object> contextMap = context.getAttributes();
 		String library = (String) attributes.get("library");
 		String name = (String) attributes.get("name");
+
+        String key = name + library;
+        
+        if (null == name) {
+            return;
+        }
+        
+        // Ensure this script is not rendered more than once per request
+        if (contextMap.containsKey(key)) {
+            return;
+        }
+        
 		Boolean isDeferred = null;
 		if( component.getAttributes().get( "defer" ) == null ) {
 			Website website = Website.getCurrentWebsiteFromTabSession();

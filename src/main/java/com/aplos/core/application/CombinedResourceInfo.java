@@ -47,7 +47,7 @@ final class CombinedResourceInfo {
 
 	// Properties -----------------------------------------------------------------------------------------------------
 
-	private Long assignedId;
+	private String assignedId;
 	private String combinedResourcesId;
 	private Set<ResourceIdentifier> resourceIdentifiers;
 	private Set<Resource> resources;
@@ -65,7 +65,7 @@ final class CombinedResourceInfo {
 	 */
 	private CombinedResourceInfo(String combinedResourcesId, Long assignedId, Set<ResourceIdentifier> resourceIdentifiers) {
 		this.combinedResourcesId = combinedResourcesId;
-		this.assignedId = assignedId;
+		this.assignedId = String.valueOf( assignedId );
 		this.resourceIdentifiers = resourceIdentifiers;
 	}
 
@@ -112,7 +112,7 @@ final class CombinedResourceInfo {
 		 * @throws IllegalStateException If there are no resources been added. So, to prevent it beforehand, use
 		 * the {@link #isEmpty()} method to check if there are any resources been added.
 		 */
-		public Long create(String extension) {
+		public String create(String extension, String assignedId) {
 			if (resourceIdentifiers.isEmpty()) {
 				throw new IllegalStateException(ERROR_EMPTY_RESOURCES);
 			}
@@ -124,7 +124,12 @@ final class CombinedResourceInfo {
 				if (resourceIdentifiers != null) {
 					combinedResourceInfo = new CombinedResourceInfo(combinedResourcesId, globalCombinedResourceId++, Collections.unmodifiableSet(resourceIdentifiers));
 					combinedResourceInfo.setExtension(extension);
-					CACHE_BY_ASSIGNED_ID.put(combinedResourceInfo.getAssignedId().toString(), combinedResourceInfo);
+					if( CommonUtil.isNullOrEmpty( assignedId ) ) {
+						assignedId = combinedResourceInfo.getAssignedId().toString();
+					} else {
+						combinedResourceInfo.setAssignedId(assignedId);
+					}
+					CACHE_BY_ASSIGNED_ID.put(assignedId, combinedResourceInfo);
 					CACHE_BY_RESOURCE_IDS.put(combinedResourcesId, combinedResourceInfo);
 				}
 			}
@@ -365,11 +370,11 @@ final class CombinedResourceInfo {
 		this.extension = extension;
 	}
 
-	public Long getAssignedId() {
+	public String getAssignedId() {
 		return assignedId;
 	}
 
-	public void setAssignedId(Long assignedId) {
+	public void setAssignedId(String assignedId) {
 		this.assignedId = assignedId;
 	}
 

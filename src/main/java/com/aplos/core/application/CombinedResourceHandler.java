@@ -31,6 +31,7 @@ import com.aplos.common.application.PriorityFutureTask;
 import com.aplos.common.beans.Website;
 import com.aplos.common.enums.CombinedResourceStatus;
 import com.aplos.common.utils.ApplicationUtil;
+import com.aplos.common.utils.CommonUtil;
 import com.aplos.common.utils.JSFUtil;
 import com.aplos.core.component.deferrablescript.DeferrableScript;
 import com.aplos.core.component.deferrablescript.DeferrableScriptRenderer;
@@ -184,6 +185,29 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				}
 		
 				builder.create(context);
+			} else {
+				FacesContext context = FacesContext.getCurrentInstance();
+				UIViewRoot view = context.getViewRoot();
+				CombinedResourceBuilder builder = new CombinedResourceBuilder();
+		
+				for (UIComponent componentResource : view.getComponentResources(context, TARGET_HEAD)) {
+					if( (componentResource instanceof DeferrableScript || 
+						componentResource instanceof DeferrableStyle) 
+						&& componentResource.getAttributes().get("group") != null ) {
+						builder.add(context, componentResource, TARGET_HEAD);
+					}
+		
+				}
+		
+				for (UIComponent componentResource : view.getComponentResources(context, TARGET_BODY)) {
+					if( (componentResource instanceof DeferrableScript || 
+						componentResource instanceof DeferrableStyle) 
+						&& componentResource.getAttributes().get("group") != null ) {
+						builder.add(context, componentResource, TARGET_HEAD);
+					}
+				}
+
+				builder.create(context);
 			}
 		}
 	}
@@ -299,7 +323,9 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		// Constants --------------------------------------------------------------------------------------------------
 
 		private static final String RENDERER_TYPE_CSS = "javax.faces.resource.Stylesheet";
+		private static final String RENDERER_TYPE_DEFERRABLE_CSS = "com.aplos.core.component.DeferrableStyle";
 		private static final String RENDERER_TYPE_JS = "javax.faces.resource.Script";
+		private static final String RENDERER_TYPE_DEFERRABLE_JS = "com.aplos.core.component.DeferrableStyle";
 		private static final String EXTENSION_CSS = ".css";
 		private static final String EXTENSION_JS = ".js";
 
@@ -307,6 +333,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 
 		private CombinedResourceBuilder stylesheets;
 		private CombinedResourceBuilder scripts;
+		private Map<String, CombinedResourceBuilder> deferrableStyles;
 		private Map<String, CombinedResourceBuilder> deferrableScripts;
 		private List<UIComponent> componentResourcesToRemove;
 
@@ -314,6 +341,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 			stylesheets = new CombinedResourceBuilder(EXTENSION_CSS, TARGET_HEAD);
 			scripts = new CombinedResourceBuilder(EXTENSION_JS, TARGET_HEAD);
 			deferrableScripts = new LinkedHashMap<String, CombinedResourceBuilder>(2);
+			deferrableStyles = new LinkedHashMap<String, CombinedResourceBuilder>(2);
 			componentResourcesToRemove = new ArrayList<UIComponent>(3);
 		}
 
@@ -336,12 +364,12 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 
 				componentResourcesToRemove.add(component);
 			}
-			else if (rendererType.equals(RENDERER_TYPE_CSS)) {
+			else if (rendererType.equals(RENDERER_TYPE_CSS) ) {
 				if (stylesheets.add(component, id)) {
 					ResourceIdentifier.setMojarraResourceRendered(context, id); // Prevents future forced additions by libs.
 				}
 			}
-			else if (rendererType.equals(RENDERER_TYPE_JS)) {
+			else if (rendererType.equals(RENDERER_TYPE_JS) ) {
 				if (ResourceIdentifier.isMojarraResourceRendered(context, id)) { // This is true when o:deferrableScript is used.
 					componentResourcesToRemove.add(component);
 				}
@@ -358,16 +386,30 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				}
 
 				builder.add(component, id);
+			} else if (component instanceof DeferrableStyle) {
+				String group = (String) component.getAttributes().get("group");
+				CombinedResourceBuilder builder = deferrableStyles.get(group);
+
+				if (builder == null) {
+					builder = new CombinedResourceBuilder(EXTENSION_CSS, TARGET_BODY);
+					deferrableStyles.put(group, builder);
+				}
+
+				builder.add(component, id);
 			}
 			// --------------------------------------------------------------------------------------------------------
 		}
 
 		public void create(FacesContext context) {
-			stylesheets.create(context, RENDERER_TYPE_CSS);
-			scripts.create(context, RENDERER_TYPE_JS);
+			stylesheets.create(context, RENDERER_TYPE_CSS, null);
+			scripts.create(context, RENDERER_TYPE_JS, null);
 
-			for (CombinedResourceBuilder builder : deferrableScripts.values()) {
-				builder.create(context, DeferrableScriptRenderer.RENDERER_TYPE);
+			for (String groupName : deferrableScripts.keySet()) {
+				deferrableScripts.get(groupName).create(context, DeferrableScriptRenderer.RENDERER_TYPE, groupName);
+			}
+
+			for (String groupName : deferrableStyles.keySet()) {
+				deferrableStyles.get(groupName).create(context, DeferrableStyleRenderer.RENDERER_TYPE, groupName);
 			}
 
 			removeComponentResources(context, componentResourcesToRemove, TARGET_HEAD);
@@ -422,7 +464,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 			return (attribute == null) ? "" : attribute.trim();
 		}
 
-		private void create(FacesContext context, String rendererType) {
+		private void create(FacesContext context, String rendererType, String assignedId ) {
 			if (!infoBuilder.isEmpty()) {
 				if (componentResource == null) {
 					componentResource = new UIOutput();
@@ -430,11 +472,11 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 				}
 
 				componentResource.getAttributes().put("library", LIBRARY_NAME);
-				componentResource.getAttributes().put("name", infoBuilder.create(extension) + extension);
+				componentResource.getAttributes().put("name", infoBuilder.create(extension, assignedId) + extension);
 				componentResource.setRendererType(rendererType);
 			}
 
-			removeComponentResources(context, componentResourcesToRemove, target);
+			removeComponentResources(context, componentResourcesToRemove, null);
 		}
 
 	}
