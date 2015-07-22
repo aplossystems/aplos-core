@@ -244,11 +244,12 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 
 	@Override
 	public Resource createResource(String resourceName, String libraryName, String contentType) {
+		Resource resource;
 		if (LIBRARY_NAME.equals(libraryName)) {
-			return new CombinedResource(resourceName);
+			resource = new CombinedResource(resourceName);
 		} else {
 			JSFUtil.getResponse().addHeader( "cache-control", "public, max-age=" + (3600 * 24 * 31) );
-			Resource resource = super.createResource(resourceName, libraryName, contentType);
+			resource = super.createResource(resourceName, libraryName, contentType);
 
 //	        if(resource != null && libraryName != null ) {
 //	        	if( libraryName.equalsIgnoreCase("styles") ) {
@@ -269,46 +270,46 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 //	        		return new AplosCssResource(resource, null );
 //	        	}
 //	        } 
-	        
-			if( resource != null ) {
-				if( !JSFUtil.isLocalHost() ) {
-			        if( resourceName.endsWith( ".js" ) ) {
-			        	String nameLibraryCombo = libraryName + ":" + resourceName;
-			        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
-				            try {
-				    	        CallableJsMinifier callableJsMinifier = new CallableJsMinifier( resource.getResourceName(), resource.getInputStream() );
-				    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
-				    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
-				    	    	executorService.execute(minifyTask);
-				    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
-				            } catch( IOException ioex ) {
-				            	ApplicationUtil.handleError( ioex, false );
-				            }
-			        	}
-			        	resource = new MinifiedJsResource(resource,futureTaskMap.get( nameLibraryCombo ));
-			        } else if(resourceName.endsWith( ".css" )) {
-			        	String nameLibraryCombo = libraryName + ":" + resourceName;
-			        	try {
-				        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
-				        		File processedCssFile = MinifiedCssResource.getProcessedFile( resource.getResourceName(), resource.getInputStream() );
-				    	        CallableCssMinifier callableJsMinifier = new CallableCssMinifier( resource.getResourceName(), processedCssFile );
-				    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
-				    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
-				    	    	executorService.execute(minifyTask);
-				    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
-				        	}
-			        	} catch( IOException ioex ) {
-			        		ApplicationUtil.handleError( ioex, false );
-			        	}
-			        	resource = new MinifiedCssResource(resource,futureTaskMap.get( nameLibraryCombo ));
-			        }
-				}
-			} else {
-				ApplicationUtil.handleError( new Exception( "Resource not found " + resourceName + " " + libraryName ), false );
-			}
-	        
-	        return resource;
 		}
+        
+		if( resource != null ) {
+//			if( !JSFUtil.isLocalHost() ) {
+		        if( resourceName.endsWith( ".js" ) ) {
+		        	String nameLibraryCombo = libraryName + ":" + resourceName;
+		        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
+			            try {
+			    	        CallableJsMinifier callableJsMinifier = new CallableJsMinifier( resource.getResourceName(), resource.getInputStream() );
+			    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
+			    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
+			    	    	executorService.execute(minifyTask);
+			    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
+			            } catch( IOException ioex ) {
+			            	ApplicationUtil.handleError( ioex, false );
+			            }
+		        	}
+		        	resource = new MinifiedJsResource(resource,futureTaskMap.get( nameLibraryCombo ));
+		        } else if(resourceName.endsWith( ".css" )) {
+		        	String nameLibraryCombo = libraryName + ":" + resourceName;
+		        	try {
+			        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
+			        		File processedCssFile = MinifiedCssResource.getProcessedFile( resource.getResourceName(), resource.getInputStream() );
+			    	        CallableCssMinifier callableJsMinifier = new CallableCssMinifier( resource.getResourceName(), processedCssFile );
+			    	        PriorityFutureTask<File> minifyTask = new PriorityFutureTask<File>( callableJsMinifier, 1 );
+			    	    	ExecutorService executorService = Executors.newFixedThreadPool(1);
+			    	    	executorService.execute(minifyTask);
+			    	    	futureTaskMap.put(nameLibraryCombo, minifyTask);
+			        	}
+		        	} catch( IOException ioex ) {
+		        		ApplicationUtil.handleError( ioex, false );
+		        	}
+		        	resource = new MinifiedCssResource(resource,futureTaskMap.get( nameLibraryCombo ));
+		        }
+//			}
+		} else {
+			ApplicationUtil.handleError( new Exception( "Resource not found " + resourceName + " " + libraryName ), false );
+		}
+        
+        return resource;
 	}
 
 	// Inner classes --------------------------------------------------------------------------------------------------

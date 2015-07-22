@@ -211,7 +211,7 @@ final class CombinedResourceInfo {
 				if( firstResource ) {
 					firstResource = false;
 				} else {
-					combinedResourceStrBuf.append( "\r\n" );
+					combinedResourceStrBuf.append( ";\r\n" );
 				}
 				
 				StringWriter writer = new StringWriter();
