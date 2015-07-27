@@ -7,16 +7,12 @@ import javax.faces.application.Resource;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ComponentSystemEvent;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.aplos.common.beans.Website;
 import com.aplos.common.utils.ApplicationUtil;
 import com.aplos.common.utils.CommonUtil;
 import com.aplos.common.utils.ComponentUtil;
-import com.aplos.common.utils.JSFUtil;
 import com.sun.faces.renderkit.html_basic.ScriptStyleBaseRenderer;
 
 @FacesRenderer(componentFamily=DeferrableStyle.COMPONENT_FAMILY, rendererType=DeferrableStyleRenderer.RENDERER_TYPE)
