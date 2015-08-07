@@ -170,10 +170,16 @@ public class BreadCrumbs extends UIComponentBase {
 						//add an extra crumb if this tab is only selected because of an additional binding
 						Class<? extends BackingPage> extraEditCrumbClassAdded = null;
 						if (reverseOrderCrumbs.size() == 0) {
-							//check the last crumb we found against the current page (some edit pages are bound as additional bindings and wont have their own crumb)
+							/*
+							 * check the last crumb we found against the current page, if it isn't assignable then it is an
+							 * additional binding and needs an additional crumb.  We check assignable and not equals because
+							 * of backingpage overriding.
+							 */
 							if (JSFUtil.getCurrentBackingPage() != null) {
 								extraEditCrumbClassAdded = JSFUtil.getCurrentBackingPage().getClass();
-								if (((MenuTab)currentObject).getTabActionClass() != null && !extraEditCrumbClassAdded.equals( ((MenuTab)currentObject).getTabActionClass().getBackingPageClass() )) {
+								if (((MenuTab)currentObject).getTabActionClass() != null 
+										&& ((MenuTab)currentObject).getTabActionClass().getBackingPageClass() != null
+										&& !((MenuTab)currentObject).getTabActionClass().getBackingPageClass().isAssignableFrom( extraEditCrumbClassAdded )) {
 									reverseOrderCrumbs.add(createCrumb(navStack, extraEditCrumbClassAdded, expf, facesContext, debug, "ExtraEditCrumbBinding"));
 								} else {
 									extraEditCrumbClassAdded = null;
@@ -181,9 +187,8 @@ public class BreadCrumbs extends UIComponentBase {
 							}
 						} 
 
-						//we need this check but it cant be an ifelse with the above check otherwise list pages show an edit crumb before a bean is selected, when no previous (trailing) crumb
+						//we need this check but it cant be an if else with the above check otherwise list pages show an edit crumb before a bean is selected, when no previous (trailing) crumb
 						if (reverseOrderCrumbs.size() != 0) {
-						
 							//eg internal projects should be followed by the project name (when not the final crumb already (ie when job selected)
 							if ( ((MenuTab)currentObject).getTabActionClass() != null && ListPage.class.isAssignableFrom(((MenuTab)currentObject).getTabActionClass().getBackingPageClass()) ) {
 								//display the selected requisite bean, by using the editpage class
@@ -195,14 +200,7 @@ public class BreadCrumbs extends UIComponentBase {
 									//we need to check that if we have a crumb following this one, its not actually this one
 									if (previousObject == null || ( ((MenuTab)previousObject).getTabActionClass() == null || !(((MenuTab)previousObject).getTabActionClass().getBackingPageClass().equals(editPage)) )) {
 										if (extraEditCrumbClassAdded == null || !(extraEditCrumbClassAdded.equals(editPage)) ) {
-											try {
-												//we use a new instance so the traildisplayname is the bean name not the class name
-												reverseOrderCrumbs.add(createCrumb(navStack, editPage.newInstance(), expf, facesContext, debug, "RequisiteBeanCrumb"));
-											} catch (InstantiationException e) {
-												e.printStackTrace();
-											} catch (IllegalAccessException e) {
-												e.printStackTrace();
-											}
+											reverseOrderCrumbs.add(createCrumb(navStack, editPage, expf, facesContext, debug, "RequisiteBeanCrumb"));
 										}
 									}
 								}
@@ -393,15 +391,6 @@ public class BreadCrumbs extends UIComponentBase {
 			} else {
 				return null;
 			}
-		}
-	}
-
-	private HtmlCommandLink createCrumb(NavigationStack navStack, BackingPage backingPage, ExpressionFactory expf, FacesContext facesContext, boolean debug, String identifier) {
-		BackingPageState backingPageState = getBackingPageStateFromHistory(navStack, backingPage.getClass());
-		if (backingPageState != null) {
-			return createCrumb(navStack.indexOf(backingPageState), backingPageState, expf, facesContext, debug, identifier);
-		} else {
-			return createCrumb(backingPage.determineTrailDisplayName().determineName(), new BackingPageUrl(backingPage.getClass()).toString(), true, expf, facesContext, debug, identifier);
 		}
 	}
 	
