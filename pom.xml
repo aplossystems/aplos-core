@@ -28,7 +28,6 @@
 	      <groupId>com.aplos</groupId>
 	      <artifactId>common</artifactId>
 	      <version>1.10.0-GIT</version>
-		  <scope>provided</scope>
 	    </dependency>
     </dependencies>
 
