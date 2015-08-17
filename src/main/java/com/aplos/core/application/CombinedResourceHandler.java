@@ -273,7 +273,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		}
         
 		if( resource != null ) {
-//			if( !JSFUtil.isLocalHost() ) {
+			if( !JSFUtil.isLocalHost() ) {
 		        if( resourceName.endsWith( ".js" ) ) {
 		        	String nameLibraryCombo = libraryName + ":" + resourceName;
 		        	if( futureTaskMap.get( nameLibraryCombo ) == null ) {
@@ -304,7 +304,7 @@ public class CombinedResourceHandler extends ResourceHandlerWrapper implements S
 		        	}
 		        	resource = new MinifiedCssResource(resource,futureTaskMap.get( nameLibraryCombo ));
 		        }
-//			}
+			}
 		} else {
 			ApplicationUtil.handleError( new Exception( "Resource not found " + resourceName + " " + libraryName ), false );
 		}

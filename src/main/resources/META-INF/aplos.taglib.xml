@@ -306,6 +306,14 @@
 			<renderer-type>com.aplos.core.component.menubar.TabbedMenuBarRenderer</renderer-type>
 		</component>
 	</tag>
+
+	<tag>
+		<tag-name>socket</tag-name>
+		<component>
+			<component-type>com.aplos.core.component.socket.Socket</component-type>
+			<renderer-type>com.aplos.core.component.socket.SocketRenderer</renderer-type>
+		</component>
+	</tag>
 	
 	<tag>
 		<tag-name>aplosSmallBorder</tag-name>
@@ -336,5 +344,7 @@
         	<name>test</name>
         </attribute>
     </tag>
+    
+    
 
 </facelet-taglib>

@@ -4,6 +4,12 @@
   <artifactId>core</artifactId>
   <version>1.1.0-GIT</version>
 
+	
+	<parent>
+        <groupId>com.aplos</groupId>
+        <artifactId>root</artifactId>
+        <version>0.1.0-GIT</version>
+    </parent>
 
     <dependencies>  
 		<dependency>
@@ -30,27 +36,10 @@
 	      <version>1.10.0-GIT</version>
 	    </dependency>
     </dependencies>
-
-	<repositories>
-		<repository>
-			<id>aplos-repo2</id>
-			<name>Aplos Systems Maven Repository</name>
-			<url>http://maven.aplossystems.co.uk/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
     
     <build>
 		<pluginManagement>
 	        <plugins>
-	            <plugin>
-	                <groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-compiler-plugin</artifactId>
-	                <version>2.3.2</version>
-	                <configuration>
-	                    <source>1.6</source>
-	                    <target>1.6</target>
-	                </configuration>
-	            </plugin>
 	            <plugin>
 	              	<groupId>org.apache.maven.plugins</groupId>
 	             	<artifactId>maven-war-plugin</artifactId>

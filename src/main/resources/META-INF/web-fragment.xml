@@ -258,6 +258,19 @@
 		<url-pattern>/documentservlet</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+          <servlet-name>Push Servlet</servlet-name>
+          <servlet-class>com.aplos.common.servlets.PushServlet</servlet-class>
+          <init-param>
+            <param-name>org.atmosphere.useWebSocketAndServlet3</param-name>
+            <param-value>false</param-value>
+        </init-param>
+	</servlet>
+    <servlet-mapping>
+        <servlet-name>Push Servlet</servlet-name>
+        <url-pattern>/aplospush/*</url-pattern>
+    </servlet-mapping>
+	
 	<listener>
 		<listener-class>com.aplos.common.listeners.AplosSessionListener</listener-class>
 	</listener>
