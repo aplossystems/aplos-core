@@ -261,6 +261,7 @@
 	<servlet>
           <servlet-name>Push Servlet</servlet-name>
           <servlet-class>com.aplos.common.servlets.PushServlet</servlet-class>
+          <load-on-startup>1</load-on-startup>
           <init-param>
             <param-name>org.atmosphere.useWebSocketAndServlet3</param-name>
             <param-value>false</param-value>
