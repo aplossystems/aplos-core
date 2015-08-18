@@ -3469,6 +3469,10 @@
 /* jshint eqnull:true, noarg:true, noempty:true, eqeqeq:true, evil:true, laxbreak:true, undef:true, browser:true, indent:false, maxerr:50 */
 
 
+function handlePushMessage(message) {
+    alert( message.test );
+}
+
 /**
  * Aplos Components Socket Widget
  */
