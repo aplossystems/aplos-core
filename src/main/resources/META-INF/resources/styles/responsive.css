@@ -10,7 +10,7 @@
 	margin: auto;
 	width: 1000px;
 	clear:both;
-	background-color:#{commonConfiguration.highlightColour};
+	background-color:#{commonConfiguration.highlightColourWithHash};
 	padding:8px 0px 8px 0px;
 }
 
@@ -32,12 +32,12 @@
 
 .outerWebsiteHeaderBar {
 	padding-bottom:0px;
-	background-color:#{commonConfiguration.mainHeaderColour};
+	background-color:#{commonConfiguration.mainHeaderColourWithHash};
 }
 
 .aplosNavigationBar {
 	padding-bottom:0px;
-	background-color:#{commonConfiguration.subHeaderColour};
+	background-color:#{commonConfiguration.subHeaderColourWithHash};
 }
 
 .websiteHeaderBar {
@@ -84,7 +84,7 @@
 }
 
 .aplosMainMenu a, .aplosMainMenu li a {
-	color: #{commonConfiguration.subHeaderTextColour};
+	color: #{commonConfiguration.subHeaderTextColourWithHash};
 	font: bold 12px 'Open Sans',sans-serif;
 	text-decoration: none;
 	text-align:center;
@@ -96,10 +96,10 @@
 }
 
 .aplosMainMenu div.current a, .aplosMainMenu li.current a {
-    color: #{commonConfiguration.highlightColour};
+    color: #{commonConfiguration.highlightColourWithHash};
 }
 
-.aplosControlPanel { min-width:1000px; border: 0px; background-color:#{commonConfiguration.highlightColour}; height:50px; position:fixed; bottom:0; left:0; z-index:500; width:100%; padding:0; margin:0;}
+.aplosControlPanel { min-width:1000px; border: 0px; background-color:#{commonConfiguration.highlightColourWithHash}; height:50px; position:fixed; bottom:0; left:0; z-index:500; width:100%; padding:0; margin:0;}
 .aplosControlPanelPane { margin:8px 10px; padding:0; }
 .aplosControlPanelLeft { float:left; position:relative; text-align:left; }
 .aplosControlPanelLeft .ui-messages { z-index:1000; min-width: 250px; max-width: 430px; font-family: Arial,sans-serif; font-size: 1.1em; position: absolute; bottom: 37px; left: 8px; }
@@ -134,7 +134,7 @@ body {
 	font: normal 11px 'Open Sans',sans-serif;
 }
    
-.aplos-labelled-box { color:#{commonConfiguration.highlightColour}; }
+.aplos-labelled-box { color:#{commonConfiguration.highlightColourWithHash}; }
 
 /* replaces formText */
 .aplos-label { 
@@ -142,7 +142,7 @@ body {
 	text-align: right; 
 	font-size: 11px; 
 	font-weight: bold; 
-	color: #{commonConfiguration.mainHeaderColour}; 
+	color: #{commonConfiguration.mainTextColourWithHash}; 
 	padding-right: 20px; 
 	width: 150px; 
 	min-width: 150px; 
@@ -159,7 +159,7 @@ table.aplos-form-table-with-required .aplos-field .aplos-date-input-dropdowns se
 table.aplos-form-table .aplos-field { width: 270px; }
 .aplos-field input[type='text'],table.aplos-form-table .aplos-field input[type='password'],table.aplos-form-table .aplos-field select {
 	width: 230px; 
-	border: 2px solid #{commonConfiguration.mainHeaderColour};
+	border: 2px solid #{commonConfiguration.mainTextColourWithHash};
     font-size: 12px;
     padding: 6px; 
 }
@@ -172,13 +172,13 @@ table.aplos-form-table .aplos-field select {
 table.aplos-form-table-with-required .aplos-field { width: 270px; }
 .aplos-field input[type='text'], .aplos-field input[type='password'], .aplos-field select {
 	width: 230px; 
-	border: 2px solid #{commonConfiguration.mainHeaderColour};
+	border: 2px solid #{commonConfiguration.mainTextColourWithHash};
     font-size: 12px;
     padding: 6px;
 }
 
 .aplos-field .aplos-date-input-dropdowns select { 
-	border: 2px solid #{commonConfiguration.mainHeaderColour};
+	border: 2px solid #{commonConfiguration.mainTextColourWithHash};
     font-size: 12px;
     padding:2px 0px;
     width:auto;
@@ -211,8 +211,8 @@ table.aplos-form-table-with-required .aplos-field select {
 .aplosSmallBorder a:hover { color:#33147F; } /* a shade of navy */
 
 .aplos-command-button {
-    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColour};
-    color: #{commonConfiguration.subHeaderTextColour};
+    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColourWithHash};
+    color: #{commonConfiguration.subHeaderTextColourWithHash};
     display: inline-block;
     font-size: 15px;
     font-weight: 700 !important;
@@ -226,12 +226,12 @@ table.aplos-form-table-with-required .aplos-field select {
     margin-right:30px;
 }
 .aplos-command-button:hover {
-    background: none repeat scroll 0 0 #{commonConfiguration.highlightColour};
+    background: none repeat scroll 0 0 #{commonConfiguration.highlightColourWithHash};
     color:#FFF;
 }
 
 .centreContent .aplos-command-button {
-    background: none repeat scroll 0 0 #{commonConfiguration.mainHeaderColour};
+    background: none repeat scroll 0 0 #{commonConfiguration.mainTextColourWithHash};
     color: #FFF;
 }
 
@@ -240,16 +240,16 @@ table.aplos-form-table-with-required .aplos-field select {
 }
 
 .aplosControlPanel .aplos-command-button {
-    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColour};
-    color : #{commonConfiguration.subHeaderTextColour};
+    background: none repeat scroll 0 0 #{commonConfiguration.subHeaderColourWithHash};
+    color : #{commonConfiguration.subHeaderTextColourWithHash};
 }
 
 .aplosControlPanel .aplos-command-button:hover {
-    background: none repeat scroll 0 0 #{commonConfiguration.highlightColour};
+    background: none repeat scroll 0 0 #{commonConfiguration.highlightColourWithHash};
 }
 
 
-#listAndEditHeading, .aplos-listAndEditHeading { font-family: 'Open Sans',sans-serif; font-size: 18px; color: #{commonConfiguration.mainHeaderColour}; font-weight: normal; }
+#listAndEditHeading, .aplos-listAndEditHeading { font-family: 'Open Sans',sans-serif; font-size: 18px; color: #{commonConfiguration.mainTextColourWithHash}; font-weight: normal; }
 
 #topLoginBarRightDiv {
 	background-image:none;
@@ -262,7 +262,7 @@ table.aplos-form-table-with-required .aplos-field select {
 }
 
 .ui-widget-header {
-	background:-moz-linear-gradient(center top , rgba(184, 186, 170, 0.8), rgba(197, 200, 183, 0)) repeat scroll 0 0 #{commonConfiguration.subHeaderColour};	
+	background:-moz-linear-gradient(center top , rgba(184, 186, 170, 0.8), rgba(197, 200, 183, 0)) repeat scroll 0 0 #{commonConfiguration.subHeaderColourWithHash};	
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
@@ -347,7 +347,7 @@ div.jpassword {
 }
 
 h2 {
-	color:#{commonConfiguration.mainHeaderColour};
+	color:#{commonConfiguration.mainTextColourWithHash};
 }
 
 #topLoginBarUserName a {
@@ -359,7 +359,7 @@ h2 {
 }
 
 #topLoginBarUserName a:hover {
-	color:#{commonConfiguration.highlightColour};    
+	color:#{commonConfiguration.highlightColourWithHash};    
 	text-shadow: 2px 2px 2px gray;
 }
 
@@ -373,7 +373,7 @@ h2 {
 }
 
 .promotionalMessage {
-	color: #{commonConfiguration.highlightColour};
+	color: #{commonConfiguration.highlightColourWithHash};
 	font-weight: bold;
     padding: 10px;
 }

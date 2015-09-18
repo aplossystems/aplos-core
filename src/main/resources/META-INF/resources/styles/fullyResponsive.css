@@ -670,7 +670,7 @@ h6 {
   font-weight: 300;
 }
 h2 {
-  color: #{commonConfiguration.highlightColour};
+  color: #{commonConfiguration.highlightColourWithHash};
   font-size: 40px;
   line-height: 40px;
   padding-top: 35px;
@@ -687,7 +687,7 @@ h3 {
   font-weight: lighter;
   font-size: 40px;
   line-height: 40px;
-  color: #{commonConfiguration.mainHeaderColour};
+  color: #{commonConfiguration.mainHeaderColourWithHash};
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;
   padding-top: 52px;
@@ -696,7 +696,7 @@ h3 {
   font-weight: lighter;
   font-size: 30px;
   line-height: 30px;
-  color: #{commonConfiguration.highlightColour};
+  color: #{commonConfiguration.highlightColourWithHash};
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;
 }
@@ -760,7 +760,7 @@ p.text-3 {
   font-size: 15px;
   line-height: 54px;
   text-transform: uppercase;
-  color: #{commonConfiguration.mainHeaderColour};
+  color: #{commonConfiguration.mainHeaderColourWithHash};
   height: 54px;
   padding: 0 21px;
   background: #ededed;
@@ -891,7 +891,7 @@ p {
   left: 0;
   right: 0;
   height: 13px;
-  background: #{commonConfiguration.highlightColour};
+  background: #{commonConfiguration.highlightColourWithHash};
 }
 .page-1 .bord-1 {
   margin-top: 0;
@@ -927,7 +927,7 @@ p {
 }
 /************Header************/
 header {
-  background: #{commonConfiguration.mainHeaderColour};
+  background: #{commonConfiguration.mainHeaderColourWithHash};
 }
 h1 {
   margin-top: 92px;
@@ -978,7 +978,7 @@ h1 {
   vertical-align: middle;
   height: 54px;
   padding: 0 25px !important;
-  background: #{commonConfiguration.highlightColour} !important;
+  background: #{commonConfiguration.highlightColourWithHash} !important;
   font-weight: 600 !important;
   margin-top: 55px !important;
 }
@@ -1016,14 +1016,14 @@ section.content {
   text-align: center;
   margin-top: 124px;
   line-height: 25px;
-  color: #{commonConfiguration.mainHeaderColour};
+  color: #{commonConfiguration.mainHeaderColourWithHash};
 }
 .shape-1 {
   width: 109px;
   height: 109px;
   text-align: center;
   vertical-align: middle;
-  background: #{commonConfiguration.highlightColour};
+  background: #{commonConfiguration.highlightColourWithHash};
   line-height: 108px;
   margin: 0 auto;
 }
@@ -1032,7 +1032,7 @@ section.content {
   vertical-align: middle;
 }
 .bg-1 {
-  background: #{commonConfiguration.highlightColour};
+  background: #{commonConfiguration.highlightColourWithHash};
   padding-bottom: 113px;
 }
 .bg-1 h2 {
@@ -1070,7 +1070,7 @@ section.content {
   font-weight: 300;
   font-size: 60px;
   line-height: 60px;
-  color: #{commonConfiguration.highlightColour};
+  color: #{commonConfiguration.highlightColourWithHash};
   top: -7px;
 }
 .list_carousel .inside .quote.v1 {
@@ -1108,7 +1108,7 @@ section.content {
   padding-top: 38px;
   font-size: 20px;
   line-height: 40px;
-  color: #{commonConfiguration.highlightColour};
+  color: #{commonConfiguration.highlightColourWithHash};
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
@@ -1210,7 +1210,7 @@ section.content {
   outline: none;
 }
 #subscribe-form a:hover {
-  background: #{commonConfiguration.highlightColour};
+  background: #{commonConfiguration.highlightColourWithHash};
 }
 .block-3 {
   margin-top: -24px;
@@ -1295,7 +1295,7 @@ footer {
   font-size: 14px;
   line-height: 24px;
   padding-bottom: 30px;
-  border-top: 1px solid #{commonConfiguration.highlightColour};
+  border-top: 1px solid #{commonConfiguration.highlightColourWithHash};
 }
 .copyright {
   margin-top: 32px;
