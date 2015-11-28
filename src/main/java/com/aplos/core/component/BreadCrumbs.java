@@ -193,9 +193,13 @@ public class BreadCrumbs extends UIComponentBase {
 							if ( ((MenuTab)currentObject).getTabActionClass() != null && ListPage.class.isAssignableFrom(((MenuTab)currentObject).getTabActionClass().getBackingPageClass()) ) {
 								//display the selected requisite bean, by using the editpage class
 								Class<? extends EditPage> editPage = (Class<? extends EditPage>) ApplicationUtil.getAplosContextListener().getEditPageClasses().get( ((MenuTab)currentObject).getTabActionClass().getBackingPageClass().getSimpleName().replace("ListPage", "") );
-								if (editPage == null && ((MenuTab)currentObject).getTabActionClass().getBackingPageClass().getSuperclass() != null) {
-									editPage = (Class<? extends EditPage>) ApplicationUtil.getAplosContextListener().getEditPageClasses().get( ((MenuTab)currentObject).getTabActionClass().getBackingPageClass().getSuperclass().getSimpleName().replace("ListPage", "") );
-								}
+								/*
+								 * Why was it trying to get the super class, this doesn't make sense when it's inheriting a common list page class 
+								 * like clientBeanListPage in carbon profile.
+								 */
+//								if (editPage == null && ((MenuTab)currentObject).getTabActionClass().getBackingPageClass().getSuperclass() != null) {
+//									editPage = (Class<? extends EditPage>) ApplicationUtil.getAplosContextListener().getEditPageClasses().get( ((MenuTab)currentObject).getTabActionClass().getBackingPageClass().getSuperclass().getSimpleName().replace("ListPage", "") );
+//								}
 								if (editPage != null) {
 									//we need to check that if we have a crumb following this one, its not actually this one
 									if (previousObject == null || ( ((MenuTab)previousObject).getTabActionClass() == null || !(((MenuTab)previousObject).getTabActionClass().getBackingPageClass().equals(editPage)) )) {

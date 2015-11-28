@@ -8,7 +8,9 @@ import javax.faces.render.FacesRenderer;
 
 import org.primefaces.renderkit.CoreRenderer;
 
-import com.aplos.common.utils.ApplicationUtil;
+import com.aplos.common.AplosUrl;
+import com.aplos.common.beans.Website;
+import com.aplos.common.enums.SslProtocolEnum;
 import com.aplos.common.utils.JSFUtil;
 import com.aplos.core.utils.WidgetBuilder;
 
@@ -25,23 +27,19 @@ public class SocketRenderer extends CoreRenderer {
         Socket socket = (Socket) component;
         String channel = socket.getChannel();
         String channelUrl = "aplospush" + channel;
-        String url = getResourceURL(context, channelUrl);
-        String pushServer = ApplicationUtil.getAplosContextListener().getServerUrl();
-        String contextPath = JSFUtil.getContextPath().replaceFirst( "/", "" ); 
-        if( contextPath.length() > 0 ) {
-        	pushServer = pushServer + contextPath + "/"; 
+        AplosUrl aplosUrl = new AplosUrl(channelUrl);
+        aplosUrl.setHost(Website.getCurrentWebsiteFromTabSession());
+        if( JSFUtil.getRequest().getRequestURL().toString().startsWith( "https" ) ) {
+        	aplosUrl.setScheme(SslProtocolEnum.FORCE_SSL);
+        } else {
+            aplosUrl.setScheme(SslProtocolEnum.FORCE_HTTP);
         }
-        pushServer = "http://localhost:8080/altrui/";
         String clientId = socket.getClientId(context);
-        
-        if(pushServer != null) {
-            url = pushServer + url;
-        }
 
         WidgetBuilder wb = new WidgetBuilder(context);
         wb.initWithDomReady("Socket", socket.resolveWidgetVar(), clientId);
         
-        wb.attr("url", url)
+        wb.attr("url", aplosUrl.toString())
         	.attr("autoConnect", socket.isAutoConnect())
         	.attr("transport", socket.getTransport())
         	.attr("fallbackTransport", socket.getFallbackTransport())
