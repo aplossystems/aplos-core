@@ -37,7 +37,7 @@
 	    		<aplos:panel layout="block" styleClass="aplosControlPanelLeft aplosControlPanelPane" title="Click to close">
 	    			<aplos:panel layout="none"  rendered="#{empty cc.facets.leftControlPanel}">
 	    				<p:messages autoUpdate="true" rendered="#{ cc.attrs.showGrowl }" id="controlPanelGrowl" showDetail="false" />
-	    				<a href="http://www.aplossystems.co.uk">
+	    				<a href="#{contextListener.backendImageLinkUrl}">
 	    					<img src="#{request.contextPath}/images/#{themeManager.theme}/AplosLogo.png" style="margin:-5px"/>
 	    				</a>
 			    	</aplos:panel>
@@ -76,11 +76,13 @@
 		        		</aplos:panel>
 		        	</h:panelGroup>	
 	        		<h:panelGroup rendered="#{ not cc.editButtonsValid and not (cc.showListBackButton and cc.listButtonsValid) }" styleClass="aplos-contact-details">
-	    				<a href="http://www.aplossystems.co.uk" title="Click to visit our website" class="aplos-site-link" target="_blank">Aplos Systems Website</a>
+	        			<aplos:panel layout="none" rendered="#{ contextLister.isShowingAplosWebsiteLink }">
+	    					<a href="http://www.aplossystems.co.uk" title="Click to visit our website" class="aplos-site-link" target="_blank">Aplos Systems Website</a>
+	    				</aplos:panel>
 						<span class="controlPanelDefaultText">
 							<aplos:panel rendered="#{currentUser == null or !currentUser.superuser}" layout="none">
-								<span class="aplos-highlighted">Email&#160;&#160;</span>info@aplossystems.co.uk
-								&#160;&#160;&#160;&#160;<span class="aplos-highlighted">Phone&#160;&#160;</span>0800 520 0690
+								<span class="aplos-highlighted">Email&#160;&#160;</span>#{ contextListener.backendTemplateEmail }
+								&#160;&#160;&#160;&#160;<span class="aplos-highlighted">Phone&#160;&#160;</span>#{ contextListener.backendTemplatePhone }
 							</aplos:panel>
 							<aplos:panel rendered="#{currentUser != null and currentUser.superuser}" layout="none">
 								<span title="Emails will be redirected to this address when in debug mode" class="aplos-highlighted">Superuser Email Redirect&#160;:&#160;&#160;</span><h:outputText escape="false" title="Emails will be redirected to this address when in debug mode" value="#{cc.emailRedirectStr}" />

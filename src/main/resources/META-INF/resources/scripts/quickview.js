@@ -29,7 +29,7 @@ function registerQuickviews() {
 	});
 
 	
-	$j('.aplos-quickview-button-trigger').hover( function () {
+	$j('.aplos-quickview-button-trigger').click( function () {
 
 		var extension = "";
 		for( var i = 0; i < this.classList.length; i++ ) {
@@ -45,7 +45,7 @@ function registerQuickviews() {
 
 function renderQuickview(extension) {
 	
-	if( extension.length > 0 && extension.length < 15 ) {
+	if( extension.length > 0 && extension.length < 25 ) {
 		eval( "showDialog_" + extension + "()" );
 	}
 }
