@@ -88,7 +88,7 @@
 						<h:outputText value="id" rendered="#{ cc.attrs.idColHeader == null }" />
 						<h:outputText value="#{ cc.attrs.idColHeader }" rendered="#{ cc.attrs.idColHeader != null }" />
 					</f:facet>
-					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{!tableBean.editable and !cc.attrs.ignoreEditable}" value="#{ cc.beanId }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
+					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{(!tableBean.editable and !cc.attrs.ignoreEditable) or commonConfiguration.selectableRowsAllowed}" value="#{ cc.beanId }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
 					<aploscc:quickView action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean() }" rendered="#{ cc.attrs.dataTableState.showingQuickView }" bean="#{tableBean}" text="#{cc.beanId}" /> 
 				</p:column>
 				<p:column style="width:35px" rendered="#{ cc.attrs.dataTableState.showingIdColumn and !cc.attrs.dataTableState.showingIdColumnFilter }" sortBy="#{ tableBean.id }" filterStyle="#{ cc.attrs.idFilterStyle }">
@@ -96,7 +96,7 @@
 						<h:outputText value="id" rendered="#{ cc.attrs.idColHeader == null }" />
 						<h:outputText value="#{ cc.attrs.idColHeader }" rendered="#{ cc.attrs.idColHeader != null }" />
 					</f:facet>
-					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{!tableBean.editable and !cc.attrs.ignoreEditable}" value="#{ tableBean.id }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
+					<h:commandLink rendered="#{ !cc.attrs.dataTableState.showingQuickView }" disabled="#{(!tableBean.editable and !cc.attrs.ignoreEditable) or commonConfiguration.selectableRowsAllowed}" value="#{ tableBean.id }" immediate="true" action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean }" />
 					<aploscc:quickView action="#{ cc.attrs.dataTableState.lazyDataModel.selectBean() }" rendered="#{ cc.attrs.dataTableState.showingQuickView }" bean="#{tableBean}" text="#{tableBean.id}" /> 
 				</p:column>
 				<cc:insertChildren></cc:insertChildren>
