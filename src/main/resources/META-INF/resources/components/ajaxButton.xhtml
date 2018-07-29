@@ -24,7 +24,7 @@
     	<cc:attribute name="disabled" default="false" />
     </cc:interface>
     <cc:implementation>
-    	<aplos:panel layout="none" rendered="#{ cc.showingPicturedBtn and cc.attrs.rendered }">
+    	<aplos:panel layout="none" rendered="#{ cc.showingPicturedBtn and cc.attrs.rendered and cc.containingActions }">
 			<h:commandLink id="ajaxCommandLink" action="#{ cc.invokeAction }" immediate="{ cc.attrs.immediate }" class="#{ cc.styleClasses }" onclick="#{ cc.attrs.onclick }" styleClass="#{ cc.attrs.styleClass }" target="#{ cc.attrs.target }" disabled="#{ cc.attrs.disabled }" >
 				<p:ajax process="@form" event="action" oncomplete="#{ cc.attrs.oncomplete }"  update="#{ cc.attrs.reRender }" disabled="#{ !cc.determineAjaxEnabled() }"/>
 				<span id="cmdBtnPnl" class="aplos-command-button-right aplosSmallBorder" style="cursor:pointer;display:inline-block;#{ cc.attrs.style };">
@@ -35,6 +35,17 @@
 					</span>
 				</span>
 			</h:commandLink>
+		</aplos:panel>
+    	<aplos:panel layout="none" rendered="#{ cc.showingPicturedBtn and cc.attrs.rendered and !cc.containingActions }">
+    		<span class="#{ cc.styleClasses }">
+				<span id="cmdBtnPnl" class="aplos-command-button-right aplosSmallBorder" style="cursor:pointer;display:inline-block;#{ cc.attrs.style };" onclick="#{ cc.attrs.onclick }" disabled="#{ cc.attrs.disabled }">
+					<span id="cmdBtnLeftPnl" class="aplos-command-button-left btnLeftPnl" style="display:block">
+						<span id="cmdBtnRightPnl" class="aplos-command-button-middle btnRightPnl" style="display:block;">
+							<span><h:outputText value="#{ cc.attrs.value }" /></span>
+						</span>
+					</span>
+				</span>
+			</span>
 		</aplos:panel>
 		<aplos:panel layout="none" rendered="#{ !cc.showingPicturedBtn and cc.containingActions and cc.attrs.rendered }">  
 			<h:commandLink id="ajaxCommandLink2" action="#{ cc.invokeAction }" immediate="{ cc.attrs.immediate }" class="#{ cc.styleClasses }" onclick="#{ cc.attrs.onclick }" style="#{ cc.attrs.style }" target="#{ cc.attrs.target }">
