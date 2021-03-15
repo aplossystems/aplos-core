@@ -1,8 +1,4 @@
 package components;
-import javax.faces.component.NamingContainer;
-import javax.faces.component.UIInput;
-
-import org.primefaces.model.UploadedFile;
 
 import com.aplos.common.SaveableFileDetailsOwnerHelper;
 import com.aplos.common.beans.FileDetails;
@@ -10,6 +6,10 @@ import com.aplos.common.interfaces.FileDetailsOwnerInter;
 import com.aplos.common.interfaces.FileUploaderInter;
 import com.aplos.common.utils.CommonUtil;
 import com.aplos.common.utils.JSFUtil;
+import org.primefaces.model.UploadedFile;
+
+import javax.faces.component.NamingContainer;
+import javax.faces.component.UIInput;
 
 public class fileUploader2 extends UIInput implements NamingContainer, FileUploaderInter {
 	
